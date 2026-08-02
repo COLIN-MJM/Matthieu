@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cst0j5nt5ha8a"]
+
+[ext_resource type="Script" uid="uid://b3trvewnpeu2u" path="res://card_slote.gd" id="1_3cehr"]
+
+[node name="Node2D" type="Node2D" unique_id=1506127502]
+script = ExtResource("1_3cehr")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1689773622]
+color = Color(0, 0.15686275, 1, 1)
+polygon = PackedVector2Array(-1.5258789e-05, 0, 100, 0, 100.00003, 100.000015, 0, 100)
+uv = PackedVector2Array(-7, 4, 262, 1, 272, 128, -2, 146)
