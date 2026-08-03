@@ -1,5 +1,5 @@
+class_name Carte_3
 extends Carte
-
 func _ready() -> void:
 	ActivationType= GlobalCardEnum.ActivationTypes.OnPlacement
 

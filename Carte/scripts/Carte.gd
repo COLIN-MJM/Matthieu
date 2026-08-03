@@ -1,6 +1,6 @@
 @abstract
 class_name Carte
-extends Node
+extends Resource
 var direction : Vector2i
 var position :Vector2i
 var ActivationType :GlobalCardEnum.ActivationTypes
