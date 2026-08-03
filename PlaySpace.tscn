@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://c3n7l0ujysmbd" path="res://play_space.gd" id="1_ddk8d"]
 [ext_resource type="PackedScene" uid="uid://cst0j5nt5ha8a" path="res://CardSlote.tscn" id="2_n6yqr"]
+[ext_resource type="PackedScene" uid="uid://bbvvo3ludckha" path="res://Hand.tscn" id="3_u1prq"]
 
 [node name="Node2D" type="Node2D" unique_id=1755601109]
 script = ExtResource("1_ddk8d")
 dimensions = Vector2i(4, 4)
 slotSize = Vector2i(100, 100)
 metadata/CarteSlot = ExtResource("2_n6yqr")
+metadata/Hand = ExtResource("3_u1prq")

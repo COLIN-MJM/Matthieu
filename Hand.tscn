@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bbvvo3ludckha"]
+
+[ext_resource type="Script" uid="uid://dl6c0ycohbr6e" path="res://La Main.gd" id="1_d3vym"]
+[ext_resource type="Script" uid="uid://cxxhbu1cx5vy7" path="res://Carte/scripts/AllCarte.gd" id="2_esir1"]
+
+[node name="Control" type="Control" unique_id=78339630 node_paths=PackedStringArray("allCarte", "selectable")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d3vym")
+allCarte = NodePath("AllCartHolder")
+selectable = NodePath("ItemList")
+
+[node name="AllCartHolder" type="Node" parent="." unique_id=92741298]
+script = ExtResource("2_esir1")
+
+[node name="ItemList" type="ItemList" parent="." unique_id=494708506]
+layout_mode = 0
+offset_left = 1112.0
+offset_right = 1152.0
+offset_bottom = 40.0
+
+[connection signal="item_activated" from="ItemList" to="." method="_on_item_list_item_activated"]
+[connection signal="item_selected" from="ItemList" to="." method="_on_item_list_item_selected"]
