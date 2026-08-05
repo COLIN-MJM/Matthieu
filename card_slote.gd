@@ -11,8 +11,12 @@ func AssignCard(entrance : CarteRenderer)->void :
 	entrance.position=Vector2(15,15)
 	carte=entrance
 	carteData=entrance.CardEffect
-	print_debug(carteData)
 	carteData.position=coords
 	haveCarte=true
 	add_child(entrance)
-	print(carteData.position,carteData.ActivationType)
+func PlaceCard(entrance : CarteRenderer)->SecondaryEffect :
+	AssignCard(entrance)
+	if(entrance.CardEffect.ActivationType== GlobalCardEnum.ActivationTypes.OnPlacement) :
+		return entrance.CardEffect.Activate()
+	else :
+		return

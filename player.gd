@@ -33,4 +33,11 @@ func create_card_from_clic(event : InputEvent)->void :
 	var ressource : PackedScene = preload("res://CarteInstance.tscn")
 	var instance : CarteRenderer =ressource.instantiate()
 	instance.CardEffect=carte
-	playSpace.allSlots[test].AssignCard(instance)
+	var effects:SecondaryEffect = playSpace.allSlots[test].PlaceCard(instance)
+	if effects:
+		applySecondaryEffects(effects)
+
+func applySecondaryEffects(entrance : SecondaryEffect)->void :
+	for x :Vector2i in entrance.targetsCoords:
+		if playSpace.allSlots[x].carte :
+			entrance.effectToDo.call(playSpace.allSlots[x].carte)

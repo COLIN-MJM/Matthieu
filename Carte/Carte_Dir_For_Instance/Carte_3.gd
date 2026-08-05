@@ -5,11 +5,11 @@ func _ready() -> void:
 
 
 func Activate()->SecondaryEffect:
-	var targets : Array[Vector2i]=[]
-	targets[0]=position+Vector2i.UP
-	targets[1]=position+Vector2i.RIGHT
-	targets[2]=position+Vector2i.DOWN
-	targets[3]=position+Vector2i.LEFT
+	var targets : Array[Vector2i]
+	targets.append(position+Vector2i.UP)
+	targets.append(position+Vector2i.RIGHT)
+	targets.append(position+Vector2i.DOWN)
+	targets.append(position+Vector2i.LEFT)
 	
 	var effects :SecondaryEffect = SecondaryEffect.new(targets,afterEffect)
 	return effects
