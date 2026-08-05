@@ -33,7 +33,7 @@ func create_card_from_clic(event : InputEvent)->bool :
 	var instance : CarteRenderer =ressource.instantiate()
 	instance.CardEffect=carte
 	var effects:SecondaryEffect = playSpace.allSlots[pos].PlaceCard(instance)
-	if effects:
+	if effects !=null:
 		applySecondaryEffects(effects)
 	cur_selected_index=-1
 	return true
@@ -59,7 +59,7 @@ func move_card_from_clic(event : InputEvent)->bool :
 	if playSpace.allSlots[newPos].haveCarte : return false
 	var cardrendered = playSpace.allSlots[savedpos].GiveMovedCard()
 	var effects:SecondaryEffect = playSpace.allSlots[newPos].ReceiveMovedCard(cardrendered)
-	if effects :
+	if effects!=null :
 		applySecondaryEffects(effects)
 	savedpos=Vector2i(-1,-1)
 	newPos =Vector2i(-1,-1)
@@ -69,7 +69,7 @@ func move_card_from_clic(event : InputEvent)->bool :
 func applySecondaryEffects(entrance : SecondaryEffect)->void :
 	for x :Vector2i in entrance.targetsCoords:
 		if playSpace.allSlots[x].carte :
-			entrance.effectToDo.call(playSpace.allSlots[x].carte)
+			entrance.effectToDo.call(playSpace.allSlots[x].carteData)
 func verrify_Clic_position(event : InputEvent )->Vector2i :
 	var mousePos : Vector2= event.global_position
 	var test : Vector2i = Vector2i( floori(mousePos.x /playSpace.slotSize.x) ,floori(mousePos.y /playSpace.slotSize.y))

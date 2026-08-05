@@ -30,5 +30,7 @@ layout_mode = 0
 offset_left = 1112.0
 offset_right = 1152.0
 offset_bottom = 40.0
+auto_height = true
+wraparound_items = false
 
 [connection signal="item_selected" from="La main/ItemList" to="La main" method="_on_item_list_item_selected"]

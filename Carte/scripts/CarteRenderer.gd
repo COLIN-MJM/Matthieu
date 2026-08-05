@@ -1,8 +1,16 @@
 class_name CarteRenderer
 extends Node2D
 
-@export var CardEffect:Carte 
+@export var CardEffect:Carte :
+	get :
+		return CardEffect
+	set (value):
+		value.carteRenderer = self
+		CardEffect=value
+		
 @export var arrow :Node2D
+
+
 
 func _process(_delta: float) -> void :
 	var dirToRot : float

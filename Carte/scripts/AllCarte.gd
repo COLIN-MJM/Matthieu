@@ -10,11 +10,12 @@ func is_Carte(d :Dictionary):
 func add_to_dico(entrance : Dictionary)->void:
 	var baseString=entrance["class"]
 	var number : int =baseString.erase(0,baseString.length()-2).to_int()
-	dico[number]=load(entrance["path"]).new()
+	dico.get_or_add(number,load(entrance["path"]).new())
 #endregion
 
 func _init() -> void:
-	ProjectSettings.get_global_class_list().filter(is_Carte).all(add_to_dico)
+	for x in ProjectSettings.get_global_class_list().filter(is_Carte) :
+		add_to_dico(x)
 	##initialise tout les script enfant de Class correctement formaté
 	####Pire crime de l'histoire de l'humanité,on raconte que son créateur construit une tour de sont hubris,la hauteur tell qu'elle perças le paradis
 

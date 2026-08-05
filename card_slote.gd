@@ -16,13 +16,13 @@ func AssignCard(entrance : CarteRenderer)->void :
 	add_child(entrance)
 func PlaceCard(entrance : CarteRenderer)->SecondaryEffect :
 	AssignCard(entrance)
-	if(entrance.CardEffect.ActivationType== GlobalCardEnum.ActivationTypes.OnPlacement) :
+	if entrance.CardEffect.ActivationType== GlobalCardEnum.ActivationTypes.OnPlacement :
 		return entrance.CardEffect.Activate()
 	else :
 		return
 func ReceiveMovedCard(entrance : CarteRenderer)->SecondaryEffect :
 	AssignCard(entrance)
-	if(entrance.CardEffect.ActivationType== GlobalCardEnum.ActivationTypes.OnMove) :
+	if entrance.CardEffect.ActivationType== GlobalCardEnum.ActivationTypes.OnMove :
 		return entrance.CardEffect.Activate()
 	else :
 		return
