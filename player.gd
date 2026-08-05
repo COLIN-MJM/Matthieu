@@ -22,7 +22,6 @@ func create_card_from_clic(event : InputEvent)->bool :
 	if carte == null :
 		return false
 	
-	print("passed initial test")
 	
 	
 	##create position and check validity
@@ -73,7 +72,6 @@ func applySecondaryEffects(entrance : SecondaryEffect)->void :
 func verrify_Clic_position(event : InputEvent )->Vector2i :
 	var mousePos : Vector2= event.global_position
 	var test : Vector2i = Vector2i( floori(mousePos.x /playSpace.slotSize.x) ,floori(mousePos.y /playSpace.slotSize.y))
-	print("test is " ,test)
 	if test.x >playSpace.dimensions.x or test.x <0 or test.y >playSpace.dimensions.y or test.y <0  :
 		return Vector2i(-1,-1)
 	return test

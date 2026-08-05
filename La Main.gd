@@ -12,7 +12,6 @@ var allCarteState :Dictionary[int, CarteState]
 
 func _ready() -> void:
 	var numberOfCarte : Array [int] = allCarte.dico.keys()
-	print(numberOfCarte)
 	for x in numberOfCarte :
 		allCarteState[x]=CarteState.IN_HAND
 		selectable.add_item(String.num(x))
@@ -30,4 +29,3 @@ func requestCard(i :int)->Carte :
 
 func _on_item_list_item_selected(index: int) -> void:
 	currentSelected= selectable.get_item_text(index).to_int()
-	print(currentSelected)
