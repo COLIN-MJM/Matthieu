@@ -7,37 +7,73 @@ var playSpace: PlaySpace
 
 var cur_selected_index : int = -1
 func _input(event: InputEvent) -> void:
-	create_card_from_clic(event)
+	if create_card_from_clic(event) : return
+	if move_card_from_clic(event):return
 
-func create_card_from_clic(event : InputEvent)->void :
+func create_card_from_clic(event : InputEvent)->bool :
 	##Check if initial condition are proper
 	if event is not InputEventMouseButton:
-		return
+		return false
+	if event.is_action_pressed("Left mouse Clic") :return false
 	if  cur_selected_index == -1 :
 		cur_selected_index = main.currentSelected
-		return
+		return false
 	var carte : Carte = main.requestCard(cur_selected_index)
 	if carte == null :
-		return
+		return false
 	
 	print("passed initial test")
 	
+	
 	##create position and check validity
-	var mousePos : Vector2= event.global_position
-	var test : Vector2i = Vector2i( floori(mousePos.x /playSpace.slotSize.x) ,floori(mousePos.y /playSpace.slotSize.y))
-	print("test is " ,test)
-	if test.x >playSpace.dimensions.x or test.x <0 or test.y >playSpace.dimensions.y or test.y <0  :
-		return
-	print("passed position test  value is ",test)
+	var pos=  verrify_Clic_position(event)
+	if pos ==Vector2i(-1,-1) :return false
 	##create the card
 	var ressource : PackedScene = preload("res://CarteInstance.tscn")
 	var instance : CarteRenderer =ressource.instantiate()
 	instance.CardEffect=carte
-	var effects:SecondaryEffect = playSpace.allSlots[test].PlaceCard(instance)
+	var effects:SecondaryEffect = playSpace.allSlots[pos].PlaceCard(instance)
 	if effects:
 		applySecondaryEffects(effects)
+	cur_selected_index=-1
+	return true
+
+var savedpos : Vector2i=Vector2i(-1,-1)
+func move_card_from_clic(event : InputEvent)->bool :
+	##Check if initial condition are proper
+	if event is not InputEventMouseButton:
+		return false
+	if event.is_action_pressed("Left mouse Clic") :return false
+	if  cur_selected_index != -1 :
+		return false
+	if savedpos==Vector2i(-1,-1) :
+		savedpos=  verrify_Clic_position(event)
+		if savedpos ==Vector2i(-1,-1) :return false
+		if !playSpace.allSlots[savedpos].haveCarte : 
+			savedpos=Vector2i(-1,-1)
+			return false
+	##create position and check validity
+	var newPos=verrify_Clic_position(event)
+	if newPos ==Vector2i(-1,-1) :return false
+	if newPos.distance_to(savedpos)!=1:return false
+	if playSpace.allSlots[newPos].haveCarte : return false
+	var cardrendered = playSpace.allSlots[savedpos].GiveMovedCard()
+	var effects:SecondaryEffect = playSpace.allSlots[newPos].ReceiveMovedCard(cardrendered)
+	if effects :
+		applySecondaryEffects(effects)
+	savedpos=Vector2i(-1,-1)
+	newPos =Vector2i(-1,-1)
+	return true
+
 
 func applySecondaryEffects(entrance : SecondaryEffect)->void :
 	for x :Vector2i in entrance.targetsCoords:
 		if playSpace.allSlots[x].carte :
 			entrance.effectToDo.call(playSpace.allSlots[x].carte)
+func verrify_Clic_position(event : InputEvent )->Vector2i :
+	var mousePos : Vector2= event.global_position
+	var test : Vector2i = Vector2i( floori(mousePos.x /playSpace.slotSize.x) ,floori(mousePos.y /playSpace.slotSize.y))
+	print("test is " ,test)
+	if test.x >playSpace.dimensions.x or test.x <0 or test.y >playSpace.dimensions.y or test.y <0  :
+		return Vector2i(-1,-1)
+	return test

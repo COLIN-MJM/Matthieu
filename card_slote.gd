@@ -20,3 +20,16 @@ func PlaceCard(entrance : CarteRenderer)->SecondaryEffect :
 		return entrance.CardEffect.Activate()
 	else :
 		return
+func ReceiveMovedCard(entrance : CarteRenderer)->SecondaryEffect :
+	AssignCard(entrance)
+	if(entrance.CardEffect.ActivationType== GlobalCardEnum.ActivationTypes.OnMove) :
+		return entrance.CardEffect.Activate()
+	else :
+		return
+func GiveMovedCard()->CarteRenderer:
+	haveCarte=false
+	remove_child(carte)
+	var give : CarteRenderer = carte
+	carte = null
+	carteData = null
+	return give
