@@ -1,7 +1,7 @@
 @abstract
 class_name Carte
 extends Resource
-var direction : Vector2i
+var direction : Vector2i = Vector2i(0,-1)
 var position :Vector2i :
 	get :
 		return position

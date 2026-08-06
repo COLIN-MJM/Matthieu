@@ -19,8 +19,10 @@ func Activate()->SecondaryEffect:
 	var effects :SecondaryEffect = SecondaryEffect.new(targets,afterEffect)
 	return effects
 
-func AfterEffect(entrance:Carte):
+func AfterEffect(entrance:Carte)->void:
 	if !playspace.allSlots[entrance.position+mooveDir].haveCarte :
 		var  x = playspace.allSlots[entrance.position].GiveMovedCard()
-		playspace.allSlots[entrance.position+mooveDir].ReceiveMovedCard(x)
-	pass
+		var effects =playspace.allSlots[entrance.position+mooveDir].ReceiveMovedCard(x)
+		if effects !=null:
+			playspace.sideEffectHandler.queu_secondaryEffect(effects)
+	

@@ -6,7 +6,7 @@ extends Node2D
 @onready var carteSlot : PackedScene =$".".get_meta("CarteSlot")
 @onready var player_scene : PackedScene =$".".get_meta("PlayerScene")
 
-
+var sideEffectHandler : SideEffectHandler = SideEffectHandler.new(self)
 
 var allSlots :Dictionary[Vector2i,CardSlot]
 

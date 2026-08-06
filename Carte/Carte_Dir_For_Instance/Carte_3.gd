@@ -13,13 +13,12 @@ func Activate()->SecondaryEffect:
 	targets.append(position+Vector2i.DOWN)
 	targets.append(position+Vector2i.LEFT)
 	
-	targets =targets.filter(func(o) : 
-		!(o.x >playspace.dimensions.x or o.x <0 or o.y >playspace.dimensions.y or o.y <0) 
-		)
+	targets=targets.filter(
+		func(o : Vector2i) :return !(o.x >playspace.dimensions.x or o.x <0 or o.y >playspace.dimensions.y or o.y <0))
 	
 	var effects :SecondaryEffect = SecondaryEffect.new(targets,afterEffect)
 	return effects
 
-func AfterEffect(entrance:Carte):
-	entrance.direction= entrance.direction*-1
-	pass
+func AfterEffect(entrance:Carte)->void:
+	var rotationFunc = func(x:Carte) :x.direction= x.direction *-1
+	playspace.allSlots[entrance.position].RotateCard(rotationFunc)

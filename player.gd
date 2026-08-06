@@ -8,13 +8,14 @@ var playSpace: PlaySpace
 var cur_selected_index : int = -1
 func _input(event: InputEvent) -> void:
 	if create_card_from_clic(event) : return
-	if move_card_from_clic(event):return
-
+	if move_card_from_clic(event):return ##c'est dégeu mais il attribue save pos pour plus tard
+	if rotate_card_from_clic(event) : return
+	playSpace.sideEffectHandler.ResolveSecondaryEffects()
 func create_card_from_clic(event : InputEvent)->bool :
 	##Check if initial condition are proper
 	if event is not InputEventMouseButton:
 		return false
-	if event.is_action_pressed("Left mouse Clic") :return false
+	if !event.is_action_pressed("Left mouse Clic") :return false
 	if  cur_selected_index == -1 :
 		cur_selected_index = main.currentSelected
 		return false
@@ -33,7 +34,7 @@ func create_card_from_clic(event : InputEvent)->bool :
 	instance.CardEffect=carte
 	var effects:SecondaryEffect = playSpace.allSlots[pos].PlaceCard(instance)
 	if effects !=null:
-		applySecondaryEffects(effects)
+		playSpace.sideEffectHandler.queu_secondaryEffect(effects)
 	cur_selected_index=-1
 	return true
 
@@ -42,9 +43,8 @@ func move_card_from_clic(event : InputEvent)->bool :
 	##Check if initial condition are proper
 	if event is not InputEventMouseButton:
 		return false
-	if event.is_action_pressed("Left mouse Clic") :return false
-	if  cur_selected_index != -1 :
-		return false
+	if !event.is_action_pressed("Left mouse Clic") :return false
+
 	if savedpos==Vector2i(-1,-1) :
 		savedpos=  verrify_Clic_position(event)
 		if savedpos ==Vector2i(-1,-1) :return false
@@ -58,17 +58,26 @@ func move_card_from_clic(event : InputEvent)->bool :
 	if playSpace.allSlots[newPos].haveCarte : return false
 	var cardrendered = playSpace.allSlots[savedpos].GiveMovedCard()
 	var effects:SecondaryEffect = playSpace.allSlots[newPos].ReceiveMovedCard(cardrendered)
-	if effects!=null :
-		applySecondaryEffects(effects)
+	if effects !=null:
+		playSpace.sideEffectHandler.queu_secondaryEffect(effects)
 	savedpos=Vector2i(-1,-1)
 	newPos =Vector2i(-1,-1)
 	return true
 
+func rotate_card_from_clic(event : InputEvent)->bool :
+	##Check if initial condition are proper
+	if savedpos == Vector2i(-1,-1) : return false
+	if !event.is_action_pressed("Right mous Clic") : return false
+	var newPos=verrify_Clic_position(event)
+	if newPos ==Vector2i(-1,-1) :return false
+	if newPos.distance_to(savedpos)!=1:return false
+	var newDir : Vector2i = newPos-savedpos
+	var rotatFunc : Callable = func(x : Carte) : x.direction= newDir
+	var effects:SecondaryEffect = playSpace.allSlots[savedpos].RotateCard(rotatFunc)
+	if effects !=null:
+		playSpace.sideEffectHandler.queu_secondaryEffect(effects)
+	return true
 
-func applySecondaryEffects(entrance : SecondaryEffect)->void :
-	for x :Vector2i in entrance.targetsCoords:
-		if playSpace.allSlots[x].carte :
-			entrance.effectToDo.call(playSpace.allSlots[x].carteData)
 func verrify_Clic_position(event : InputEvent )->Vector2i :
 	var mousePos : Vector2= event.global_position
 	var test : Vector2i = Vector2i( floori(mousePos.x /playSpace.slotSize.x) ,floori(mousePos.y /playSpace.slotSize.y))

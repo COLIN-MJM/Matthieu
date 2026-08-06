@@ -33,3 +33,11 @@ func GiveMovedCard()->CarteRenderer:
 	carte = null
 	carteData = null
 	return give
+func RotateCard(rotationFunc : Callable)->SecondaryEffect :
+	
+	rotationFunc.call(carteData)
+	print(carteData.direction)
+	if carteData.ActivationType ==GlobalCardEnum.ActivationTypes.OnRotate :
+		return carteData.Activate()
+	else :
+		return
