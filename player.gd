@@ -67,11 +67,15 @@ func move_card_from_clic(event : InputEvent)->bool :
 func rotate_card_from_clic(event : InputEvent)->bool :
 	##Check if initial condition are proper
 	if savedpos == Vector2i(-1,-1) : return false
+	if !playSpace.allSlots[savedpos].haveCarte : 
+			savedpos=Vector2i(-1,-1)
+			return false
 	if !event.is_action_pressed("Right mous Clic") : return false
 	var newPos=verrify_Clic_position(event)
 	if newPos ==Vector2i(-1,-1) :return false
 	if newPos.distance_to(savedpos)!=1:return false
 	var newDir : Vector2i = newPos-savedpos
+	if newDir==playSpace.allSlots[savedpos].carteData.direction *-1: return false
 	var rotatFunc : Callable = func(x : Carte) : x.direction= newDir
 	var effects:SecondaryEffect = playSpace.allSlots[savedpos].RotateCard(rotatFunc)
 	if effects !=null:
