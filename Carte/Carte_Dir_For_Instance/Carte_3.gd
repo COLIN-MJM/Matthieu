@@ -3,6 +3,7 @@ extends Carte
 func _init() -> void:
 	ActivationType= GlobalCardEnum.ActivationTypes.OnPlacement
 
+
 var playspace : PlaySpace
 func Activate()->SecondaryEffect:
 	if playspace == null :

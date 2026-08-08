@@ -31,6 +31,16 @@ func createGrid()->void:
 			allSlots[Vector2i(x,y)]= instance
 			add_child(instance)
 
+func Resolve_Passive()->void :
+	var filtered =allSlots.keys().filter(
+		func(x:Vector2i) :
+			return (allSlots[x].haveCarte and allSlots[x].carteData.ActivationType== GlobalCardEnum.ActivationTypes.Passive)
+	)
+	
+	for y in filtered :
+		sideEffectHandler.queu_secondaryEffect(allSlots[y].ActivateCard())
+	sideEffectHandler.ResolveSecondaryEffects()
+
 func debugCreateCard(at :Vector2i =Vector2i(0,0))->void :
 	var ressource : PackedScene = preload("res://CarteInstance.tscn")
 	var instance : CarteRenderer =ressource.instantiate()

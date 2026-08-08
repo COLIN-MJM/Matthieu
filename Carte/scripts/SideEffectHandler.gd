@@ -20,7 +20,6 @@ func queu_secondaryEffect(SE : SecondaryEffect)->void :
 	else :
 		effectQueu.queu_secondaryEffect(SE)
 
-
 func applySecondaryEffects(entrance : SecondaryEffect)->void :
 	for x :Vector2i in entrance.targetsCoords:
 		if playSpace.allSlots[x].carte :
@@ -29,10 +28,12 @@ func applySecondaryEffects(entrance : SecondaryEffect)->void :
 
 class EffectQueu :
 	var qeu :Array[SecondaryEffect]
+	var last_first : int 
 	
 	func first ()->SecondaryEffect :
-		var index = qeu.find_custom(func(x:SecondaryEffect) : return !x.wasEvaluated)
+		var index = qeu.find_custom(func(x:SecondaryEffect) : return !x.wasEvaluated ,last_first)
 		qeu[index].wasEvaluated= true
+		last_first=index
 		return qeu[index]
 	
 	func _init(initial : SecondaryEffect) -> void:

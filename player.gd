@@ -1,12 +1,14 @@
 class_name Player
 extends Control
 
-
+var player_Id : int
 @export var main : La_Main
 var playSpace: PlaySpace
 
 var cur_selected_index : int = -1
 func _input(event: InputEvent) -> void:
+	playSpace.Resolve_Passive()
+	if activate_card_from_clic(event) :return
 	if create_card_from_clic(event) : return
 	if move_card_from_clic(event):return ##c'est dégeu mais il attribue save pos pour plus tard
 	if rotate_card_from_clic(event) : return
@@ -16,19 +18,18 @@ func create_card_from_clic(event : InputEvent)->bool :
 	if event is not InputEventMouseButton:
 		return false
 	if !event.is_action_pressed("Left mouse Clic") :return false
+	##create position and check validity
+	var pos=  verrify_Clic_position(event)
+	if pos ==Vector2i(-1,-1) :return false
+	## create and verify Carte effect validity
 	if  cur_selected_index == -1 :
 		cur_selected_index = main.currentSelected
 		return false
 	var carte : Carte = main.requestCard(cur_selected_index)
 	if carte == null :
 		return false
-	
-	
-	
-	##create position and check validity
-	var pos=  verrify_Clic_position(event)
-	if pos ==Vector2i(-1,-1) :return false
 	##create the card
+	carte.owner=player_Id
 	var ressource : PackedScene = preload("res://CarteInstance.tscn")
 	var instance : CarteRenderer =ressource.instantiate()
 	instance.CardEffect=carte
@@ -81,6 +82,21 @@ func rotate_card_from_clic(event : InputEvent)->bool :
 	if effects !=null:
 		playSpace.sideEffectHandler.queu_secondaryEffect(effects)
 	return true
+
+func activate_card_from_clic(event : InputEvent)->bool :
+	##Check if initial condition are proper
+	if event is not InputEventMouseButton:
+		return false
+	if !event.is_action_pressed("Right mous Clic") :return false
+	##create position and check validity
+	var pos=  verrify_Clic_position(event)
+	if pos ==Vector2i(-1,-1) :return false
+	if !playSpace.allSlots[pos].haveCarte : return false
+	if playSpace.allSlots[pos].carteData.ActivationType != GlobalCardEnum.ActivationTypes.OnPlayerActivation : return false
+	var effects : SecondaryEffect = playSpace.allSlots[pos].ActivateCard()
+	if effects != null : playSpace.sideEffectHandler.queu_secondaryEffect(effects)
+	return true
+	
 
 func verrify_Clic_position(event : InputEvent )->Vector2i :
 	var mousePos : Vector2= event.global_position

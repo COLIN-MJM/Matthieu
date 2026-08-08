@@ -41,3 +41,5 @@ func RotateCard(rotationFunc : Callable)->SecondaryEffect :
 		return carteData.Activate()
 	else :
 		return
+func ActivateCard()->SecondaryEffect:
+	return carteData.Activate()

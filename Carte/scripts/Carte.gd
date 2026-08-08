@@ -11,7 +11,8 @@ var position :Vector2i :
 var oldPosition : Vector2i
 var ActivationType :GlobalCardEnum.ActivationTypes
 var afterEffect =Callable(self,"AfterEffect")
-var wasEvaluated : bool =false
+var owner : int 
+
 
 var carteRenderer : CarteRenderer
 @abstract func Activate()->SecondaryEffect #do thing on the current card
