@@ -12,7 +12,6 @@ func ResolveSecondaryEffects() -> void :
 	if effectQueu == null : return
 	while !effectQueu.havefinished() :
 		applySecondaryEffects(effectQueu.first())
-	effectQueu.free()
 
 func queu_secondaryEffect(SE : SecondaryEffect)->void :
 	if effectQueu == null :
@@ -24,7 +23,6 @@ func applySecondaryEffects(entrance : SecondaryEffect)->void :
 	for x :Vector2i in entrance.targetsCoords:
 		if playSpace.allSlots[x].carte :
 			entrance.effectToDo.call(playSpace.allSlots[x].carteData)
-	entrance.free()
 
 class EffectQueu :
 	var qeu :Array[SecondaryEffect]

@@ -10,11 +10,20 @@ func Activate()->SecondaryEffect:
 	var targets : Array[Vector2i]
 	if dimension == Vector2i(-1,-1) :
 		playspace = carteRenderer.get_node("/root/Node2D")
-		dimension=playspace.dimensions
+		dimension=playspace.dimensions - Vector2i(1,1)
 	mooveDir = position-oldPosition
-	var number : int = floor(((dimension - position) *mooveDir).length())
-	for i in range(number-1) :
-		targets.append(position+ mooveDir +(mooveDir*i ))
+	var number : int
+	match mooveDir :
+		Vector2i.UP:
+			number=position.y
+		Vector2i.LEFT :
+			number=position.x
+		Vector2i.RIGHT :
+			number = dimension.x-position.x
+		Vector2i.DOWN :
+			number = dimension.y-position.y
+	for i in range(number - 1) :
+		targets.append(position+mooveDir +(mooveDir*i ))
 	targets.reverse()
 	var effects :SecondaryEffect = SecondaryEffect.new(targets,afterEffect)
 	return effects

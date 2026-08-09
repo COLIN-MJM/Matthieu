@@ -8,6 +8,7 @@ var playspace : PlaySpace
 func Activate()->SecondaryEffect:
 	if playspace == null :
 		playspace = carteRenderer.get_node("/root/Node2D")
+	var dimension : Vector2i =playspace.dimensions-Vector2i(1,1)
 	var targets : Array[Vector2i]
 	targets.append(position+Vector2i.UP)
 	targets.append(position+Vector2i.RIGHT)
@@ -15,8 +16,7 @@ func Activate()->SecondaryEffect:
 	targets.append(position+Vector2i.LEFT)
 	
 	targets=targets.filter(
-		func(o : Vector2i) :return !(o.x >playspace.dimensions.x or o.x <0 or o.y >playspace.dimensions.y or o.y <0))
-	
+		func(o : Vector2i) :return !(o.x >dimension.x or o.x <0 or o.y >dimension.y or o.y <0))
 	var effects :SecondaryEffect = SecondaryEffect.new(targets,afterEffect)
 	return effects
 
