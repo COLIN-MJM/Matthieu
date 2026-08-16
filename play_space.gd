@@ -2,15 +2,19 @@ class_name PlaySpace
 extends Node2D
 @export var dimensions : Vector2i
 @export var slotSize : Vector2i
-
+var board : Node2D
+var TlMidBr : PackedVector2Array
 @onready var carteSlot : PackedScene =$".".get_meta("CarteSlot")
 @onready var player_scene : PackedScene =$".".get_meta("PlayerScene")
+
+var  scaler : Vector2 
 
 var sideEffectHandler : SideEffectHandler = SideEffectHandler.new(self)
 
 var allSlots :Dictionary[Vector2i,CardSlot]
 
 func _ready() -> void:
+	scaler= Vector2(slotSize)/100
 	createGrid()
 	createplayer_scene()
 
@@ -23,13 +27,26 @@ func createplayer_scene()->void:
 
 
 func createGrid()->void:
+	board=Node2D.new()
+	add_child(board)
+	
 	for y in dimensions.y :
 		for x in dimensions.x :
 			var instance : CardSlot = carteSlot.instantiate()
-			instance.position =position+ Vector2(slotSize.x *x,slotSize.y * y )
+			instance.position =board.position+ Vector2(slotSize.x *x,slotSize.y * y )
 			instance.coords=Vector2i(x,y)
 			allSlots[Vector2i(x,y)]= instance
-			add_child(instance)
+			instance.poly.scale=scaler
+			board.add_child(instance)
+	get_window().size_changed.connect(centerPlayspace)
+	_midpoint=Vector2(dimensions.x*slotSize.x,dimensions.y*slotSize.y)/2
+	
+	centerPlayspace()
+var _midpoint : Vector2
+func centerPlayspace()->void :
+	var center :Vector2 = get_window().size/2
+	board.position=center-_midpoint
+	TlMidBr=PackedVector2Array([center-_midpoint,center,center+_midpoint])
 
 func Resolve_Passive()->void :
 	var filtered =allSlots.keys().filter(

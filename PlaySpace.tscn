@@ -6,7 +6,7 @@
 
 [node name="Node2D" type="Node2D" unique_id=1755601109]
 script = ExtResource("1_ddk8d")
-dimensions = Vector2i(4, 4)
-slotSize = Vector2i(100, 100)
+dimensions = Vector2i(10, 10)
+slotSize = Vector2i(60, 60)
 metadata/CarteSlot = ExtResource("2_n6yqr")
 metadata/PlayerScene = ExtResource("3_u1prq")

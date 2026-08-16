@@ -12,7 +12,7 @@ var oldPosition : Vector2i
 var ActivationType :GlobalCardEnum.ActivationTypes
 var afterEffect =Callable(self,"AfterEffect")
 var owner : int 
-
+var sprite : DPITexture
 
 var carteRenderer : CarteRenderer
 @abstract func Activate()->SecondaryEffect #do thing on the current card

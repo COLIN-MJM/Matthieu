@@ -1,16 +1,23 @@
 [gd_scene format=3 uid="uid://cqhllnaq53hyr"]
 
 [ext_resource type="Script" uid="uid://c4ws3hf8em16v" path="res://Carte/scripts/CarteRenderer.gd" id="1_8sjrd"]
+[ext_resource type="Texture2D" uid="uid://w1hfa7fprxqj" path="res://Contour_Placeholder.svg" id="2_8sjrd"]
+[ext_resource type="Texture2D" uid="uid://djqq6bxlxabw8" path="res://Carte/Carte_Dir_For_Instance/Carte_Inté_3svg.svg" id="2_h4qqw"]
 
-[node name="CarteIntance" type="Node2D" unique_id=1507316123 node_paths=PackedStringArray("arrow")]
+[node name="CarteIntance" type="Node2D" unique_id=1507316123 node_paths=PackedStringArray("arrow", "spriteMain", "playerColor")]
 script = ExtResource("1_8sjrd")
 arrow = NodePath("Polygon2D/DirectionIndactor")
+spriteMain = NodePath("Polygon2D")
+playerColor = NodePath("Polygon2D/Polygon2D")
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=849488948]
-polygon = PackedVector2Array(0, 0, 70, 0, 70.000015, 70, 0, 70)
+[node name="Polygon2D" type="Sprite2D" parent="." unique_id=346156981]
+texture = ExtResource("2_h4qqw")
+centered = false
 
-[node name="DirectionIndactor" type="Polygon2D" parent="Polygon2D" unique_id=1821188917]
-position = Vector2(35, 35)
-color = Color(1, 0, 0.0627451, 1)
-offset = Vector2(-35, -35)
-polygon = PackedVector2Array(35, 0, 0, 29.999992, 70, 29.999992)
+[node name="DirectionIndactor" type="Sprite2D" parent="Polygon2D" unique_id=1101818354]
+position = Vector2(50, 50)
+texture = ExtResource("2_8sjrd")
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D" unique_id=927431188]
+z_index = -1
+polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)

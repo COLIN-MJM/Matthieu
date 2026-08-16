@@ -5,10 +5,9 @@ var haveCarte : bool =false
 var carte : CarteRenderer
 var carteData : Carte 
 var coords: Vector2i
-
+@export var poly : Polygon2D
 
 func AssignCard(entrance : CarteRenderer)->void :
-	entrance.position=Vector2(15,15)
 	carte=entrance
 	carteData=entrance.CardEffect
 	carteData.position=coords

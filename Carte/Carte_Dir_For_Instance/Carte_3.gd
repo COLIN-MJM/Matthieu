@@ -2,6 +2,7 @@ class_name Carte_3
 extends Carte
 func _init() -> void:
 	ActivationType= GlobalCardEnum.ActivationTypes.OnPlacement
+	sprite= preload("uid://djqq6bxlxabw8")
 
 
 var playspace : PlaySpace

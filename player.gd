@@ -7,6 +7,7 @@ var playSpace: PlaySpace
 
 var cur_selected_index : int = -1
 func _input(event: InputEvent) -> void:
+	if event.is_echo() :return
 	playSpace.Resolve_Passive()
 	if activate_card_from_clic(event) :return
 	if create_card_from_clic(event) : return
@@ -32,6 +33,7 @@ func create_card_from_clic(event : InputEvent)->bool :
 	carte.owner=player_Id
 	var ressource : PackedScene = preload("res://CarteInstance.tscn")
 	var instance : CarteRenderer =ressource.instantiate()
+	instance.spriteMain.scale=playSpace.scaler
 	instance.CardEffect=carte
 	var effects:SecondaryEffect = playSpace.allSlots[pos].PlaceCard(instance)
 	if effects !=null:
@@ -100,6 +102,11 @@ func activate_card_from_clic(event : InputEvent)->bool :
 
 func verrify_Clic_position(event : InputEvent )->Vector2i :
 	var mousePos : Vector2= event.global_position
+	var tlmidbr: PackedVector2Array=playSpace.TlMidBr
+	if mousePos.x < tlmidbr[0].x or mousePos.x > tlmidbr[2].x or mousePos.y < tlmidbr[0].y or mousePos.y > tlmidbr[2].y:
+		return Vector2i(-1,-1)
+	mousePos = mousePos-tlmidbr[0]
+
 	var test : Vector2i = Vector2i( floori(mousePos.x /playSpace.slotSize.x) ,floori(mousePos.y /playSpace.slotSize.y))
 	if test.x >playSpace.dimensions.x or test.x <0 or test.y >playSpace.dimensions.y or test.y <0  :
 		return Vector2i(-1,-1)
