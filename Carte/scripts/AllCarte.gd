@@ -1,5 +1,5 @@
 class_name AllCarte 
-extends Node
+extends ItemList
 
 static  var dico :Dictionary[int,Carte]
 
