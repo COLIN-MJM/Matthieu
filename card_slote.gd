@@ -12,6 +12,7 @@ func AssignCard(entrance : CarteRenderer)->void :
 	carteData=entrance.CardEffect
 	carteData.position=coords
 	haveCarte=true
+	entrance.process_card_rotate()
 	add_child(entrance)
 func PlaceCard(entrance : CarteRenderer)->SecondaryEffect :
 	AssignCard(entrance)
@@ -35,10 +36,12 @@ func GiveMovedCard()->CarteRenderer:
 func RotateCard(rotationFunc : Callable)->SecondaryEffect :
 	
 	rotationFunc.call(carteData)
-	print(carteData.direction)
+	carte.process_card_rotate()
 	if carteData.ActivationType ==GlobalCardEnum.ActivationTypes.OnRotate :
 		return carteData.Activate()
 	else :
 		return
 func ActivateCard()->SecondaryEffect:
+	if carteData.ActivationType ==GlobalCardEnum.ActivationTypes.OnRotate :
+		carte.process_card_rotate()
 	return carteData.Activate()

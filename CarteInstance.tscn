@@ -4,11 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://w1hfa7fprxqj" path="res://Contour_Placeholder.svg" id="2_8sjrd"]
 [ext_resource type="Texture2D" uid="uid://djqq6bxlxabw8" path="res://Carte/Carte_Dir_For_Instance/Carte_Inté_3svg.svg" id="2_h4qqw"]
 
-[node name="CarteIntance" type="Node2D" unique_id=1507316123 node_paths=PackedStringArray("arrow", "spriteMain", "playerColor")]
+[node name="CarteIntance" type="Node2D" unique_id=1507316123 node_paths=PackedStringArray("arrow", "spriteMain", "playerColor", "teamColor")]
 script = ExtResource("1_8sjrd")
 arrow = NodePath("Polygon2D/DirectionIndactor")
 spriteMain = NodePath("Polygon2D")
-playerColor = NodePath("Polygon2D/Polygon2D")
+playerColor = NodePath("Polygon2D/Polygon2D3")
+teamColor = NodePath("Polygon2D/Polygon2D2")
 
 [node name="Polygon2D" type="Sprite2D" parent="." unique_id=346156981]
 texture = ExtResource("2_h4qqw")
@@ -18,6 +19,14 @@ centered = false
 position = Vector2(50, 50)
 texture = ExtResource("2_8sjrd")
 
-[node name="Polygon2D" type="Polygon2D" parent="Polygon2D" unique_id=927431188]
+[node name="Polygon2D2" type="Polygon2D" parent="Polygon2D" unique_id=882506123]
 z_index = -1
-polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
+position = Vector2(101, 103)
+rotation = -3.1415927
+polygon = PackedVector2Array(0, 0, 48, 50, 100, 100, 0, 100)
+uv = PackedVector2Array(0, 0, 48, 50, 100, 100, 0, 100)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Polygon2D" unique_id=795592032]
+z_index = -1
+polygon = PackedVector2Array(0, 0, 48, 50, 100, 100, 0, 100)
+uv = PackedVector2Array(0, 0, 48, 50, 100, 100, 0, 100)

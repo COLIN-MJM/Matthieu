@@ -66,3 +66,4 @@ func createplayer_scene(p_id : int)->void:
 	players.append(player)
 	add_child(player)
 	player._setup_listVisual()
+	

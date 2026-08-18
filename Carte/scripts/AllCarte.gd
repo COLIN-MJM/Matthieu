@@ -1,7 +1,7 @@
 class_name AllCarte 
 extends ItemList
 
-static  var dico :Dictionary[int,Carte]
+var dico :Dictionary[int,Carte]
 
 #region Helper method for loading Carte_X.gd
 func is_Carte(d :Dictionary):
@@ -23,7 +23,7 @@ func _ready() -> void:
 	for x in ProjectSettings.get_global_class_list().filter(is_Carte) :
 		add_to_dico(x,id)
 	##initialise tout les script enfant de Class correctement formaté
-	####Pire crime de l'histoire de l'humanité,on raconte que son créateur construit une tour de sont hubris,la hauteur tell qu'elle perças le paradis
+	####Pire crime de l'histoire de l'humanité,on raconte que son créateur construit une tour de sont hubris,la hauteur serait tell qu'elle perças le paradis
 
 
 func GetCarteInstanceOnNumber(entrance :int)->Carte :

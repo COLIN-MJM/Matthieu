@@ -18,6 +18,8 @@ var isTurn: bool = false :
 		isTurn=value
 
 
+
+
 func _setup_listVisual() :
 	print("o")
 	if sign(player_Id)==-1 :
