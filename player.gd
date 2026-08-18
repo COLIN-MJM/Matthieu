@@ -4,16 +4,43 @@ extends Control
 var player_Id : int
 @export var main : La_Main
 var playSpace: PlaySpace
+signal  turnSuccessFull 
+var isTurn: bool = false :
+	get : 
+		return isTurn
+	set(value) : 
+		if value ==true :
+			main.allCarte.visible=true
+			set_process_input(true)
+		else : 
+			main.allCarte.visible=false
+			set_process_input(false)
+		isTurn=value
 
+
+func _setup_listVisual() :
+	print("o")
+	if sign(player_Id)==-1 :
+		main.allCarte.position = Vector2(0+(main.allCarte.size.x+15)*((player_Id+1)*-1),0)
+	else :
+		main.allCarte.position = Vector2((get_window().size.x-main.allCarte.size.x)+(main.allCarte.size.x+15)*((player_Id-1)*-1),0)
 var cur_selected_index : int = -1
 func _input(event: InputEvent) -> void:
+	if !isTurn : return
 	if event.is_echo() :return
-	playSpace.Resolve_Passive()
-	if activate_card_from_clic(event) :return
-	if create_card_from_clic(event) : return
-	if move_card_from_clic(event):return ##c'est dégeu mais il attribue save pos pour plus tard
-	if rotate_card_from_clic(event) : return
-	playSpace.sideEffectHandler.ResolveSecondaryEffects()
+
+	if activate_card_from_clic(event) :
+		turnSuccessFull.emit()
+		return
+	if create_card_from_clic(event) : 
+		turnSuccessFull.emit()
+		return
+	if move_card_from_clic(event):
+		turnSuccessFull.emit()
+		return ##c'est dégeu mais il attribue save pos pour plus tard
+	if rotate_card_from_clic(event) :
+		turnSuccessFull.emit()
+		return
 func create_card_from_clic(event : InputEvent)->bool :
 	##Check if initial condition are proper
 	if event is not InputEventMouseButton:

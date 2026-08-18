@@ -3,10 +3,30 @@
 [ext_resource type="Script" uid="uid://c3n7l0ujysmbd" path="res://play_space.gd" id="1_ddk8d"]
 [ext_resource type="PackedScene" uid="uid://cst0j5nt5ha8a" path="res://CardSlote.tscn" id="2_n6yqr"]
 [ext_resource type="PackedScene" uid="uid://bbvvo3ludckha" path="res://Player.tscn" id="3_u1prq"]
+[ext_resource type="Script" uid="uid://dna6waf1hqwh4" path="res://player_manager.gd" id="4_df1a7"]
 
-[node name="Node2D" type="Node2D" unique_id=1755601109]
+[node name="Node2D" type="Node2D" unique_id=1755601109 node_paths=PackedStringArray("player_manager")]
 script = ExtResource("1_ddk8d")
-dimensions = Vector2i(10, 10)
-slotSize = Vector2i(60, 60)
+dimensions = Vector2i(5, 5)
+slotSize = Vector2i(100, 100)
+player_manager = NodePath("Player_Manager")
+nbr_of_player = 4
 metadata/CarteSlot = ExtResource("2_n6yqr")
-metadata/PlayerScene = ExtResource("3_u1prq")
+
+[node name="Player_Manager" type="Control" parent="." unique_id=1166481334 node_paths=PackedStringArray("playspace", "text")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_df1a7")
+playspace = NodePath("..")
+text = NodePath("Label")
+metadata/Player_Scene = ExtResource("3_u1prq")
+
+[node name="Label" type="Label" parent="Player_Manager" unique_id=1792141228]
+layout_mode = 0
+offset_left = 644.0
+offset_top = 6.0
+offset_right = 684.0
+offset_bottom = 29.0
+text = "TEST"

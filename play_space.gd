@@ -2,10 +2,13 @@ class_name PlaySpace
 extends Node2D
 @export var dimensions : Vector2i
 @export var slotSize : Vector2i
+
+@export var player_manager : Player_Manager
+@export_custom(PROPERTY_HINT_RANGE,"0,4,1") var nbr_of_player : int
 var board : Node2D
 var TlMidBr : PackedVector2Array
 @onready var carteSlot : PackedScene =$".".get_meta("CarteSlot")
-@onready var player_scene : PackedScene =$".".get_meta("PlayerScene")
+
 
 var  scaler : Vector2 
 
@@ -16,14 +19,9 @@ var allSlots :Dictionary[Vector2i,CardSlot]
 func _ready() -> void:
 	scaler= Vector2(slotSize)/100
 	createGrid()
-	createplayer_scene()
+	player_manager.createplayer_sceneS(nbr_of_player)
 
 
-
-func createplayer_scene()->void:
-	var player : Player = player_scene.instantiate()
-	player.playSpace= self
-	add_child(player)
 
 
 func createGrid()->void:
