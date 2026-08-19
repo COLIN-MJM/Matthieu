@@ -51,6 +51,12 @@ func create_card_from_clic(event : InputEvent)->bool :
 	##create position and check validity
 	var pos=  verrify_Clic_position(event)
 	if pos ==Vector2i(-1,-1) :return false
+	if playSpace.allSlots[pos].haveCarte :
+		if sign(playSpace.allSlots[pos].carteData.owner)!=sign(player_Id) : 
+			return false
+		if sign(playSpace.allSlots[pos].combat_score)!=sign(player_Id):
+			return false
+		playSpace.allSlots[pos].KillCard()
 	## create and verify Carte effect validity
 	if  cur_selected_index == -1 :
 		cur_selected_index = main.currentSelected
@@ -60,6 +66,7 @@ func create_card_from_clic(event : InputEvent)->bool :
 		return false
 	##create the card
 	carte.owner=player_Id
+	carte.strenght=sign(player_Id)
 	var ressource : PackedScene = preload("res://CarteInstance.tscn")
 	var instance : CarteRenderer =ressource.instantiate()
 	instance.spriteMain.scale=playSpace.scaler
@@ -77,17 +84,27 @@ func move_card_from_clic(event : InputEvent)->bool :
 		return false
 	if !event.is_action_pressed("Left mouse Clic") :return false
 
+#attribue savepos pour plus tard puis escape attendant le prochain event
 	if savedpos==Vector2i(-1,-1) :
 		savedpos=  verrify_Clic_position(event)
 		if savedpos ==Vector2i(-1,-1) :return false
 		if !playSpace.allSlots[savedpos].haveCarte : 
 			savedpos=Vector2i(-1,-1)
 			return false
+		if sign(playSpace.allSlots[savedpos].carteData.owner)!=sign(player_Id) : 
+			savedpos=Vector2i(-1,-1)
+			return false
 	##create position and check validity
 	var newPos=verrify_Clic_position(event)
 	if newPos ==Vector2i(-1,-1) :return false
 	if newPos.distance_to(savedpos)!=1:return false
-	if playSpace.allSlots[newPos].haveCarte : return false
+	if playSpace.allSlots[newPos].haveCarte :
+		if sign(playSpace.allSlots[newPos].carteData.owner)==sign(player_Id) :
+			return false
+		if sign(playSpace.allSlots[newPos].combat_score)!=sign(player_Id):
+			return false
+		playSpace.allSlots[newPos].KillCard()
+	
 	var cardrendered = playSpace.allSlots[savedpos].GiveMovedCard()
 	var effects:SecondaryEffect = playSpace.allSlots[newPos].ReceiveMovedCard(cardrendered)
 	if effects !=null:
@@ -123,11 +140,12 @@ func activate_card_from_clic(event : InputEvent)->bool :
 	var pos=  verrify_Clic_position(event)
 	if pos ==Vector2i(-1,-1) :return false
 	if !playSpace.allSlots[pos].haveCarte : return false
+	if !(sign(playSpace.allSlots[pos].owner)==sign(player_Id)) : return false
 	if playSpace.allSlots[pos].carteData.ActivationType != GlobalCardEnum.ActivationTypes.OnPlayerActivation : return false
 	var effects : SecondaryEffect = playSpace.allSlots[pos].ActivateCard()
 	if effects != null : playSpace.sideEffectHandler.queu_secondaryEffect(effects)
 	return true
-	
+
 
 func verrify_Clic_position(event : InputEvent )->Vector2i :
 	var mousePos : Vector2= event.global_position

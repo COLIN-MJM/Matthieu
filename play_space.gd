@@ -46,6 +46,15 @@ func centerPlayspace()->void :
 	board.position=center-_midpoint
 	TlMidBr=PackedVector2Array([center-_midpoint,center,center+_midpoint])
 
+func Resolve_AttacksAndDefend()->void :
+	var slotWithCard = allSlots.values().filter(
+		func(x : CardSlot): return x.haveCarte)
+	for slot : CardSlot in slotWithCard :
+		var tryPos : Vector2i =slot.coords+slot.carteData.direction
+		if tryPos.x <dimensions.x and tryPos.x >0 and tryPos.y <dimensions.y and tryPos.y >0  :
+			allSlots[tryPos].combat_score+=slot.carteData.strenght
+		
+	
 func Resolve_Passive()->void :
 	var filtered =allSlots.keys().filter(
 		func(x:Vector2i) :

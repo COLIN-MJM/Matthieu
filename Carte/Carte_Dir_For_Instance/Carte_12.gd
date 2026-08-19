@@ -1,6 +1,7 @@
 class_name Carte_12
 extends Carte
 func _init() -> void:
+	super()
 	ActivationType= GlobalCardEnum.ActivationTypes.OnMove
 
 var dimension : Vector2i =Vector2i(-1,-1)

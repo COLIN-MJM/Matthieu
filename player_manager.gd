@@ -4,7 +4,7 @@ extends Control
 @export var playspace : PlaySpace
 @export var text : Label
 @onready var player_scene : PackedScene =$".".get_meta("Player_Scene")
-var players : Array[Player]
+var players : Dictionary[int,Player]
 var currRound : int 
 
 var current_player : int  = 0
@@ -31,7 +31,7 @@ func setup_turn() ->void:
 
 
 func  _process_round()->bool :
-	for p in players :
+	for p in players.values() :
 		current_player= p.player_Id
 		text.text=" round "+ str(currRound)+"\n"+"player to play "+ str(current_player)
 		await _process_turn(p)
@@ -39,6 +39,9 @@ func  _process_round()->bool :
 
 func _process_turn(player : Player)->bool :
 	playspace.Resolve_Passive()
+	playspace.Resolve_AttacksAndDefend()
+	player.main.decreaseDeathTimer()
+	player.savedpos=Vector2i(-1,-1)
 	player.isTurn=true
 	await player.turnSuccessFull
 	player.isTurn=false
@@ -63,7 +66,7 @@ func createplayer_scene(p_id : int)->void:
 	player.playSpace= get_parent() as PlaySpace
 	player.player_Id=p_id
 	player.isTurn=false
-	players.append(player)
+	players.get_or_add(p_id,player)
 	add_child(player)
 	player._setup_listVisual()
 	

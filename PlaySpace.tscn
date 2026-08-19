@@ -10,7 +10,7 @@ script = ExtResource("1_ddk8d")
 dimensions = Vector2i(5, 5)
 slotSize = Vector2i(100, 100)
 player_manager = NodePath("Player_Manager")
-nbr_of_player = 4
+nbr_of_player = 2
 metadata/CarteSlot = ExtResource("2_n6yqr")
 
 [node name="Player_Manager" type="Control" parent="." unique_id=1166481334 node_paths=PackedStringArray("playspace", "text")]
