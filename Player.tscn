@@ -32,4 +32,5 @@ wraparound_items = false
 same_column_width = true
 script = ExtResource("2_esir1")
 
+[connection signal="turnSuccessFull" from="." to="." method="_on_turn_success_full"]
 [connection signal="item_selected" from="La main/ItemList" to="La main" method="_on_item_list_item_selected"]

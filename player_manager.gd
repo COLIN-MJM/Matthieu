@@ -41,7 +41,6 @@ func _process_turn(player : Player)->bool :
 	playspace.Resolve_Passive()
 	playspace.Resolve_AttacksAndDefend()
 	player.main.decreaseDeathTimer()
-	player.savedpos=Vector2i(-1,-1)
 	player.isTurn=true
 	await player.turnSuccessFull
 	player.isTurn=false
