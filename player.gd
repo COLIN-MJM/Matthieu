@@ -92,6 +92,8 @@ class Gui_selected :
 	func process_event(event : InputEvent)->Player_State:
 		if event.is_action_pressed("Left mouse Clic") :
 			if create_card_from_clic(event) : player.turnSuccessFull.emit()
+		if event.is_action_pressed("Right mous Clic") :
+			return Gui_none_selected.new(player)
 		return null
 	func create_card_from_clic(event : InputEvent)->bool :
 		var pos= player.verrify_Clic_position(event)
