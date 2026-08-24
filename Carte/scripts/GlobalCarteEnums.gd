@@ -1,4 +1,4 @@
 
 class_name  GlobalCardEnum 
-extends Resource
+extends Object
 enum ActivationTypes {OnPlacement,OnMove,OnRotate,OnPlayerActivation,Passive}
