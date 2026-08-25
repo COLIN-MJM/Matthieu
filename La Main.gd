@@ -15,8 +15,6 @@ func _ready() -> void:
 	for x in numberOfCarte :
 		allCarteState[x]=CarteState.IN_HAND
 		allCarte.add_item(String.num(x))
-		
-
 
 func requestCard(i :int)->Carte :
 	if allCarteState[i] == CarteState.IN_HAND :

@@ -9,7 +9,7 @@ var position :Vector2i :
 		oldPosition = position
 		position=value
 var oldPosition : Vector2i
-var ActivationType :GlobalCardEnum.ActivationTypes
+@export var ActivationType :GlobalCardEnum.ActivationTypes
 var afterEffect =Callable(self,"AfterEffect")
 var owner : int 
 var sprite : DPITexture

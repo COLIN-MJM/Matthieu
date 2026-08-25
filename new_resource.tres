@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Carte_12" format=3 uid="uid://b33en8ov87rth"]
+
+[ext_resource type="Script" uid="uid://bneufas4fcgkr" path="res://Carte/Carte_Dir_For_Instance/Carte_12.gd" id="1_g5ko2"]
+
+[resource]
+script = ExtResource("1_g5ko2")
+metadata/_custom_type_script = "uid://bneufas4fcgkr"
