@@ -13,6 +13,8 @@ const non_finite_while_limits = 25
 ## les valeurs sont inversé  : filter_dist.bind(Vector,int) => "filter_dist",int,Vector,"sequence_end" me demande pas Pk j'en ais pas la moindre idée
 const inputs : Array = ["filtre_dist",1,Vector2i(7,2),"sequence_end","orer","filtre_relative_pos",Vector2i.UP,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.LEFT,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.RIGHT,Vector2i(7,2),"sequence_end","sequence_end"]
 
+#vue que les orer sont casse bonbon à demander une array il doivent fonctionner en exception.
+const exception :Array[String] = ["orer"]
 var b : bite
 func _run() -> void:
 	b=bite.new()
@@ -29,7 +31,7 @@ func interpreter():
 	while i <=inputs.size()-1:
 		print("big I is ",i)
 		if current_block !=null :
-			var x: bind_return= test_bind_to_callable(current_block,i,0)
+			var x: bind_return= bind_to_callable(current_block,i,0)
 			call_array.append(x.callable)
 			current_block = null
 			i=x.next_i
@@ -58,7 +60,7 @@ func interpreter():
 	for y in result:
 		test.append(y.name)	
 	print(test)
-func test_bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
+func bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 	print(x.callable.get_method())
 	var returned: Callable=x.callable
 	var y:int =i
@@ -72,7 +74,7 @@ func test_bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 		assert(y-i<non_finite_while_limits,"sequence_end not encountered , inputs may be badly formated")
 		print("next item is ",inputs[y+1])
 		if statics.has(item)  :
-			var result = test_bind_to_callable(map[item],y+1,iter+1)
+			var result = bind_to_callable(map[item],y+1,iter+1)
 			y=result.next_i
 			item=result.callable
 		
@@ -91,33 +93,6 @@ func test_bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 		returned=returned.bind(array)
 	return bind_return.new(returned,next_i)
 
-func bind_to_callable(x:filter_struct,i:int)->bind_return:
-	
-	var returned: Callable
-	if x.finite !=-1:
-		for y in range(i+1,x.finite) :
-			var item = inputs[y]
-			if item is statics and item != statics.sequence_end :
-				item = bind_to_callable(map[item],i)
-				y+=item.next_i
-				item=item.callable
-			returned=x.callable.bind(item)
-			
-	else :
-		var y:int =i
-		while true :
-			y+=1
-			
-			if y-i>non_finite_while_limits : push_error("sequence_end not encountered , inputs may be badly formated")
-			if  inputs[y] is statics and inputs[y]==statics.sequence_end :break
-			var item = inputs[y]
-			if item is statics :
-				item = bind_to_callable(map[item],i)
-				y+=item.next_i
-				item=item.callable
-			returned=x.callable.bind(item)
-			
-	return bind_return.new(returned,0)
 
 class bind_return :
 	var callable : Callable
