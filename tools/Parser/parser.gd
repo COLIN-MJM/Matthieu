@@ -6,7 +6,12 @@ enum statics{filtre_dist,filtre_direction,filtre_relative_pos,orer,filter_owner,
 
 @export var map : Dictionary[StringName,filter_struct]
 const non_finite_while_limits = 25
-const inputs : Array = ["filtre_dist",Vector2i(7,2),1,"sequence_end","orer","filtre_relative_pos",Vector2i(7,2),Vector2i.UP,"sequence_end","filtre_relative_pos",Vector2i(7,2),Vector2i.LEFT,"sequence_end","filtre_relative_pos",Vector2i(7,2),Vector2i.RIGHT,"sequence_end","sequence_end"]
+
+#alors plusieur point sur le formatage :
+## ouais c'est des string et pas de des enum donc douleur
+## "sequence_end"  est à chaque fin de truc , on perd pas de perf et plus simple à codé , mais faut formaté correctement quoi
+## les valeurs sont inversé  : filter_dist.bind(Vector,int) => "filter_dist",int,Vector,"sequence_end" me demande pas Pk j'en ais pas la moindre idée
+const inputs : Array = ["filtre_dist",1,Vector2i(7,2),"sequence_end","orer","filtre_relative_pos",Vector2i.UP,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.LEFT,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.RIGHT,Vector2i(7,2),"sequence_end","sequence_end"]
 
 var b : bite
 func _run() -> void:
@@ -54,10 +59,11 @@ func interpreter():
 		test.append(y.name)	
 	print(test)
 func test_bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
-	
+	print(x.callable.get_method())
 	var returned: Callable=x.callable
 	var y:int =i
 	var next_i :int
+	var array:Array=[]
 	print("i is : ",i," and thus is : ",inputs[i])
 	while true :
 		var item = inputs[y]
@@ -69,12 +75,20 @@ func test_bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 			var result = test_bind_to_callable(map[item],y+1,iter+1)
 			y=result.next_i
 			item=result.callable
-		print("binded ", item)
-		returned=returned.bind(item)
+		
+		if x.callable.get_method() == "orer" :
+			print("appended ", item)
+			array.append(item)
+		else:
+			print("binded ", item)
+			returned=returned.bind(item)
 		y+=1
 		next_i=y
 		
 	print("succeful bind")
+	if x.callable.get_method() == "orer" :
+		print("binded array ", array)
+		returned=returned.bind(array)
 	return bind_return.new(returned,next_i)
 
 func bind_to_callable(x:filter_struct,i:int)->bind_return:
