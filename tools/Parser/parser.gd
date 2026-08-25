@@ -41,7 +41,12 @@ func interpreter():
 			i+=1
 			continue
 	print("\n","---AND THE FINAL RESULT IS ---","\n")
-	print(call_array)
+	for c in call_array :
+		var o = c.get_bound_arguments()
+		print(o)
+		for p in o :
+			if p is Callable :
+				print(p.get_bound_arguments())
 	final_callable=final_callable.bind(call_array,bite.get_test_array())
 	var test : Array
 	var result : Array=final_callable.call()
