@@ -9,7 +9,7 @@ var non_finite_while_limits = 25
 ## ouais c'est des string et pas de des enum donc douleur
 ## "sequence_end"  est à chaque fin de truc , on perd pas de perf et plus simple à codé , mais faut formaté correctement quoi
 ## les valeurs sont inversé  : filter_dist.bind(Vector,int) => "filter_dist",int,Vector,"sequence_end" me demande pas Pk j'en ais pas la moindre idée
-const inputs : Array = ["filtre_dist",1,Vector2i(7,2),"sequence_end","orer","array_block","filtre_relative_pos",Vector2i.UP,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.LEFT,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.RIGHT,Vector2i(7,2),"sequence_end","sequence_end"]
+const inputs : Array = ["filtre_dist",1,Vector2i(7,2),"sequence_end","op_or","array_block","filtre_relative_pos",Vector2i.UP,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.LEFT,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.RIGHT,Vector2i(7,2),"sequence_end","sequence_end"]
 
 var fBank : FilterBank
 func _run() -> void:
