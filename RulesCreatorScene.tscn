@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bhfq52js8fsv"]
+
+[node name="Control" type="MarginContainer" unique_id=1637621449]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="Control" parent="." unique_id=192066505]
+layout_mode = 2

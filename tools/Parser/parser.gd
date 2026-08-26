@@ -34,6 +34,7 @@ const inputs : Array = [
 	&"sequence_end"]
 
 var fBank : FilterBank
+
 func _run() -> void:
 	fBank=FilterBank.new()
 	non_finite_while_limits= inputs.size()
@@ -42,6 +43,7 @@ func _run() -> void:
 		map.get_or_add(i,filter_struct.new(fBank,null,i))
 	interpreter()
 	map.clear()
+
 func interpreter():
 	var final_callable : Callable = FilterBank.evaluator.evaluate
 	var call_array : Array[Callable]=[]
