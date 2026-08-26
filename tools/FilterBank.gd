@@ -2,8 +2,11 @@
 class_name FilterBank
 extends EditorScript
 
-const statics : Array[StringName]= ["filtre_dist", "filtre_direction", "filtre_relative_pos", "filtre_team", "op_not", "op_nand", "op_xor", "op_or", "sequence_end", "array_block"]
-const array_block_needed : Array[StringName]= ["op_nand", "op_xor", "op_or"]
+#region ConstArrays
+
+const statics : Array[StringName]= [&"filtre_dist", &"filtre_direction", &"filtre_relative_pos", &"filtre_team", &"op_not", &"op_nand", &"op_xor", &"op_or", &"sequence_end", &"array_block"]
+const array_block_needed : Array[StringName]= [&"op_nand", &"op_xor", &"op_or"]
+#endregion
 
 static func get_test_array()->Array[Card]:
 	var test : Array
@@ -13,6 +16,12 @@ static func get_test_array()->Array[Card]:
 	print(test)
 	return toreturn
 
+#region FILTRES & OPERATEURS
+
+## Les filtres sont des fonctions prenant en entrée une Card "i", et renvoyant un booléen vérifiant sa validité vis à vis des conditions dudit filtre.
+## MUST : return bool; i:Card en entrée, ajouter le nom du filtre dans statics
+## CAN : Autres paramètres en entrée
+#region FILTRES
 ## Vérifie que la distance de la carte étudiée i vis-à vis de la position "who" est plus petite ou égale à "dist"
 static func filtre_dist(i:Card, who:Vector2i, dist:int)->bool :
 	return i.position.distance_squared_to(who)<=dist
@@ -32,7 +41,12 @@ static func filtre_relative_pos(i:Card, whoPos:Vector2i, whoDir:Vector2i, relati
 ## Si "allyOrEnemy" est vrai, on vérifie qu'elles sont dans la même équipe. Sinon, on vérifie qu'elles sont dans des équipes opposées.
 static func filtre_team(i:Card, who:bool, allyOrEnemy:bool)->bool:
 	return (i.owner == who) == allyOrEnemy
-	
+#endregion
+
+## Les opérateurs sont des filtres spéciaux applicant des opérations logiques sur des filtres
+## MUST : même que Filtres; filter:Callable voire filters:Array(Callable) en entrée
+## Dans le cas d'un Array(Callable), MUST ajouter le nom de l'opérateur dans array_block_needed 
+#region OPERATEURS
 ## Opérateur inversant la validité du filtre "filter".
 static func op_not(i:Card, filter:Callable)->bool:
 	return !filter.call(i)
@@ -56,6 +70,8 @@ static func op_or(i: Card, possible:Array)->bool:
 	for callable in possible :
 		if callable.call(i) : return true
 	return false
+#endregion
+#endregion
 
 class Rules:
 	var Action : Callable
