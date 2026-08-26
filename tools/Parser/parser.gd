@@ -41,7 +41,7 @@ func _run() -> void:
 		if i  == &"sequence_end" or i  ==&"array_block" : continue
 		map.get_or_add(i,filter_struct.new(fBank,null,i))
 	interpreter()
-	
+	map.clear()
 func interpreter():
 	var final_callable : Callable = FilterBank.evaluator.evaluate
 	var call_array : Array[Callable]=[]
@@ -61,7 +61,7 @@ func interpreter():
 				print("sequence_end or array_block  encounter,skipping iteration")
 				i+=1
 				continue
-			current_block=filter_struct.new(fBank,map[inputs[i]])
+			current_block=map[inputs[i]]
 			print("current block is ",current_block.methode as String," and should be ",inputs[i])
 			i+=1
 			continue
