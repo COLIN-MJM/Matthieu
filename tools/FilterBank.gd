@@ -2,7 +2,7 @@
 class_name FilterBank
 extends EditorScript
 
-enum statics{filtre_dist, filtre_direction, filtre_relative_pos, op_not, op_xor, op_or, filter_owner, sequence_end, array_block}
+enum statics{filtre_dist, filtre_direction, filtre_relative_pos, filtre_team, op_not, op_nand, op_xor, op_or, filter_owner, sequence_end, array_block}
 
 @export var oi:Array[Callable]
 var array : Array[Card]
@@ -27,8 +27,10 @@ static func filtre_direction(i:Card, dir:int)->bool :
 	return i.rotation==dir
 
 ## Vérifie que la position de la carte étudiée i est n'importe où sur la direction "dir" de la carte en position "who"
-static func filtre_relative_pos(i:Card, who:Vector2i, dir:Vector2i)->bool:
-	return Vector2(i.pos-who).normalized()==Vector2(dir)
+static func filtre_relative_pos(i:Card, whoPos:Vector2i, whoDir:int, relativeDir:int)->bool:
+	var possibleDirs : Array[Vector2i] = [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
+	var comparedDirIndex : int = (whoDir + relativeDir) % 4 
+	return Vector2(i.pos-whoPos).normalized()==Vector2(possibleDirs[comparedDirIndex])
 
 ## Vérifie l'équipe de la carte étudiée i par rapport à l'équipe "who". 
 ## Si "allyOrEnemy" est vrai, on vérifie qu'elles sont dans la même équipe. Sinon, on vérifie qu'elles sont dans des équipes opposées.
@@ -68,7 +70,7 @@ func _ready()->void :
 	
 	Rotate(1,active_filters.call())
 
-static  func Rotate(angle : int,targets : Array[Card])->SecondaryEffect :
+static func Rotate(angle : int,targets : Array[Card])->SecondaryEffect :
 	for c in targets :
 		c.rotation+=angle
 		return c.When(GlobalCardEnum.ActivationTypes.OnRotate)
