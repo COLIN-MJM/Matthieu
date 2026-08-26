@@ -18,7 +18,6 @@ const inputs : Array = [
 		&"filtre_relative_pos",
 			Vector2i(7,2),
 			Vector2i.RIGHT,
-		&"sequence_end",
 ]
 
 
@@ -43,5 +42,6 @@ static func Receive_Unformated(input_array:Array)->Array :
 			result.append_array(curr_bloc)
 			curr_bloc.clear()
 		i+=1
+	result.append(&"sequence_end")
 	result.append(&"sequence_end")
 	return result
