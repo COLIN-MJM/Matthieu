@@ -2,24 +2,23 @@
 class_name Parser
 extends EditorScript
 
-enum statics{filtre_dist,filtre_direction,filtre_relative_pos,orer,filter_owner,sequence_end}
+enum statics{filtre_dist,filtre_direction,filtre_relative_pos,orer,filter_owner,sequence_end,array_block}
 
 @export var map : Dictionary[StringName,filter_struct]
-const non_finite_while_limits = 25
+var non_finite_while_limits =25
 
 #alors plusieur point sur le formatage :
 ## ouais c'est des string et pas de des enum donc douleur
 ## "sequence_end"  est à chaque fin de truc , on perd pas de perf et plus simple à codé , mais faut formaté correctement quoi
 ## les valeurs sont inversé  : filter_dist.bind(Vector,int) => "filter_dist",int,Vector,"sequence_end" me demande pas Pk j'en ais pas la moindre idée
-const inputs : Array = ["filtre_dist",1,Vector2i(7,2),"sequence_end","orer","filtre_relative_pos",Vector2i.UP,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.LEFT,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.RIGHT,Vector2i(7,2),"sequence_end","sequence_end"]
+const inputs : Array = ["filtre_dist",1,Vector2i(7,2),"sequence_end","orer","array_block","filtre_relative_pos",Vector2i.UP,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.LEFT,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.RIGHT,Vector2i(7,2),"sequence_end","sequence_end"]
 
-#vue que les orer sont casse bonbon à demander une array il doivent fonctionner en exception.
-const exception :Array[String] = ["orer"]
 var b : bite
 func _run() -> void:
 	b=bite.new()
+	non_finite_while_limits= inputs.size()
 	for i in statics.keys():
-		if i  == "sequence_end": continue
+		if i  == "sequence_end" or i  =="array_block" : continue
 		map.get_or_add(i,filter_struct.new(b,null,i))
 	interpreter()
 	
@@ -37,10 +36,9 @@ func interpreter():
 			i=x.next_i
 			i+=1
 			continue
-			
 		if statics.has(inputs[i]) :
-			if inputs[i] =="sequence_end":
-				print("sequence_end encounter ,skipping iteration")
+			if inputs[i] =="sequence_end" or inputs[i] =="array_block":
+				print("sequence_end or array_block  encounter,skipping iteration")
 				i+=1
 				continue
 			current_block=filter_struct.new(b,map[inputs[i]])
@@ -66,19 +64,26 @@ func bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 	var y:int =i
 	var next_i :int
 	var array:Array=[]
+	var in_array_block:bool = false
 	print("i is : ",i," and thus is : ",inputs[i])
-	while true :
+	for panic in range(inputs.size()):
 		var item = inputs[y]
-		if statics.has(item)  and statics[item]==statics.sequence_end :break
-		print("recursive iter : ",iter," while iter : ",y-i)
-		assert(y-i<non_finite_while_limits,"sequence_end not encountered , inputs may be badly formated")
-		print("next item is ",inputs[y+1])
-		if statics.has(item)  :
+		if statics.has(item) :
+			if statics[item]==statics.sequence_end :break
+			if statics[item]==statics.array_block :
+				print("entred array_outpout mode for current block")
+				in_array_block=true
+				y+=1
+				next_i=y
+				continue
 			var result = bind_to_callable(map[item],y+1,iter+1)
 			y=result.next_i
 			item=result.callable
+		assert(y-i<non_finite_while_limits,"sequence_end not encountered , inputs may be badly formated")
+		print("recursive iter : ",iter," while iter : ",y-i)
+		print("next item is ",inputs[y+1])
 		
-		if x.callable.get_method() == "orer" :
+		if in_array_block:
 			print("appended ", item)
 			array.append(item)
 		else:
@@ -86,9 +91,8 @@ func bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 			returned=returned.bind(item)
 		y+=1
 		next_i=y
-		
 	print("succeful bind")
-	if x.callable.get_method() == "orer" :
+	if in_array_block :
 		print("binded array ", array)
 		returned=returned.bind(array)
 	return bind_return.new(returned,next_i)
