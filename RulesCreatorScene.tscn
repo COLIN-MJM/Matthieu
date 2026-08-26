@@ -1,11 +1,27 @@
 [gd_scene format=3 uid="uid://bhfq52js8fsv"]
 
-[node name="Control" type="MarginContainer" unique_id=1637621449]
+[ext_resource type="Script" uid="uid://bncnu5umm422p" path="res://rules_creator_scene.gd" id="1_2egki"]
+
+[node name="RCScene" type="MarginContainer" unique_id=1637621449]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2egki")
 
-[node name="Container" type="Control" parent="." unique_id=192066505]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=959674142]
 layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Distance" type="Button" parent="HBoxContainer" unique_id=406426095]
+unique_name_in_owner = true
+layout_mode = 2
+offset_transform_enabled = true
+text = "Distance"
+
+[node name="Direction" type="Button" parent="HBoxContainer" unique_id=232567023]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Direction"
