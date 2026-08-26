@@ -89,7 +89,7 @@ func bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 	print("i is : ",i," and thus is : ",inputs[i])
 	for panic in range(inputs.size()):
 		var item = inputs[y]
-		if fBank.statics.has(item) :
+		if item is StringName and fBank.statics.has(item) :
 			if item==&"sequence_end" :break
 			if item==&"array_block" :
 				print("entred array_outpout mode for current block")
