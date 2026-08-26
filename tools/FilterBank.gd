@@ -15,7 +15,7 @@ static func get_test_array()->Array[Card]:
 
 ## Vérifie que la distance de la carte étudiée i vis-à vis de la position "who" est plus petite ou égale à "dist"
 static func filtre_dist(i:Card, who:Vector2i, dist:int)->bool :
-	return i.pos.distance_squared_to(who)<=dist
+	return i.position.distance_squared_to(who)<=dist
 	
 ## Vérifie que la direction de la carte étudiée i est égale à "dir"
 static func filtre_direction(i:Card, dir:Vector2i)->bool : 
