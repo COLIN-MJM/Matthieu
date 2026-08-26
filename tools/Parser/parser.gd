@@ -2,10 +2,8 @@
 class_name Parser
 extends EditorScript
 
-enum statics{filtre_dist,filtre_direction,filtre_relative_pos,orer,filter_owner,sequence_end,array_block}
-
 @export var map : Dictionary[StringName,filter_struct]
-var non_finite_while_limits =25
+var non_finite_while_limits = 25
 
 #alors plusieur point sur le formatage :
 ## ouais c'est des string et pas de des enum donc douleur
@@ -13,17 +11,17 @@ var non_finite_while_limits =25
 ## les valeurs sont inversé  : filter_dist.bind(Vector,int) => "filter_dist",int,Vector,"sequence_end" me demande pas Pk j'en ais pas la moindre idée
 const inputs : Array = ["filtre_dist",1,Vector2i(7,2),"sequence_end","orer","array_block","filtre_relative_pos",Vector2i.UP,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.LEFT,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.RIGHT,Vector2i(7,2),"sequence_end","sequence_end"]
 
-var b : bite
+var fBank : FilterBank
 func _run() -> void:
-	b=bite.new()
+	fBank=FilterBank.new()
 	non_finite_while_limits= inputs.size()
-	for i in statics.keys():
+	for i in fBank.statics.keys():
 		if i  == "sequence_end" or i  =="array_block" : continue
-		map.get_or_add(i,filter_struct.new(b,null,i))
+		map.get_or_add(i,filter_struct.new(fBank,null,i))
 	interpreter()
 	
 func interpreter():
-	var final_callable : Callable = bite.evaluator.evaluate
+	var final_callable : Callable = FilterBank.evaluator.evaluate
 	var call_array : Array[Callable]=[]
 	var current_block : filter_struct =null
 	var i :int = 0
@@ -36,12 +34,12 @@ func interpreter():
 			i=x.next_i
 			i+=1
 			continue
-		if statics.has(inputs[i]) :
+		if fBank.statics.has(inputs[i]) :
 			if inputs[i] =="sequence_end" or inputs[i] =="array_block":
 				print("sequence_end or array_block  encounter,skipping iteration")
 				i+=1
 				continue
-			current_block=filter_struct.new(b,map[inputs[i]])
+			current_block=filter_struct.new(fBank,map[inputs[i]])
 			print("current block is ",current_block.methode as String," and should be ",inputs[i])
 			i+=1
 			continue
@@ -52,12 +50,13 @@ func interpreter():
 		for p in o :
 			if p is Callable :
 				print(p.get_bound_arguments())
-	final_callable=final_callable.bind(call_array,bite.get_test_array())
+	final_callable=final_callable.bind(call_array,FilterBank.get_test_array())
 	var test : Array
 	var result : Array=final_callable.call()
 	for y in result:
 		test.append(y.name)	
 	print(test)
+	
 func bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 	print(x.callable.get_method())
 	var returned: Callable=x.callable
@@ -68,9 +67,9 @@ func bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 	print("i is : ",i," and thus is : ",inputs[i])
 	for panic in range(inputs.size()):
 		var item = inputs[y]
-		if statics.has(item) :
-			if statics[item]==statics.sequence_end :break
-			if statics[item]==statics.array_block :
+		if fBank.statics.has(item) :
+			if fBank.statics[item]==fBank.statics.sequence_end :break
+			if fBank.statics[item]==fBank.statics.array_block :
 				print("entred array_outpout mode for current block")
 				in_array_block=true
 				y+=1

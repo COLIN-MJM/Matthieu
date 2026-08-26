@@ -1,6 +1,8 @@
 @tool
-class_name bite
+class_name FilterBank
 extends EditorScript
+
+enum statics{filtre_dist,filtre_direction,filtre_relative_pos,orer,filter_owner,sequence_end,array_block}
 
 @export var oi:Array[Callable]
 var array : Array[cart]
