@@ -2,8 +2,10 @@
 class_name FilterBank
 extends EditorScript
 
-enum statics{filtre_dist, filtre_direction, filtre_relative_pos, filtre_team, op_not, op_nand, op_xor, op_or, filter_owner, sequence_end, array_block}
-
+const statics : Array[StringName]= ["filtre_dist", "filtre_direction", "filtre_relative_pos", "filtre_team", "op_not", "op_nand", "op_xor", "op_or", "filter_owner", "sequence_end", "array_block"]
+const array_block_needed : Array[StringName]= ["op_nand", "op_xor", "op_or"]
+@export_enum("filtre_dist", "filtre_direction", "filtre_relative_pos", "filtre_team", "op_not", "op_nand", "op_xor", "op_or", "filter_owner", "sequence_end", "array_block") 
+var str : String
 @export var oi:Array[Callable]
 var array : Array[Card]
 var pos : Vector2i = Vector2i(7,2)
