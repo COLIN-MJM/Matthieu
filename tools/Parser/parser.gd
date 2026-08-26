@@ -9,14 +9,33 @@ var non_finite_while_limits = 25
 ## ouais c'est des string et pas de des enum donc douleur
 ## "sequence_end"  est à chaque fin de truc , on perd pas de perf et plus simple à codé , mais faut formaté correctement quoi
 ## les valeurs sont inversé  : filter_dist.bind(Vector,int) => "filter_dist",int,Vector,"sequence_end" me demande pas Pk j'en ais pas la moindre idée
-const inputs : Array = ["filtre_dist",1,Vector2i(7,2),"sequence_end","op_or","array_block","filtre_relative_pos",Vector2i.UP,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.LEFT,Vector2i(7,2),"sequence_end","filtre_relative_pos",Vector2i.RIGHT,Vector2i(7,2),"sequence_end","sequence_end"]
+const inputs : Array = [
+	&"filtre_dist",
+		1,
+		Vector2i(7,2),
+	&"sequence_end",
+	&"op_or",
+		&"array_block",
+		&"filtre_relative_pos",
+			Vector2i.UP,
+			Vector2i(7,2),
+		&"sequence_end",
+		&"filtre_relative_pos",
+			Vector2i.LEFT,
+			Vector2i(7,2),
+		&"sequence_end",
+		&"filtre_relative_pos",
+			Vector2i.RIGHT,
+			Vector2i(7,2),
+		&"sequence_end",
+	&"sequence_end"]
 
 var fBank : FilterBank
 func _run() -> void:
 	fBank=FilterBank.new()
 	non_finite_while_limits= inputs.size()
-	for i in fBank.statics.keys():
-		if i  == "sequence_end" or i  =="array_block" : continue
+	for i in fBank.statics:
+		if i  == &"sequence_end" or i  ==&"array_block" : continue
 		map.get_or_add(i,filter_struct.new(fBank,null,i))
 	interpreter()
 	
@@ -68,8 +87,8 @@ func bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 	for panic in range(inputs.size()):
 		var item = inputs[y]
 		if fBank.statics.has(item) :
-			if fBank.statics[item]==fBank.statics.sequence_end :break
-			if fBank.statics[item]==fBank.statics.array_block :
+			if item==&"sequence_end" :break
+			if item==&"array_block" :
 				print("entred array_outpout mode for current block")
 				in_array_block=true
 				y+=1
