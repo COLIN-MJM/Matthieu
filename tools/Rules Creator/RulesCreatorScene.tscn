@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bhfq52js8fsv"]
 
-[ext_resource type="Script" uid="uid://bncnu5umm422p" path="res://rules_creator_scene.gd" id="1_2egki"]
+[ext_resource type="Script" uid="uid://bncnu5umm422p" path="res://tools/Rules Creator/rules_creator_scene.gd" id="1_2egki"]
 
 [node name="RCScene" type="MarginContainer" unique_id=1637621449]
 anchors_preset = 15

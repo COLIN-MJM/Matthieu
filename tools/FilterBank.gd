@@ -4,7 +4,30 @@ extends EditorScript
 
 #region ConstArrays
 
-const statics : Array[StringName]= [&"filtre_dist", &"filtre_direction", &"filtre_relative_pos", &"filtre_team", &"op_not", &"op_nand", &"op_xor", &"op_or", &"sequence_end", &"array_block"]
+
+const statics : Array[StringName]= [
+	&"filtre_dist", &"filtre_direction", &"filtre_relative_pos", &"filtre_team",
+	 &"op_not", &"op_nand", &"op_xor", &"op_or",
+	 &"sequence_end", &"array_block"]
+const statics_arguments_dic : Dictionary[StringName,Array] ={
+	&"filtre_dist":[
+		2,"Vérifie que la distance de la carte étudiée i vis-à vis de la position WHO est plus petite ou égale à Dist","Who:Vector2i ","Dist:int"],
+	&"filtre_direction":[
+		1,"Vérifie que la direction de la carte étudiée i est égale à DIR ","DIR:Vector2i"],
+	&"filtre_relative_pos":
+		[3,"Vérifie que la position de la carte étudiée i est n'importe où sur la direction DIR de la carte en position WHO","WHOPOS:Vector2i","WHODIR:Vector2I","RELATIVEDIR:Vector2i"],
+	&"filtre_team" : [
+		2,"Vérifie l'équipe de la carte étudiée i par rapport à l'équipe WHO.\nSi ALLYORENNEMY est vrai, on vérifie qu'elles sont dans la même équipe. Sinon, on vérifie qu'elles sont dans des équipes opposées.","WHO:bool","ALLYORENNEMY:bool"],
+	&"op_not" : [
+		1,"Opérateur inversant la validité du filtre FILTER.","FILTER:bloc filtre",&"filter"],
+	&"op_nand" :[
+		-1,"Opérateur vérifiant qu'au moins un filtre testés dans Possible est faux.","POSSIBLE:Array[filtre]",&"filter"],
+	&"op_xor" :[
+		-1,"Opérateur vérifiant qu'un seul des filtres testés dans POSSIBLE est vrai.","POSSIBLE:Array[filtre]",&"filter"],
+	&"op_or" :[
+		-1,"Opérateur vérifiant qu'au moins un des filtres testés dans POSSIBLE est vrai.","POSSIBLE:Array[filtre]",&"filter"],
+}
+const utility_statics : Array[StringName]=[ &"sequence_end", &"array_block"]
 const array_block_needed : Array[StringName]= [&"op_nand", &"op_xor", &"op_or"]
 #endregion
 

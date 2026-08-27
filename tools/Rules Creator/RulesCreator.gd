@@ -9,7 +9,7 @@ func _run() -> void:
 	window = Window.new()
 	window.title = "Rules Creator"
 	
-	var gui_scene := gui.instantiate()
+	var gui_scene := gui.instantiate() as Rules_Creator_Scene
 	window.add_child(gui_scene)
 	gui_scene.confirmed.connect(_on_confirmed)
 	

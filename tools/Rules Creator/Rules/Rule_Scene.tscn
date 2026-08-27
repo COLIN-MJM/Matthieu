@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://c1toly1av552t"]
+
+[ext_resource type="Script" uid="uid://bfrvc1qde2k48" path="res://tools/Rules Creator/Rules/Rules_option_button.gd" id="1_xr2nv"]
+
+[node name="Control" type="Panel" unique_id=637416597]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -752.0
+offset_bottom = -448.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=118592724]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer" unique_id=2028341929]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/MarginContainer" unique_id=24247808]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="HSplitContainer/MarginContainer/VBoxContainer" unique_id=339905368 node_paths=PackedStringArray("textual", "argument_list")]
+layout_mode = 2
+search_bar_enabled = true
+script = ExtResource("1_xr2nv")
+textual = NodePath("../RichTextLabel")
+argument_list = NodePath("../../../MarginContainer2/ScrollContainer/VBoxContainer")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HSplitContainer/MarginContainer/VBoxContainer" unique_id=480807942]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HSplitContainer" unique_id=1011995266]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/MarginContainer2" unique_id=1722651513]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/MarginContainer2/ScrollContainer" unique_id=1610643493]
+layout_mode = 2
+
+[connection signal="item_selected" from="HSplitContainer/MarginContainer/VBoxContainer/OptionButton" to="HSplitContainer/MarginContainer/VBoxContainer/OptionButton" method="_on_item_selected"]
