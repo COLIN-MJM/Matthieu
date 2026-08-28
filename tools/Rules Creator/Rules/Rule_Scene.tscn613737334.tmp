@@ -1,25 +1,23 @@
 [gd_scene format=3 uid="uid://c1toly1av552t"]
 
-[ext_resource type="Script" uid="uid://ck0g0jhp72fw" path="res://tools/Rules Creator/Rules/rule_scene.gd" id="1_oi5a1"]
 [ext_resource type="Script" uid="uid://bfrvc1qde2k48" path="res://tools/Rules Creator/Rules/Rules_option_button.gd" id="1_xr2nv"]
 
 [node name="Control" type="FoldableContainer" unique_id=1967808319]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -474.0
-offset_bottom = -369.0
+offset_right = -752.0
+offset_bottom = -448.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_oi5a1")
 
 [node name="Panel" type="Panel" parent="." unique_id=1767278691]
 layout_mode = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Panel" unique_id=118592724]
 layout_mode = 0
-offset_right = 671.0
-offset_bottom = 171.0
+offset_right = 189.0
+offset_bottom = 205.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/HSplitContainer" unique_id=2028341929]
 layout_mode = 2
@@ -27,11 +25,11 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HSplitContainer/MarginContainer" unique_id=24247808]
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=339905368 node_paths=PackedStringArray("textual", "argument_list", "folded", "plus_button")]
+[node name="OptionButton" type="OptionButton" parent="Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=339905368 node_paths=PackedStringArray("textual", "argument_list")]
 layout_mode = 2
 selected = 0
 search_bar_enabled = true
-item_count = 32
+item_count = 16
 popup/item_0/text = "filtre_dist"
 popup/item_0/id = 0
 popup/item_1/id = -1
@@ -64,80 +62,23 @@ popup/item_14/text = "op_or"
 popup/item_14/id = 14
 popup/item_15/id = -1
 popup/item_15/separator = true
-popup/item_16/text = "filtre_dist"
-popup/item_16/id = 16
-popup/item_17/id = -1
-popup/item_17/separator = true
-popup/item_18/text = "filtre_direction"
-popup/item_18/id = 18
-popup/item_19/id = -1
-popup/item_19/separator = true
-popup/item_20/text = "filtre_relative_pos"
-popup/item_20/id = 20
-popup/item_21/id = -1
-popup/item_21/separator = true
-popup/item_22/text = "filtre_team"
-popup/item_22/id = 22
-popup/item_23/id = -1
-popup/item_23/separator = true
-popup/item_24/text = "op_not"
-popup/item_24/id = 24
-popup/item_25/id = -1
-popup/item_25/separator = true
-popup/item_26/text = "op_nand"
-popup/item_26/id = 26
-popup/item_27/id = -1
-popup/item_27/separator = true
-popup/item_28/text = "op_xor"
-popup/item_28/id = 28
-popup/item_29/id = -1
-popup/item_29/separator = true
-popup/item_30/text = "op_or"
-popup/item_30/id = 30
-popup/item_31/id = -1
-popup/item_31/separator = true
 script = ExtResource("1_xr2nv")
 textual = NodePath("../RichTextLabel")
 argument_list = NodePath("../../../MarginContainer2/ScrollContainer/VBoxContainer")
-folded = NodePath("../../../../..")
-plus_button = NodePath("../../../../Button")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=480807942]
-custom_maximum_size = Vector2(-1, 125)
 layout_mode = 2
-text = "A
-
-AA
-A
-A
-A
-
-A
-A
-A
-
-A
-A
-A"
-fit_content = true
+text = "Vérifie que la distance de la carte étudiée i vis-à vis de la position WHO est plus petite ou égale à Dist"
+scroll_following = true
+scroll_following_visible_characters = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/HSplitContainer" unique_id=1011995266]
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/HSplitContainer/MarginContainer2" unique_id=1722651513]
 layout_mode = 2
-scroll_horizontal_by_default = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HSplitContainer/MarginContainer2/ScrollContainer" unique_id=1610643493]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Panel" unique_id=472507545]
-layout_mode = 0
-offset_left = 656.0
-offset_right = 674.0
-offset_bottom = 31.0
-disabled = true
-text = "+"
-
 [connection signal="item_selected" from="Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" to="Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" method="_on_item_selected"]
-[connection signal="pressed" from="Panel/Button" to="Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" method="_on_plus_button_pressed"]

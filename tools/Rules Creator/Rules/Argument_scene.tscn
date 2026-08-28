@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b3pkf0krao1j7"]
+
+[ext_resource type="Script" uid="uid://du3akpte7uh4c" path="res://tools/Rules Creator/Rules/argument_scene.gd" id="1_gij3v"]
+
+[node name="Control" type="HBoxContainer" unique_id=1681702173 node_paths=PackedStringArray("indicativ_text", "line_edit")]
+custom_minimum_size = Vector2(0, 40)
+custom_maximum_size = Vector2(-1, 40)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -843.0
+offset_bottom = -608.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gij3v")
+indicativ_text = NodePath("MarginContainer/RichTextLabel")
+line_edit = NodePath("LineEdit")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1561199508]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1779539817]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=444520395]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 2
+text = "SALUT
+"
+fit_content = true
+
+[node name="VSeparator" type="VSeparator" parent="." unique_id=485536439]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=164850952]
+layout_mode = 2
+placeholder_text = "SALUT MON POTE"
+expand_to_text_length = true
+
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

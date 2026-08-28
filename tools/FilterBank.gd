@@ -19,13 +19,13 @@ const statics_arguments_dic : Dictionary[StringName,Array] ={
 	&"filtre_team" : [
 		2,"Vérifie l'équipe de la carte étudiée i par rapport à l'équipe WHO.\nSi ALLYORENNEMY est vrai, on vérifie qu'elles sont dans la même équipe. Sinon, on vérifie qu'elles sont dans des équipes opposées.","WHO:bool","ALLYORENNEMY:bool"],
 	&"op_not" : [
-		1,"Opérateur inversant la validité du filtre FILTER.","FILTER:bloc filtre",&"filter"],
+		1,"Opérateur inversant la validité du filtre FILTER.",&"filter"],
 	&"op_nand" :[
-		-1,"Opérateur vérifiant qu'au moins un filtre testés dans Possible est faux.","POSSIBLE:Array[filtre]",&"filter"],
+		-1,"Opérateur vérifiant qu'au moins un filtre testés dans Possible est faux.",&"filter"],
 	&"op_xor" :[
-		-1,"Opérateur vérifiant qu'un seul des filtres testés dans POSSIBLE est vrai.","POSSIBLE:Array[filtre]",&"filter"],
+		-1,"Opérateur vérifiant qu'un seul des filtres testés dans POSSIBLE est vrai.",&"filter"],
 	&"op_or" :[
-		-1,"Opérateur vérifiant qu'au moins un des filtres testés dans POSSIBLE est vrai.","POSSIBLE:Array[filtre]",&"filter"],
+		-1,"Opérateur vérifiant qu'au moins un des filtres testés dans POSSIBLE est vrai.",&"filter"],
 }
 const utility_statics : Array[StringName]=[ &"sequence_end", &"array_block"]
 const array_block_needed : Array[StringName]= [&"op_nand", &"op_xor", &"op_or"]

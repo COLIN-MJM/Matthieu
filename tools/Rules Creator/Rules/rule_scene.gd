@@ -1,0 +1,2 @@
+class_name Rule_scene
+extends FoldableContainer
