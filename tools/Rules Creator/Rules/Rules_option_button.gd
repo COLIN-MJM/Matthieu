@@ -6,8 +6,10 @@ extends OptionButton
 @export var folded:FoldableContainer
 @export var plus_button:Button
 
+
 var argument_scene:PackedScene=preload("uid://b3pkf0krao1j7")
 var rule_scene:PackedScene=preload("uid://c1toly1av552t")
+
 
 var argument_array :Array
 var statics_arguments : Array
@@ -17,6 +19,8 @@ func _ready() -> void:
 		add_item(filter)
 		add_separator()
 	_on_item_selected(0)
+
+
 
 
 func _on_item_selected(index: int) -> void:

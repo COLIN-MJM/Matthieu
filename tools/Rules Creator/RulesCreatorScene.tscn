@@ -1,32 +1,97 @@
 [gd_scene format=3 uid="uid://bhfq52js8fsv"]
 
-[ext_resource type="Script" uid="uid://bncnu5umm422p" path="res://tools/Rules Creator/rules_creator_scene.gd" id="1_2egki"]
+[ext_resource type="Script" uid="uid://ck0g0jhp72fw" path="res://tools/Rules Creator/Rules/rule_scene.gd" id="1_nluca"]
+[ext_resource type="Script" uid="uid://bfrvc1qde2k48" path="res://tools/Rules Creator/Rules/Rules_option_button.gd" id="2_0tnk7"]
 
-[node name="RCScene" type="MarginContainer" unique_id=1637621449]
+[node name="Control" type="FoldableContainer" unique_id=1967808319]
+custom_minimum_size = Vector2(678, 279)
+clip_contents = true
 anchors_preset = -1
-anchor_left = 0.77300006
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -0.49609375
+anchor_right = 0.58900005
+anchor_bottom = 0.43100002
+offset_right = -0.5280762
+offset_bottom = -0.2880249
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2egki")
+size_flags_horizontal = 10
+size_flags_vertical = 3
+script = ExtResource("1_nluca")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1724373947]
+[node name="AspectRatioContainer" type="MarginContainer" parent="." unique_id=235086775]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1805106029]
+[node name="Panel" type="Panel" parent="AspectRatioContainer" unique_id=1767278691]
 layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
 
-[node name="Distance" type="Button" parent="PanelContainer/VBoxContainer" unique_id=406426095]
-unique_name_in_owner = true
-layout_mode = 2
-offset_transform_enabled = true
-text = "Distance"
+[node name="HSplitContainer" type="HSplitContainer" parent="AspectRatioContainer/Panel" unique_id=118592724]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Direction" type="Button" parent="PanelContainer/VBoxContainer" unique_id=232567023]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer/Panel/HSplitContainer" unique_id=2028341929]
 layout_mode = 2
-text = "Direction"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer" unique_id=24247808]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=339905368 node_paths=PackedStringArray("textual", "argument_list", "folded", "plus_button")]
+layout_mode = 2
+search_bar_enabled = true
+script = ExtResource("2_0tnk7")
+textual = NodePath("../RichTextLabel")
+argument_list = NodePath("../../../MarginContainer2/ScrollContainer/VBoxContainer")
+folded = NodePath("../../../../../..")
+plus_button = NodePath("../../../../Button")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=480807942]
+custom_maximum_size = Vector2(-1, 125)
+layout_mode = 2
+size_flags_vertical = 3
+text = "A
+
+AA
+A
+A
+A
+
+A
+A
+A
+
+A
+A
+A"
+fit_content = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="AspectRatioContainer/Panel/HSplitContainer" unique_id=1011995266]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer2" unique_id=1722651513]
+layout_mode = 2
+scroll_horizontal_by_default = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer2/ScrollContainer" unique_id=1610643493]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="AspectRatioContainer/Panel" unique_id=472507545]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.97200006
+anchor_right = 0.9990001
+anchor_bottom = 0.126
+offset_left = -0.24005127
+offset_right = -0.33007813
+offset_bottom = -0.12199974
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+text = "+"
+
+[connection signal="folding_changed" from="." to="." method="_on_folding_changed"]
+[connection signal="item_selected" from="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" to="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" method="_on_item_selected"]
+[connection signal="pressed" from="AspectRatioContainer/Panel/Button" to="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" method="_on_plus_button_pressed"]
