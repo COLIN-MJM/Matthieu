@@ -17,9 +17,12 @@ script = ExtResource("1_oi5a1")
 layout_mode = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="Panel" unique_id=118592724]
-layout_mode = 0
-offset_right = 671.0
-offset_bottom = 171.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.69200003
+offset_right = 1.0
+offset_bottom = 0.07598877
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/HSplitContainer" unique_id=2028341929]
 layout_mode = 2
