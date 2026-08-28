@@ -10,3 +10,4 @@ var argument
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
 	argument=str_to_var(new_text)
+	print(argument)
