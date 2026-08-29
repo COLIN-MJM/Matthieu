@@ -1,15 +1,11 @@
 [gd_scene format=3 uid="uid://cqhllnaq53hyr"]
 
-[ext_resource type="Script" uid="uid://c4ws3hf8em16v" path="res://Carte/scripts/CarteRenderer.gd" id="1_8sjrd"]
+[ext_resource type="Script" uid="uid://58ojlxda4eo0" path="res://Card.gd" id="1_h4qqw"]
 [ext_resource type="Texture2D" uid="uid://w1hfa7fprxqj" path="res://Contour_Placeholder.svg" id="2_8sjrd"]
 [ext_resource type="Texture2D" uid="uid://djqq6bxlxabw8" path="res://Carte/Carte_Dir_For_Instance/Carte_Inté_3svg.svg" id="2_h4qqw"]
 
-[node name="CarteIntance" type="Node2D" unique_id=1507316123 node_paths=PackedStringArray("arrow", "spriteMain", "playerColor", "teamColor")]
-script = ExtResource("1_8sjrd")
-arrow = NodePath("Polygon2D/DirectionIndactor")
-spriteMain = NodePath("Polygon2D")
-playerColor = NodePath("Polygon2D/Polygon2D3")
-teamColor = NodePath("Polygon2D/Polygon2D2")
+[node name="CarteInstance" type="Node2D" unique_id=1507316123]
+script = ExtResource("1_h4qqw")
 
 [node name="Polygon2D" type="Sprite2D" parent="." unique_id=346156981]
 texture = ExtResource("2_h4qqw")

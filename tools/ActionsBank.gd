@@ -20,8 +20,6 @@ static func Buff(target:Card, parameter:StringName, addedValue:int)->SecondaryEf
 
 #endregion
 
-
-
 #region Actions Multi-Cibles
 
 static func RotateAll(targets:Array[Card], angle:float)->SecondaryEffect:

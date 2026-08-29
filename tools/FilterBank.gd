@@ -1,6 +1,7 @@
-@tool
+#@tool
 class_name FilterBank
-extends EditorScript
+#extends EditorScript
+extends Object
 
 #region ConstArrays
 
@@ -95,9 +96,6 @@ static func op_or(i: Card, possible:Array)->bool:
 	return false
 #endregion
 #endregion
-
-class Rules:
-	var Action : Callable
 
 class evaluator :
 	static func evaluate(filter:Array[Callable],i:Array[Variant])-> Array[Variant] :

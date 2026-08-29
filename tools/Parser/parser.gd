@@ -1,9 +1,12 @@
-@tool
+#@tool
 class_name Parser
-extends EditorScript
+#extends EditorScript
+extends Object
 
-@export var map : Dictionary[StringName,filter_struct]
-var non_finite_while_limits = 25
+static var map : Dictionary[StringName,filter_struct]
+static var non_finite_while_limits = 25
+
+static var fBank : FilterBank = FilterBank.new()
 
 #alors plusieur point sur le formatage :
 ## ouais c'est des string et pas de des enum donc douleur
@@ -33,38 +36,39 @@ const inputs : Array = [
 		&"sequence_end",
 	&"sequence_end"]
 
-var fBank : FilterBank
-
 func _run() -> void:
-	fBank=FilterBank.new()
-	non_finite_while_limits= inputs.size()
+	Parse(inputs)
+
+static func Parse(inputsToInterpret:Array) -> Callable:
+	non_finite_while_limits = inputsToInterpret.size()
 	for i in fBank.statics:
 		if i  == &"sequence_end" or i  ==&"array_block" : continue
 		map.get_or_add(i,filter_struct.new(fBank,null,i))
-	interpreter()
+	var result = interpreter(inputsToInterpret)
 	map.clear()
+	return result
 
-func interpreter():
+static func interpreter(inputsToInterpret:Array)->Callable:
 	var final_callable : Callable = FilterBank.evaluator.evaluate
 	var call_array : Array[Callable]=[]
 	var current_block : filter_struct =null
 	var i :int = 0
-	while i <=inputs.size()-1:
+	while i <=inputsToInterpret.size()-1:
 		print("big I is ",i)
 		if current_block !=null :
-			var x: bind_return= bind_to_callable(current_block,i,0)
+			var x: bind_return= bind_to_callable(inputsToInterpret, current_block,i,0)
 			call_array.append(x.callable)
 			current_block = null
 			i=x.next_i
 			i+=1
 			continue
-		if fBank.statics.has(inputs[i]) :
-			if inputs[i] =="sequence_end" or inputs[i] =="array_block":
+		if fBank.statics.has(inputsToInterpret[i]) :
+			if inputsToInterpret[i] =="sequence_end" or inputsToInterpret[i] =="array_block":
 				print("sequence_end or array_block  encounter,skipping iteration")
 				i+=1
 				continue
-			current_block=map[inputs[i]]
-			print("current block is ",current_block.methode as String," and should be ",inputs[i])
+			current_block=map[inputsToInterpret[i]]
+			print("current block is ",current_block.methode as String," and should be ",inputsToInterpret[i])
 			i+=1
 			continue
 	print("\n","---AND THE FINAL RESULT IS ---","\n")
@@ -80,17 +84,18 @@ func interpreter():
 	for y in result:
 		test.append(y.name)	
 	print(test)
+	return final_callable
 	
-func bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
+static func bind_to_callable(inputsToInterpret:Array, x:filter_struct, i:int, iter : int)->bind_return:
 	print(x.callable.get_method())
 	var returned: Callable=x.callable
 	var y:int =i
 	var next_i :int
 	var array:Array=[]
 	var in_array_block:bool = false
-	print("i is : ",i," and thus is : ",inputs[i])
-	for panic in range(inputs.size()):
-		var item = inputs[y]
+	print("i is : ",i," and thus is : ",inputsToInterpret[i])
+	for panic in range(inputsToInterpret.size()):
+		var item = inputsToInterpret[y]
 		if item is StringName and fBank.statics.has(item) :
 			if item==&"sequence_end" :break
 			if item==&"array_block" :
@@ -99,12 +104,12 @@ func bind_to_callable(x:filter_struct,i:int,iter : int)->bind_return:
 				y+=1
 				next_i=y
 				continue
-			var result = bind_to_callable(map[item],y+1,iter+1)
+			var result = bind_to_callable(inputsToInterpret, map[item],y+1,iter+1)
 			y=result.next_i
 			item=result.callable
-		assert(y-i<non_finite_while_limits,"sequence_end not encountered , inputs may be badly formated")
+		assert(y-i<non_finite_while_limits,"sequence_end not encountered , inputsToInterpret may be badly formated")
 		print("recursive iter : ",iter," while iter : ",y-i)
-		print("next item is ",inputs[y+1])
+		print("next item is ",inputsToInterpret[y+1])
 		
 		if in_array_block:
 			print("appended ", item)
