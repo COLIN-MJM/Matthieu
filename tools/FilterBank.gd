@@ -33,7 +33,7 @@ const array_block_needed : Array[StringName] = [&"op_nand", &"op_xor", &"op_or"]
 const self_blocs : Array[StringName] = [&"self_position", &"self_rotation", &"self_owner"]
 #endregion
 
-static func get_test_array(sibling:Node)->Array[Card]:
+static func get_test_array(sibling:Card)->Array[Card]:
 	var test : Array
 	var toreturn : Array[Card] = [Card.new("1",Vector2i(7,1),Vector2i.RIGHT,true),Card.new("2",Vector2i(6,1),Vector2i.RIGHT,false),Card.new("3",Vector2i(8,2),Vector2i.DOWN,true)]
 	for y in toreturn:

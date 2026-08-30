@@ -1,4 +1,4 @@
-class_name AllCarte 
+class_name AllCards 
 extends ItemList
 
 var dico :Dictionary[int,Carte]
@@ -26,6 +26,6 @@ func _ready() -> void:
 	####Pire crime de l'histoire de l'humanité,on raconte que son créateur construit une tour de sont hubris,la hauteur serait tell qu'elle perças le paradis
 
 
-func GetCarteInstanceOnNumber(entrance :int)->Carte :
+func GetCarteInstanceOnNumber(entrance :int)->Card :
 	var test =  dico[entrance]
 	return test

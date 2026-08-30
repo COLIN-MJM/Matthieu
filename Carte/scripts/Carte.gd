@@ -18,6 +18,6 @@ var cardNumber : int
 func _init() -> void:
 	cardNumber= self.get_script().get_global_name().erase(0,self.get_script().get_global_name().length()-2).to_int()
 
-var carteRenderer : CarteRenderer
+var cardRenderer : CardRenderer
 @abstract func Activate()->SecondaryEffect #do thing on the current card
 @abstract func AfterEffect(entrance:Carte)->void#store the logic to do on other cards
