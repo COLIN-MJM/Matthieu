@@ -53,19 +53,19 @@ static func filtre_dist(i:Card, who:Vector2i, dist:int)->bool :
 	
 ## Vérifie que la direction de la carte étudiée i est égale à "dir"
 static func filtre_direction(i:Card, dir:Vector2i)->bool : 
-	return i.rotation==dir
+	return i.c_rotation==dir
 
 ## Vérifie que la position de la carte étudiée i est n'importe où sur la direction "dir" de la carte en position "who"
 static func filtre_relative_pos(i:Card, whoPos:Vector2i, whoDir:Vector2i, relativeDir:Vector2i)->bool:
 	var comparedDir : Vector2 = Vector2(whoDir)
 	var angle : float = Vector2.UP.angle_to(relativeDir)
 	comparedDir = comparedDir.rotated(angle)
-	return Vector2i(Vector2(i.position-whoPos).normalized())==Vector2i(comparedDir)
+	return Vector2i(Vector2(i.c_position-whoPos).normalized())==Vector2i(comparedDir)
 
 ## Vérifie l'équipe de la carte étudiée i par rapport à l'équipe "who". 
 ## Si "allyOrEnemy" est vrai, on vérifie qu'elles sont dans la même équipe. Sinon, on vérifie qu'elles sont dans des équipes opposées.
 static func filtre_team(i:Card, who:bool, allyOrEnemy:bool)->bool:
-	return (i.owner == who) == allyOrEnemy
+	return (i.c_owner == who) == allyOrEnemy
 #endregion
 
 ## Les opérateurs sont des filtres spéciaux applicant des opérations logiques sur des filtres

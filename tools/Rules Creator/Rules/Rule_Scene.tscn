@@ -15,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 10
 size_flags_vertical = 3
+title = "filtre_dist"
 script = ExtResource("1_oi5a1")
 
 [node name="AspectRatioContainer" type="MarginContainer" parent="." unique_id=235086775]
@@ -41,7 +42,41 @@ layout_mode = 2
 
 [node name="OptionButton" type="OptionButton" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=339905368 node_paths=PackedStringArray("textual", "argument_list", "folded", "plus_button")]
 layout_mode = 2
+selected = 0
 search_bar_enabled = true
+item_count = 16
+popup/item_0/text = "filtre_dist"
+popup/item_0/id = 0
+popup/item_1/id = -1
+popup/item_1/separator = true
+popup/item_2/text = "filtre_direction"
+popup/item_2/id = 2
+popup/item_3/id = -1
+popup/item_3/separator = true
+popup/item_4/text = "filtre_relative_pos"
+popup/item_4/id = 4
+popup/item_5/id = -1
+popup/item_5/separator = true
+popup/item_6/text = "filtre_team"
+popup/item_6/id = 6
+popup/item_7/id = -1
+popup/item_7/separator = true
+popup/item_8/text = "op_not"
+popup/item_8/id = 8
+popup/item_9/id = -1
+popup/item_9/separator = true
+popup/item_10/text = "op_nand"
+popup/item_10/id = 10
+popup/item_11/id = -1
+popup/item_11/separator = true
+popup/item_12/text = "op_xor"
+popup/item_12/id = 12
+popup/item_13/id = -1
+popup/item_13/separator = true
+popup/item_14/text = "op_or"
+popup/item_14/id = 14
+popup/item_15/id = -1
+popup/item_15/separator = true
 script = ExtResource("1_xr2nv")
 textual = NodePath("../RichTextLabel")
 argument_list = NodePath("../../../MarginContainer2/ScrollContainer/VBoxContainer")
@@ -52,20 +87,7 @@ plus_button = NodePath("../../../../Button")
 custom_maximum_size = Vector2(-1, 125)
 layout_mode = 2
 size_flags_vertical = 3
-text = "A
-
-AA
-A
-A
-A
-
-A
-A
-A
-
-A
-A
-A"
+text = "Vérifie que la distance de la carte étudiée i vis-à vis de la position WHO est plus petite ou égale à Dist"
 fit_content = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="AspectRatioContainer/Panel/HSplitContainer" unique_id=1011995266]

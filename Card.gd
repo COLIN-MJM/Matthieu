@@ -19,7 +19,7 @@ var alreadyActivatedThisTurn : bool = false
 
 
 func _ready() -> void:
-	#_init("MyCard", Vector2i(7, 2), Vector2i.UP, true)
+	#self = Card.new("MyCard", Vector2i(7, 2), Vector2i.UP, true)
 	rule.whenToActivate.append(GlobalCardEnum.ActivationTypes.OnPlacement)
 	When(GlobalCardEnum.ActivationTypes.OnMove)
 	When(GlobalCardEnum.ActivationTypes.OnPlacement)
