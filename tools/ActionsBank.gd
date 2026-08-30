@@ -7,11 +7,11 @@ var playspace
 #region Actions Fondamentales
 
 static func Rotate(target:Card, angle:float)->SecondaryEffect:
-	target.rotation = Vector2(target.rotation).rotated(angle)
+	target.c_rotation = Vector2(target.c_rotation).rotated(angle)
 	return target.When(GlobalCardEnum.ActivationTypes.OnRotate)
 
 static func Move(target:Card, dir:Vector2i, nbTiles:int)->SecondaryEffect:
-	target.position += dir * nbTiles
+	target.c_position += dir * nbTiles
 	return target.When(GlobalCardEnum.ActivationTypes.OnMove)
 
 static func Buff(target:Card, parameter:StringName, addedValue:int)->SecondaryEffect:
@@ -43,7 +43,7 @@ static func RotateTowardsOrAway(targets:Array[Card], whoPos:Vector2i, nbTiles:in
 	for c in targets:
 		var lookVector = Vector2i(Vector2(whoPos - c.pos).normalized())
 		if (!towardsOrAway) : lookVector = -lookVector
-		return Rotate (c, Vector2(c.rotation).angle_to(lookVector))
+		return Rotate (c, Vector2(c.c_rotation).angle_to(lookVector))
 	return null
 
 static func BuffAll(targets:Array[Card], parameter:StringName, addedValue:int)->SecondaryEffect:
