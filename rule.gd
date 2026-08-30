@@ -2,14 +2,17 @@ class_name Rule
 extends Node
 
 var bindedCard : Card
-var allFilters : Array
-var actions : Array
+
+var rawFilters : Array
+var rawActions : Array
+
+var updatedFilters : Array
+var updatedActions : Array
 
 var callableFilters : Callable
 var callableActions : Callable
 
-func _ready() -> void:
-	Reparse(allFilters)
+var whenToActivate : Array[GlobalCardEnum.ActivationTypes]
 
 func Reparse(f:Array) -> void:
 	callableFilters = Parser.Parse(f)

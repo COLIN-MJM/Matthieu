@@ -8,8 +8,8 @@ extends Object
 
 const statics : Array[StringName]= [
 	&"filtre_dist", &"filtre_direction", &"filtre_relative_pos", &"filtre_team",
-	 &"op_not", &"op_nand", &"op_xor", &"op_or",
-	 &"sequence_end", &"array_block"]
+	&"op_not", &"op_nand", &"op_xor", &"op_or",
+	&"sequence_end", &"array_block"]
 const statics_arguments_dic : Dictionary[StringName,Array] ={
 	&"filtre_dist":[
 		2,"Vérifie que la distance de la carte étudiée i vis-à vis de la position WHO est plus petite ou égale à Dist","Who:Vector2i ","Dist:int"],
@@ -28,8 +28,9 @@ const statics_arguments_dic : Dictionary[StringName,Array] ={
 	&"op_or" :[
 		-1,"Opérateur vérifiant qu'au moins un des filtres testés dans POSSIBLE est vrai.",&"filter"],
 }
-const utility_statics : Array[StringName]=[ &"sequence_end", &"array_block"]
-const array_block_needed : Array[StringName]= [&"op_nand", &"op_xor", &"op_or"]
+const utility_statics : Array[StringName] = [&"sequence_end", &"array_block"]
+const array_block_needed : Array[StringName] = [&"op_nand", &"op_xor", &"op_or"]
+const self_blocs : Array[StringName] = [&"self_position", &"self_rotation", &"self_owner"]
 #endregion
 
 static func get_test_array()->Array[Card]:

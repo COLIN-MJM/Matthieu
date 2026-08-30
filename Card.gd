@@ -13,12 +13,11 @@ var parameters : Dictionary[StringName, int] = {
 	&"CombatValue":1
 	}
 
-var whenToActivate : Array[GlobalCardEnum.ActivationTypes]
 var alreadyActivatedThisTurn : bool = false
 
 func _ready() -> void:
 	#_init("MyCard", Vector2i(7, 2), Vector2i.UP, true)
-	whenToActivate.append(GlobalCardEnum.ActivationTypes.OnPlacement)
+	rule.whenToActivate.append(GlobalCardEnum.ActivationTypes.OnPlacement)
 	When(GlobalCardEnum.ActivationTypes.OnMove)
 	When(GlobalCardEnum.ActivationTypes.OnPlacement)
 
@@ -30,17 +29,32 @@ func _init(s : StringName, pos : Vector2i, rot : Vector2i, ow : bool) -> void:
 	
 func When(source : GlobalCardEnum.ActivationTypes)->SecondaryEffect:
 	if (source == null || alreadyActivatedThisTurn) : return null
-	for con in whenToActivate:
-		if (con == source) : 
-			print("Corresponding condition! Let's Continue!")
-			return Activate()
+	if rule.whenToActivate.has(source) : 
+		print("Corresponding condition! Let's Continue!")
+		return Activate()
 	print("Nope...")
 	return null
 
 func Activate()->SecondaryEffect:
 	alreadyActivatedThisTurn = true
-	rule.Reparse(rule.allFilters)
+	rule.updatedFilters = UpdateFilters(rule.rawFilters)
+	rule.Reparse(rule.updatedFilters)
 	var concernedCards : Array = rule.callableFilters.call()
 	print(concernedCards)
 	return null
-	
+
+func UpdateFilters(filters:Array)->Array:
+	var tempFilters : Array = filters
+	var i : int = tempFilters.size() - 1
+	while i >= 0:
+		tempFilters[i] = UpdateBloc(tempFilters[i])
+		i = i - 1
+	return tempFilters
+
+func UpdateBloc(bloc:Variant)->Variant:
+	if !FilterBank.self_blocs.has(bloc) : return bloc
+	match bloc :
+		&"self_position": return position
+		&"self_rotation": return rotation
+		&"self_owner": return owner
+		_: return bloc
