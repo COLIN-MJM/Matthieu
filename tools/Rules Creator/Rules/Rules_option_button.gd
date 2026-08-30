@@ -12,6 +12,7 @@ var rule_scene:PackedScene=preload("uid://c1toly1av552t")
 
 
 var argument_array :Array
+var filter_name : StringName
 var statics_arguments : Array
 func _ready() -> void:
 	if item_count>0 : return
@@ -27,6 +28,7 @@ func _on_item_selected(index: int) -> void:
 	statics_arguments =FilterBank.statics_arguments_dic[get_item_text(index)]
 	textual.text=statics_arguments[1]
 	folded.title=get_item_text(index)
+	filter_name=get_item_text(index)
 	
 	plus_button.disabled=true
 	argument_array.clear()

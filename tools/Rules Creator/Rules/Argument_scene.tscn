@@ -37,4 +37,4 @@ layout_mode = 2
 placeholder_text = "SALUT MON POTE"
 expand_to_text_length = true
 
-[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

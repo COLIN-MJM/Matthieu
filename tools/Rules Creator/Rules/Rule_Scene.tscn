@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ck0g0jhp72fw" path="res://tools/Rules Creator/Rules/rule_scene.gd" id="1_oi5a1"]
 [ext_resource type="Script" uid="uid://bfrvc1qde2k48" path="res://tools/Rules Creator/Rules/Rules_option_button.gd" id="1_xr2nv"]
 
-[node name="Control" type="FoldableContainer" unique_id=1967808319]
+[node name="Control" type="FoldableContainer" unique_id=1967808319 node_paths=PackedStringArray("button")]
 custom_minimum_size = Vector2(678, 279)
 clip_contents = true
 anchors_preset = -1
@@ -13,10 +13,11 @@ offset_right = -0.5280762
 offset_bottom = -0.2880249
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "filtre_dist"
 script = ExtResource("1_oi5a1")
+button = NodePath("AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton")
 
 [node name="AspectRatioContainer" type="MarginContainer" parent="." unique_id=235086775]
 layout_mode = 2
@@ -84,7 +85,6 @@ folded = NodePath("../../../../../..")
 plus_button = NodePath("../../../../Button")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=480807942]
-custom_maximum_size = Vector2(-1, 125)
 layout_mode = 2
 size_flags_vertical = 3
 text = "Vérifie que la distance de la carte étudiée i vis-à vis de la position WHO est plus petite ou égale à Dist"

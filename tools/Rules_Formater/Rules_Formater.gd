@@ -29,11 +29,11 @@ static func Receive_Unformated(input_array:Array)->Array :
 	var result : Array=[]
 	var curr_bloc:Array=[]
 	var i :int = 0
-	while i <=inputs.size()-1:
-		if (input_array[i] is not StringName or !FilterBank.statics.has(input_array[i] as StringName)) or (input_array[i] is StringName and FilterBank.self_blocs.has(input_array[i] as StringName)) :
+	while i <input_array.size():
+		if (input_array[i] is not StringName or !FilterBank.statics.has(input_array[i] as StringName)) :
 			curr_bloc.append(input_array[i])
 		else :
-			if !curr_bloc.is_empty() : 
+			if !curr_bloc.is_empty():
 				curr_bloc.reverse()
 				curr_bloc.append(&"sequence_end")
 			curr_bloc.append(input_array[i])
@@ -42,6 +42,9 @@ static func Receive_Unformated(input_array:Array)->Array :
 			result.append_array(curr_bloc)
 			curr_bloc.clear()
 		i+=1
-	result.append(&"sequence_end")
+	if !curr_bloc.is_empty() :
+		curr_bloc.reverse()
+		curr_bloc.append(&"sequence_end")
+		result.append_array(curr_bloc)
 	result.append(&"sequence_end")
 	return result

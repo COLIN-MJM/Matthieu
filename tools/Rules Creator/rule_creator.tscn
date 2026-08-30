@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://chf4av6g3mcvh"]
+
+[ext_resource type="Script" uid="uid://bncnu5umm422p" path="res://tools/Rules Creator/rules_creator_scene.gd" id="1_ud3dl"]
+
+[node name="Rule_Creator" type="Control" unique_id=527889660 node_paths=PackedStringArray("vContainer", "button", "buttonEnd")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ud3dl")
+vContainer = NodePath("Panel/HBoxContainer/ScrollContainer/VBoxContainer")
+button = NodePath("Panel/HBoxContainer/Button")
+buttonEnd = NodePath("Panel/HBoxContainer/Button2")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=2016957061]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 1.0
+offset_right = 0.30395508
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=425682700]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer" unique_id=76403444]
+layout_mode = 2
+text = "+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer" unique_id=1323758278]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/ScrollContainer" unique_id=1401941943]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="Panel/HBoxContainer" unique_id=469573399]
+layout_mode = 2
+text = "END"
