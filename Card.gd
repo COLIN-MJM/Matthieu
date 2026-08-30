@@ -49,7 +49,8 @@ func When(source : GlobalCardEnum.ActivationTypes)->SecondaryEffect:
 func Activate()->SecondaryEffect:
 	alreadyActivatedThisTurn = true
 	rule.updatedFilters = UpdateFilters(rule.rawFilters)
-	rule.Reparse(rule.updatedFilters)
+	var cards = FilterBank.get_test_array(self)
+	rule.Reparse(rule.updatedFilters,cards)
 	var concernedCards : Array = rule.callableFilters.call()
 	print(concernedCards)
 	return null

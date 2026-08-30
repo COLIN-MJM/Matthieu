@@ -36,19 +36,17 @@ const inputs : Array = [
 		&"sequence_end",
 	&"sequence_end"]
 
-func _run() -> void:
-	Parse(inputs)
 
-static func Parse(inputsToInterpret:Array) -> Callable:
+static func Parse(inputsToInterpret:Array,cards:Array[Card]) -> Callable:
 	non_finite_while_limits = inputsToInterpret.size()
 	for i in fBank.statics:
 		if i  == &"sequence_end" or i  ==&"array_block" : continue
 		map.get_or_add(i,filter_struct.new(fBank,null,i))
-	var result = interpreter(inputsToInterpret)
+	var result = interpreter(inputsToInterpret , cards)
 	map.clear()
 	return result
 
-static func interpreter(inputsToInterpret:Array)->Callable:
+static func interpreter(inputsToInterpret:Array ,cards:Array[Card])->Callable:
 	var final_callable : Callable = FilterBank.evaluator.evaluate
 	var call_array : Array[Callable]=[]
 	var current_block : filter_struct =null
@@ -78,7 +76,7 @@ static func interpreter(inputsToInterpret:Array)->Callable:
 		for p in o :
 			if p is Callable :
 				print(p.get_bound_arguments())
-	final_callable=final_callable.bind(call_array,FilterBank.get_test_array())
+	final_callable=final_callable.bind(call_array,cards)
 	var test : Array
 	var result : Array=final_callable.call()
 	for y in result:

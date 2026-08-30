@@ -6,17 +6,17 @@ signal format_complete(Array)
 
 const inputs : Array = [ 
 	&"filtre_dist",
-		Vector2i(7,2),
+		&"self_position",
 		1,
 	&"op_or",
 		&"filtre_relative_pos",
-			Vector2i(7,2),
+			&"self_position",
 			Vector2i.UP,
 		&"filtre_relative_pos",
-			Vector2i(7,2),
+			&"self_position",
 			Vector2i.LEFT,
 		&"filtre_relative_pos",
-			Vector2i(7,2),
+			&"self_position",
 			Vector2i.RIGHT,
 ]
 
@@ -30,7 +30,7 @@ static func Receive_Unformated(input_array:Array)->Array :
 	var curr_bloc:Array=[]
 	var i :int = 0
 	while i <=inputs.size()-1:
-		if input_array[i] is not StringName or !FilterBank.statics.has(input_array[i] as StringName) :
+		if (input_array[i] is not StringName or !FilterBank.statics.has(input_array[i] as StringName)) or (input_array[i] is StringName and FilterBank.self_blocs.has(input_array[i] as StringName)) :
 			curr_bloc.append(input_array[i])
 		else :
 			if !curr_bloc.is_empty() : 
