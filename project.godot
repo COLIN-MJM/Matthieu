@@ -19,6 +19,10 @@ run/main_scene="uid://cgbx7ayc6kuuy"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdscript_refactoring/plugin.cfg")
+
 [input]
 
 "Left mouse Clic"={
