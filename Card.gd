@@ -1,5 +1,5 @@
 class_name Card
-extends Node2D
+extends Resource
 
 var c_name : StringName
 var c_position : Vector2i
@@ -15,8 +15,7 @@ var parameters : Dictionary[StringName, int] = {
 
 var alreadyActivatedThisTurn : bool = false
 
-@onready var cardRenderer: CardRenderer = %CardRenderer
-
+#@onready var cardRenderer: CardRenderer = %CardRenderer
 
 func _ready() -> void:
 	c_name = "MyCard"

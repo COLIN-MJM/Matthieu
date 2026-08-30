@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dl6c0ycohbr6e" path="res://La Main.gd" id="1_d3vym"]
 [ext_resource type="Script" uid="uid://hw8ovv8tq528" path="res://player.gd" id="1_kne1u"]
-[ext_resource type="Script" uid="uid://cxxhbu1cx5vy7" path="res://Carte/scripts/AllCarte.gd" id="2_esir1"]
+[ext_resource type="Script" uid="uid://cxxhbu1cx5vy7" path="res://Carte/scripts/AllCards.gd" id="2_esir1"]
 
 [node name="Player" type="Control" unique_id=78339630 node_paths=PackedStringArray("main")]
 layout_mode = 3

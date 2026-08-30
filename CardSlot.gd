@@ -2,15 +2,13 @@ class_name  CardSlot
 extends Node2D
 
 var haveCard : bool = false
-var carte : CardRenderer
 var cardData : Card 
 var coords: Vector2i
 var combat_score : int
 @export var poly : Polygon2D
 
-func AssignCard(entrance : CardRenderer)->void :
-	carte=entrance
-	cardData=entrance.CardEffect
+func AssignCard(entrance : Card)->void :
+	cardData = entrance.CardEffect
 	cardData.position=coords
 	haveCard=true
 	entrance.process_card_rotate()

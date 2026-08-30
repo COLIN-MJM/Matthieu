@@ -1,7 +1,7 @@
 class_name La_Main
 extends Control
 
-@export var allCarte : AllCarte
+@export var allCarte : AllCards
 @export var deathCD: int
 
 var currentSelected : int = -1
@@ -16,7 +16,7 @@ func _ready() -> void:
 		allCarteState[x]=CarteState.IN_HAND
 		allCarte.add_item(String.num(x))
 
-func requestCard(i :int)->Carte :
+func requestCard(i :int)->Card :
 	if allCarteState[i] == CarteState.IN_HAND :
 		allCarteState[i] = CarteState.IN_PLAY
 		currentSelected = -1
