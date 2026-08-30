@@ -2,13 +2,13 @@ class_name  CardSlot
 extends Node2D
 
 var haveCard : bool = false
-var carte : CarteRenderer
+var carte : CardRenderer
 var cardData : Card 
 var coords: Vector2i
 var combat_score : int
 @export var poly : Polygon2D
 
-func AssignCard(entrance : CarteRenderer)->void :
+func AssignCard(entrance : CardRenderer)->void :
 	carte=entrance
 	cardData=entrance.CardEffect
 	cardData.position=coords
@@ -16,7 +16,7 @@ func AssignCard(entrance : CarteRenderer)->void :
 	entrance.process_card_rotate()
 	add_child(entrance)
 
-func PlaceCard(entrance : CarteRenderer)->SecondaryEffect :
+func PlaceCard(entrance : CardRenderer)->SecondaryEffect :
 	AssignCard(entrance)
 	if entrance.CardEffect.ActivationType== GlobalCardEnum.ActivationTypes.OnPlacement :
 		return entrance.CardEffect.Activate()

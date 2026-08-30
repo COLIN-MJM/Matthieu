@@ -1,10 +1,10 @@
 class_name Card
-extends Object
+extends Node2D
 
-var name : StringName
-var position : Vector2i
-var rotation : Vector2i
-var owner : bool 
+var c_name : StringName
+var c_position : Vector2i
+var c_rotation : Vector2i
+var c_owner : bool 
 
 var rule : Rule
 
@@ -15,6 +15,9 @@ var parameters : Dictionary[StringName, int] = {
 
 var alreadyActivatedThisTurn : bool = false
 
+@onready var cardRenderer: CardRenderer = %CardRenderer
+
+
 func _ready() -> void:
 	#_init("MyCard", Vector2i(7, 2), Vector2i.UP, true)
 	rule.whenToActivate.append(GlobalCardEnum.ActivationTypes.OnPlacement)
@@ -22,10 +25,10 @@ func _ready() -> void:
 	When(GlobalCardEnum.ActivationTypes.OnPlacement)
 
 func _init(s : StringName, pos : Vector2i, rot : Vector2i, ow : bool) -> void:
-	name=s
-	position=pos
-	rotation=rot
-	owner=ow
+	c_name=s
+	c_position=pos
+	c_rotation=rot
+	c_owner=ow
 	
 func When(source : GlobalCardEnum.ActivationTypes)->SecondaryEffect:
 	if (source == null || alreadyActivatedThisTurn) : return null
@@ -54,7 +57,7 @@ func UpdateFilters(filters:Array)->Array:
 func UpdateBloc(bloc:Variant)->Variant:
 	if !FilterBank.self_blocs.has(bloc) : return bloc
 	match bloc :
-		&"self_position": return position
-		&"self_rotation": return rotation
-		&"self_owner": return owner
+		&"self_position": return c_position
+		&"self_rotation": return c_rotation
+		&"self_owner": return c_owner
 		_: return bloc

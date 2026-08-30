@@ -7,7 +7,7 @@ extends Node2D
 @export_custom(PROPERTY_HINT_RANGE,"0,4,1") var nbr_of_player : int
 var board : Node2D
 var TlMidBr : PackedVector2Array
-@onready var carteSlot : PackedScene =$".".get_meta("CarteSlot")
+@onready var cardSlot : PackedScene =$".".get_meta("cardSlot")
 
 var scaler : Vector2 
 var _midpoint : Vector2
@@ -27,7 +27,7 @@ func createGrid()->void:
 	
 	for y in dimensions.y :
 		for x in dimensions.x :
-			var instance : CardSlot = carteSlot.instantiate()
+			var instance : CardSlot = cardSlot.instantiate()
 			instance.position = board.position + Vector2(slotSize.x * x,slotSize.y * y )
 			instance.coords = Vector2i(x,y)
 			allSlots[Vector2i(x,y)] = instance
@@ -63,7 +63,7 @@ func Resolve_Passive()->void :
 
 func debugCreateCard(at :Vector2i =Vector2i(0,0))->void :
 	var ressource : PackedScene = preload("res://CarteInstance.tscn")
-	var instance : CarteRenderer =ressource.instantiate()
+	var instance : CardRenderer =ressource.instantiate()
 	instance.CardEffect.direction=Vector2i.RIGHT
 	allSlots[at].AssignCard(instance)
 	

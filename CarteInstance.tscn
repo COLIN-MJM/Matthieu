@@ -3,26 +3,31 @@
 [ext_resource type="Script" uid="uid://58ojlxda4eo0" path="res://Card.gd" id="1_h4qqw"]
 [ext_resource type="Texture2D" uid="uid://w1hfa7fprxqj" path="res://Contour_Placeholder.svg" id="2_8sjrd"]
 [ext_resource type="Texture2D" uid="uid://djqq6bxlxabw8" path="res://Carte/Carte_Dir_For_Instance/Carte_Inté_3svg.svg" id="2_h4qqw"]
+[ext_resource type="Script" uid="uid://c4ws3hf8em16v" path="res://Carte/scripts/CardRenderer.gd" id="2_wy3wj"]
 
 [node name="CarteInstance" type="Node2D" unique_id=1507316123]
 script = ExtResource("1_h4qqw")
 
-[node name="Polygon2D" type="Sprite2D" parent="." unique_id=346156981]
+[node name="CardRenderer" type="Node2D" parent="." unique_id=883352078]
+unique_name_in_owner = true
+script = ExtResource("2_wy3wj")
+
+[node name="Polygon2D" type="Sprite2D" parent="CardRenderer" unique_id=346156981]
 texture = ExtResource("2_h4qqw")
 centered = false
 
-[node name="DirectionIndactor" type="Sprite2D" parent="Polygon2D" unique_id=1101818354]
+[node name="DirectionIndactor" type="Sprite2D" parent="CardRenderer/Polygon2D" unique_id=1101818354]
 position = Vector2(50, 50)
 texture = ExtResource("2_8sjrd")
 
-[node name="Polygon2D2" type="Polygon2D" parent="Polygon2D" unique_id=882506123]
+[node name="Polygon2D2" type="Polygon2D" parent="CardRenderer/Polygon2D" unique_id=882506123]
 z_index = -1
 position = Vector2(101, 103)
 rotation = -3.1415927
 polygon = PackedVector2Array(0, 0, 48, 50, 100, 100, 0, 100)
 uv = PackedVector2Array(0, 0, 48, 50, 100, 100, 0, 100)
 
-[node name="Polygon2D3" type="Polygon2D" parent="Polygon2D" unique_id=795592032]
+[node name="Polygon2D3" type="Polygon2D" parent="CardRenderer/Polygon2D" unique_id=795592032]
 z_index = -1
 polygon = PackedVector2Array(0, 0, 48, 50, 100, 100, 0, 100)
 uv = PackedVector2Array(0, 0, 48, 50, 100, 100, 0, 100)
