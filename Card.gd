@@ -19,12 +19,20 @@ var alreadyActivatedThisTurn : bool = false
 
 
 func _ready() -> void:
-	#self = Card.new("MyCard", Vector2i(7, 2), Vector2i.UP, true)
-	rule.whenToActivate.append(GlobalCardEnum.ActivationTypes.OnPlacement)
+	c_name = "MyCard"
+	c_position = Vector2i(7, 2)
+	c_rotation = Vector2i.UP
+	c_owner = true
+	
+	rule = Rule.new(
+	[GlobalCardEnum.ActivationTypes.OnPlacement], 
+	[&"filtre_dist", 1, &"self_position", &"sequence_end"],
+	[&"Rotate"])
+	
 	When(GlobalCardEnum.ActivationTypes.OnMove)
 	When(GlobalCardEnum.ActivationTypes.OnPlacement)
 
-func _init(s : StringName, pos : Vector2i, rot : Vector2i, ow : bool) -> void:
+func _init(s : StringName = &"MyCard", pos : Vector2i = Vector2i(-1, -1), rot : Vector2i = Vector2i.UP, ow : bool = true) -> void:
 	c_name=s
 	c_position=pos
 	c_rotation=rot
@@ -55,7 +63,7 @@ func UpdateFilters(filters:Array)->Array:
 	return tempFilters
 
 func UpdateBloc(bloc:Variant)->Variant:
-	if !FilterBank.self_blocs.has(bloc) : return bloc
+	if bloc is not StringName or !FilterBank.self_blocs.has(bloc) : return bloc
 	match bloc :
 		&"self_position": return c_position
 		&"self_rotation": return c_rotation

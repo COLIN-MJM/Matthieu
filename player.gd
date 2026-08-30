@@ -102,14 +102,14 @@ class Gui_selected :
 			if sign(player.playSpace.allSlots[pos].carteData.owner)!=sign(player.player_Id) and sign(player.playSpace.allSlots[pos].combat_score)!=sign(player.player_Id) : 
 				return false
 			player.playSpace.allSlots[pos].KillCard()
-		var carte : Carte = player.main.requestCard(cur_hand_index)
+		var carte : Card = player.main.requestCard(cur_hand_index)
 		if carte == null :
 			return false
 		##create the card
-		carte.owner=player.player_Id
+		carte.c_owner=player.player_Id
 		carte.strenght=sign(player.player_Id)
 		var ressource : PackedScene = preload("res://CarteInstance.tscn")
-		var instance : CarteRenderer =ressource.instantiate()
+		var instance : CardRenderer =ressource.instantiate()
 		instance.spriteMain.scale=player.playSpace.scaler
 		instance.CardEffect=carte
 		var effects:SecondaryEffect = player.playSpace.allSlots[pos].PlaceCard(instance)
