@@ -26,7 +26,7 @@ func _ready() -> void:
 	rule = Rule.new(
 	[GlobalCardEnum.ActivationTypes.OnPlacement], 
 	[&"filtre_dist", 1, &"self_position", &"sequence_end"],
-	[&"Rotate"])
+	ActionsBank.ActionWord.RotateAll)
 	
 	When(GlobalCardEnum.ActivationTypes.OnMove)
 	When(GlobalCardEnum.ActivationTypes.OnPlacement)
@@ -48,7 +48,7 @@ func When(source : GlobalCardEnum.ActivationTypes)->SecondaryEffect:
 func Activate()->SecondaryEffect:
 	alreadyActivatedThisTurn = true
 	rule.updatedFilters = UpdateFilters(rule.rawFilters)
-	var cards = FilterBank.get_test_array(self)
+	var cards = FilterBank.get_test_array()
 	rule.Reparse(rule.updatedFilters,cards)
 	var concernedCards : Array = rule.callableFilters.call()
 	print(concernedCards)

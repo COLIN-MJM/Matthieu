@@ -34,7 +34,7 @@ func _on_finished_pressed():
 	var ress : Rule = inspector.get_edited_object()
 	if ress ==null : return
 	var rule_Name : String = ress.rule_name
-	ResourceSaver.save(ress,"res://NewCards/Rules_Ressources/"+rule_Name+".tres",ResourceSaver.FLAG_CHANGE_PATH)
+	ResourceSaver.save(ress,"res://Rules_Ressources/"+rule_Name+".tres",ResourceSaver.FLAG_CHANGE_PATH)
 	Window.get_focused_window().close_requested.emit()
 
 func _Read_Filters(rc:Rule_scene)->Array :

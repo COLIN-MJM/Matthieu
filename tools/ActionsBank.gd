@@ -5,7 +5,7 @@ extends EditorScript
 var playspace
 
 enum ActionWord{
-	RotateAll,MoveAll,AttractOrPushAway,RotateTowardsOrAway,BuffAll}
+	RotateAll,MoveAll,AttractOrPushAway,RotateTowardsOrAway,BuffAll,Null}
 	
 
 

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Rule" format=3 uid="uid://c2mptun6hs5lt"]
+
+[ext_resource type="Script" uid="uid://dcieys7jktyni" path="res://rule.gd" id="1_r2s80"]
+
+[resource]
+script = ExtResource("1_r2s80")
+rule_name = &"Rules_1"
+whenToActivate = Array[int]([0, 1, 2])
+rawFilters = [null, null, &"sequence_end", &"sequence_end"]
+rawAction = 1
+updatedAction = "MoveAll"
+metadata/_custom_type_script = "uid://dcieys7jktyni"

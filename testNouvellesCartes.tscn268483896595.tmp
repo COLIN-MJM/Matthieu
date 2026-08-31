@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://dhsqhyqxd74so"]
 
 [ext_resource type="Script" uid="uid://cb2l02qw3kin2" path="res://CardTester.gd" id="1_3nqio"]
-[ext_resource type="Resource" uid="uid://hu8kw0otnffl" path="res://NewCards/cardTest.tres" id="2_iu77l"]
 
 [node name="NewCards" type="Node2D" unique_id=1136097717]
 script = ExtResource("1_3nqio")
-cardRessource = ExtResource("2_iu77l")
