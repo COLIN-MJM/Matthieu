@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Rule" format=3 uid="uid://sogjlq4rrvu7"]
+
+[ext_resource type="Script" uid="uid://dcieys7jktyni" path="res://rule.gd" id="1_0mv2i"]
+
+[resource]
+script = ExtResource("1_0mv2i")
+whenToActivate = Array[int]([0])
+metadata/_custom_type_script = "uid://dcieys7jktyni"

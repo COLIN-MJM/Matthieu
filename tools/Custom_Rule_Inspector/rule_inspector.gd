@@ -1,0 +1,3 @@
+@tool
+class_name Custom_Inspector
+extends EditorInspectorPlugin

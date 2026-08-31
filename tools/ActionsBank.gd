@@ -4,6 +4,11 @@ extends EditorScript
 
 var playspace
 
+enum ActionWord{
+	RotateAll,MoveAll,AttractOrPushAway,RotateTowardsOrAway,BuffAll}
+	
+
+
 #region Actions Fondamentales
 
 static func Rotate(target:Card, angle:float)->SecondaryEffect:

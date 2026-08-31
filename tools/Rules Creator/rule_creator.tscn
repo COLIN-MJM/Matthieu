@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://chf4av6g3mcvh"]
 
 [ext_resource type="Script" uid="uid://bncnu5umm422p" path="res://tools/Rules Creator/rules_creator_scene.gd" id="1_ud3dl"]
+[ext_resource type="Script" uid="uid://ckvkgpjkp0kn" path="res://tools/Rules Creator/custom_foldable_container.gd" id="2_sblpi"]
 
-[node name="Rule_Creator" type="Control" unique_id=527889660 node_paths=PackedStringArray("vContainer", "button", "buttonEnd")]
+[node name="Rule_Creator" type="Control" unique_id=527889660 node_paths=PackedStringArray("vContainer", "button", "buttonEnd", "inspector", "button_export")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,9 +11,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ud3dl")
-vContainer = NodePath("Panel/HBoxContainer/ScrollContainer/VBoxContainer")
-button = NodePath("Panel/HBoxContainer/Button")
-buttonEnd = NodePath("Panel/HBoxContainer/Button2")
+vContainer = NodePath("Panel/HBoxContainer/FoldableContainer/HBoxContainer/ScrollContainer/VBoxContainer")
+button = NodePath("Panel/HBoxContainer/FoldableContainer/HBoxContainer/Button")
+buttonEnd = NodePath("Panel/HBoxContainer/FoldableContainer/HBoxContainer/Button2")
+inspector = NodePath("Panel/HBoxContainer/VBoxContainer/EditorInspector")
+button_export = NodePath("Panel/HBoxContainer/VBoxContainer/Button")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=2016957061]
 layout_mode = 1
@@ -21,21 +24,52 @@ anchor_right = 0.998
 anchor_bottom = 1.0
 offset_right = 0.30395508
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=425682700]
+[node name="HBoxContainer" type="HSplitContainer" parent="Panel" unique_id=1442867941]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Panel/HBoxContainer" unique_id=76403444]
-layout_mode = 2
-text = "+"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer" unique_id=1323758278]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer" unique_id=637667250]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/ScrollContainer" unique_id=1401941943]
+[node name="EditorResourcePicker" type="EditorResourcePicker" parent="Panel/HBoxContainer/VBoxContainer" unique_id=914787052]
+layout_mode = 2
+base_type = "Rule"
+
+[node name="EditorInspector" type="EditorInspector" parent="Panel/HBoxContainer/VBoxContainer" unique_id=1584604035]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer/VBoxContainer" unique_id=232381774]
+layout_mode = 2
+text = "Finish and Export"
+
+[node name="FoldableContainer" type="FoldableContainer" parent="Panel/HBoxContainer" unique_id=178883657]
+layout_mode = 2
+size_flags_horizontal = 3
+title = "Filter_Creator"
+script = ExtResource("2_sblpi")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/FoldableContainer" unique_id=819059751]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer/FoldableContainer/HBoxContainer" unique_id=76403444]
+layout_mode = 2
+text = "ADD
+Filters"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/FoldableContainer/HBoxContainer" unique_id=1323758278]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button2" type="Button" parent="Panel/HBoxContainer" unique_id=469573399]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/FoldableContainer/HBoxContainer/ScrollContainer" unique_id=1401941943]
 layout_mode = 2
-text = "END"
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="Panel/HBoxContainer/FoldableContainer/HBoxContainer" unique_id=469573399]
+layout_mode = 2
+text = "Set
+Filters"
+
+[connection signal="resource_selected" from="Panel/HBoxContainer/VBoxContainer/EditorResourcePicker" to="." method="_on_editor_resource_picker_resource_selected"]
+[connection signal="property_edited" from="Panel/HBoxContainer/VBoxContainer/EditorInspector" to="." method="_on_editor_inspector_property_edited"]
