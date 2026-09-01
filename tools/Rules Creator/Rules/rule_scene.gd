@@ -21,3 +21,7 @@ func _on_folding_changed(is_foldede: bool) -> void:
 	else :
 		custom_maximum_size=originalMaxsize
 		custom_minimum_size=originalMinsize
+
+
+func _on_removed_pressed() -> void:
+	queue_free()

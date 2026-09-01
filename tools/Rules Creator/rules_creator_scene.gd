@@ -15,12 +15,14 @@ func _enter_tree() -> void :
 	button.pressed.connect(_on_button_pressed)
 	buttonEnd.pressed.connect(_on_end_pressed)
 
-
+func remove_filter(vari :Variant)->void :
+	filters.erase(vari)
 
 func _on_button_pressed():
 	var instance = rule_scene.instantiate()
 	vContainer.add_child(instance)	
 	filters.append(instance)
+	instance.tree_exiting.connect(remove_filter.bind(instance))
 	pass
 func _on_end_pressed():
 	var test:Array=[]
