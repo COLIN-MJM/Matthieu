@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="NotPlaying" format=3 uid="uid://cq2fyuayx8yob"]
+
+[ext_resource type="Script" uid="uid://2jvvv31p2thc" path="res://Players/States/NotPlaying.gd" id="1_ose5e"]
+
+[resource]
+script = ExtResource("1_ose5e")
+metadata/_custom_type_script = "uid://2jvvv31p2thc"
