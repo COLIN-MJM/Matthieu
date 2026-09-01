@@ -17,15 +17,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 title = "filtre_dist"
 script = ExtResource("1_oi5a1")
-button = NodePath("AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton")
+button = NodePath("MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton")
 
-[node name="AspectRatioContainer" type="MarginContainer" parent="." unique_id=235086775]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=235086775]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="AspectRatioContainer" unique_id=1767278691]
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1767278691]
 layout_mode = 2
 
-[node name="HSplitContainer" type="HSplitContainer" parent="AspectRatioContainer/Panel" unique_id=118592724]
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/Panel" unique_id=118592724]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,13 +35,13 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer/Panel/HSplitContainer" unique_id=2028341929]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/HSplitContainer" unique_id=2028341929]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer" unique_id=24247808]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/HSplitContainer/MarginContainer" unique_id=24247808]
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=339905368 node_paths=PackedStringArray("textual", "argument_list", "folded", "plus_button")]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=339905368 node_paths=PackedStringArray("textual", "argument_list", "folded", "plus_button")]
 layout_mode = 2
 selected = 0
 search_bar_enabled = true
@@ -84,23 +84,23 @@ argument_list = NodePath("../../../MarginContainer2/ScrollContainer/VBoxContaine
 folded = NodePath("../../../../../..")
 plus_button = NodePath("../../../../Button")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=480807942]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer" unique_id=480807942]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Vérifie que la distance de la carte étudiée i vis-à vis de la position WHO est plus petite ou égale à Dist"
 fit_content = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="AspectRatioContainer/Panel/HSplitContainer" unique_id=1011995266]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/Panel/HSplitContainer" unique_id=1011995266]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer2" unique_id=1722651513]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/HSplitContainer/MarginContainer2" unique_id=1722651513]
 layout_mode = 2
 scroll_horizontal_by_default = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/Panel/HSplitContainer/MarginContainer2/ScrollContainer" unique_id=1610643493]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/HSplitContainer/MarginContainer2/ScrollContainer" unique_id=1610643493]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="AspectRatioContainer/Panel" unique_id=472507545]
+[node name="Button" type="Button" parent="MarginContainer/Panel" unique_id=472507545]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.97200006
@@ -115,5 +115,5 @@ disabled = true
 text = "+"
 
 [connection signal="folding_changed" from="." to="." method="_on_folding_changed"]
-[connection signal="item_selected" from="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" to="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" method="_on_item_selected"]
-[connection signal="pressed" from="AspectRatioContainer/Panel/Button" to="AspectRatioContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" method="_on_plus_button_pressed"]
+[connection signal="item_selected" from="MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" to="MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" method="_on_item_selected"]
+[connection signal="pressed" from="MarginContainer/Panel/Button" to="MarginContainer/Panel/HSplitContainer/MarginContainer/VBoxContainer/OptionButton" method="_on_plus_button_pressed"]

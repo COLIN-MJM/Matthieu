@@ -2,9 +2,13 @@
 class_name Rule_scene
 extends FoldableContainer
 
-var originalMaxsize= self.custom_maximum_size
-var originalMinsize= self.custom_minimum_size
+var originalMaxsize : Vector2
+var originalMinsize : Vector2
 @export var button : Rule_Option_Button
+
+func _enter_tree() -> void:
+	originalMaxsize= custom_maximum_size
+	originalMinsize= custom_minimum_size
 
 var arguments :Array :
 	get : return button.argument_array
