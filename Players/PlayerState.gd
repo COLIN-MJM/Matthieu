@@ -1,6 +1,6 @@
 @abstract
 class_name PlayerState
-extends Resource
+extends Node
 
 @abstract func OnEnter() -> void
 @abstract func OnUpdate() -> void

@@ -1,17 +1,14 @@
 class_name PlayerStateMachine
-extends Resource
+extends Node
 
-static var playerState : PlayerState = null
+var player : NewPlayer
 
-func _ready() -> void :
-	ChangeToState(null)
+func _process(float) -> void :
+	player.currentState.OnUpdate()
 
-func _process() -> void :
-	playerState.OnUpdate()
-
-static func ChangeToState(state:PlayerState) -> void :
-	if playerState != null :
-		playerState.OnExit()
-	playerState = state
-	playerState.OnEnter()
+func ChangeToState(state:PlayerState) -> void :
+	if player.currentState != null :
+		player.currentState.OnExit()
+	player.currentState = state
+	player.currentState.OnEnter()
 	return
