@@ -34,48 +34,59 @@ states = {
 &"WaitingForConfirmation": NodePath("States/WaitingForConfirmation")
 }
 
-[node name="StateMachine" type="Node" parent="." unique_id=1118864320]
+[node name="StateMachine" type="Node" parent="." unique_id=1118864320 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("13_m7lsr")
+player = NodePath("..")
 
 [node name="States" type="Node" parent="." unique_id=1566795998]
 
-[node name="NotPlaying" type="Node" parent="States" unique_id=1162358971]
+[node name="NotPlaying" type="Node" parent="States" unique_id=1162358971 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("3_tseti")
+player = NodePath("../..")
 
-[node name="BeforeSelecting" type="Node" parent="States" unique_id=380520120]
+[node name="BeforeSelecting" type="Node" parent="States" unique_id=380520120 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("4_m7lsr")
+player = NodePath("../..")
 
-[node name="ChoosingPlaceCard" type="Node" parent="States" unique_id=419479947]
+[node name="ChoosingPlaceCard" type="Node" parent="States" unique_id=419479947 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("5_t2uqj")
+player = NodePath("../..")
 
-[node name="ChoosingMoveCard" type="Node" parent="States" unique_id=1621494799]
+[node name="ChoosingMoveCard" type="Node" parent="States" unique_id=1621494799 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("6_26goc")
+player = NodePath("../..")
 
-[node name="ChoosingRotateCard" type="Node" parent="States" unique_id=1515893106]
+[node name="ChoosingRotateCard" type="Node" parent="States" unique_id=1515893106 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("7_bjt1c")
+player = NodePath("../..")
 
-[node name="TargetingPlace" type="Node" parent="States" unique_id=1186725241]
+[node name="TargetingPlace" type="Node" parent="States" unique_id=1186725241 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("8_llh0m")
+player = NodePath("../..")
 
-[node name="TargetingMove" type="Node" parent="States" unique_id=561274276]
+[node name="TargetingMove" type="Node" parent="States" unique_id=561274276 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("9_bx10t")
+player = NodePath("../..")
 
-[node name="TargetingRotate" type="Node" parent="States" unique_id=1068661726]
+[node name="TargetingRotate" type="Node" parent="States" unique_id=1068661726 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("10_pninn")
+player = NodePath("../..")
 
-[node name="WaitingForConfirmation" type="Node" parent="States" unique_id=732406961]
+[node name="WaitingForConfirmation" type="Node" parent="States" unique_id=732406961 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("11_sb8ii")
+player = NodePath("../..")
 
-[node name="EvaluatingEndTurn" type="Node" parent="States" unique_id=2004660323]
+[node name="EvaluatingEndTurn" type="Node" parent="States" unique_id=2004660323 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 script = ExtResource("12_3u7t7")
+player = NodePath("../..")

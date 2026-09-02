@@ -1,14 +1,14 @@
 class_name PlayerStateMachine
 extends Node
 
-var player : NewPlayer
+@export var player : NewPlayer
 
 func _process(float) -> void :
 	player.currentState.OnUpdate()
 
-func ChangeToState(state:PlayerState) -> void :
+func ChangeToState(state:StringName) -> void :
 	if player.currentState != null :
 		player.currentState.OnExit()
-	player.currentState = state
+	player.currentState = player.states[state]
 	player.currentState.OnEnter()
 	return
