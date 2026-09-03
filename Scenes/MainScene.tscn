@@ -1,3 +1,13 @@
 [gd_scene format=3 uid="uid://bjceeqf5tstca"]
 
-[node name="MainScene" type="Node3D" unique_id=1938600875]
+[ext_resource type="Script" uid="uid://c3n7l0ujysmbd" path="res://play_space.gd" id="1_tr2i4"]
+[ext_resource type="PackedScene" uid="uid://cst0j5nt5ha8a" path="res://CardSlote.tscn" id="2_tr2i4"]
+
+[node name="MainScene" type="Node3D" unique_id=1938600875 node_paths=PackedStringArray("cam")]
+script = ExtResource("1_tr2i4")
+dimensions = Vector2i(5, 5)
+cam = NodePath("Camera3D")
+metadata/cardSlot = ExtResource("2_tr2i4")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2087583222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6073952, 0.34375983, 4.7282777)
