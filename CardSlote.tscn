@@ -3,8 +3,26 @@
 [ext_resource type="Script" uid="uid://b3trvewnpeu2u" path="res://CardSlot.gd" id="1_3cehr"]
 [ext_resource type="Texture2D" uid="uid://ceron8lvv0idp" path="res://CardSlot_Placeholder.png" id="1_ddm2n"]
 
-[node name="Node2D" type="Sprite3D" unique_id=976340261]
+[node name="Node2D" type="Sprite3D" unique_id=976340261 node_paths=PackedStringArray("test", "test2")]
 centered = false
 pixel_size = 0.001
 texture = ExtResource("1_ddm2n")
 script = ExtResource("1_3cehr")
+test = NodePath("ColorRect")
+test2 = NodePath("ColorRect2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=592239126]
+visible = false
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0.34117648, 1, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=89626388]
+visible = false
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.23580599, 0.29387346, 0.79950434, 1)

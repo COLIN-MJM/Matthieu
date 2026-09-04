@@ -3,7 +3,6 @@ extends Node3D
 @export var dimensions : Vector2i
 @export var cam :Camera3D
 var slotSize : Vector2
-
 @export var player_manager : Player_Manager
 @export_custom(PROPERTY_HINT_RANGE,"0,4,1") var nbr_of_player : int
 var board : Node3D
@@ -21,15 +20,16 @@ func _ready() -> void:
 	scaler= Vector2(slotSize)/100
 	createGrid()
 	positionCam()
+	for cs in allSlots.values():
+		(cs as CardSlot).done()
 	#player_manager.createplayer_sceneS(nbr_of_player)
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Left mouse Clic") : test_click_to_slot(event)
 
 func positionCam()->void :
-	var height :float = (slotSize*dimensions.length()).length_squared()/2*tan(cam.fov/2)
-	print(-height)
+	var height :float = (slotSize.length_squared()*dimensions.length_squared())/2*tan(cam.fov/2)
 	cam.position=Vector3(slotSize.x*dimensions.x/2,slotSize.y*dimensions.y/2,-height)
-	pass
-
 func createGrid()->void:
 	board=Node3D.new()
 	add_child(board)
@@ -37,13 +37,18 @@ func createGrid()->void:
 	for y in dimensions.y :
 		for x in dimensions.x :
 			var instance : CardSlot = cardSlot.instantiate()
-			slotSize=instance.texture.get_size()*instance.pixel_size
-			print(slotSize)
+			instance.total_pixelsize=instance.texture.get_size()*instance.pixel_size
+			slotSize=instance.total_pixelsize
 			instance.position = Vector3(slotSize.x * x,slotSize.y * y,0 )
 			instance.coords = Vector2i(x,y)
 			allSlots[Vector2i(x,y)] = instance
 			board.add_child(instance)
 
+
+func test_click_to_slot(event : InputEventMouseButton)->void :
+	var index :=allSlots.values().find_custom(func(x:CardSlot):return x.screen_coords.is_within(event.position))
+	if index == -1 :print("out of bound")
+	else :print((allSlots.values()[index] as CardSlot).coords)
 func Resolve_AttacksAndDefend()->void :
 	var slotWithCard = allSlots.values().filter(
 		func(x : CardSlot): return x.haveCarte)
