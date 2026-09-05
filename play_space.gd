@@ -46,9 +46,14 @@ func createGrid()->void:
 
 
 func test_click_to_slot(event : InputEventMouseButton)->void :
-	var index :=allSlots.values().find_custom(func(x:CardSlot):return x.screen_coords.is_within(event.position))
-	if index == -1 :print("out of bound")
-	else :print((allSlots.values()[index] as CardSlot).coords)
+	var lowerbound :Vector2=allSlots[Vector2i(0,0)].screen_coords.lower_point
+	var size :Vector2=allSlots[Vector2i(0,0)].screen_coords.upper_point
+	size = abs(lowerbound-size)
+	var upperbound :Vector2=allSlots[dimensions-Vector2i(1,1)].screen_coords.upper_point
+	var b : bool =event.position.x>=lowerbound.x and event.position.x<=upperbound.x and event.position.y<=lowerbound.y and event.position.y>=upperbound.y
+	if !b : return
+	var mousePos :Vector2= event.position-lowerbound
+	var test : Vector2i = Vector2i( floori(mousePos.x /size.x) ,abs(floori(mousePos.y /size.y))-1)
 func Resolve_AttacksAndDefend()->void :
 	var slotWithCard = allSlots.values().filter(
 		func(x : CardSlot): return x.haveCarte)
