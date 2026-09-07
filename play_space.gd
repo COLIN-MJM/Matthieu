@@ -29,6 +29,7 @@ func _ready() -> void:
 	pixel_size=allSlots[Vector2i(0,0)].screen_coords.upper_point
 	pixel_size = abs(lowerBound-pixel_size)
 	create_base()
+	GameStateManager.calculate_control(self)
 
 
 func create_base()->void:
@@ -39,6 +40,7 @@ func create_base()->void:
 	allSlots[Vector2i(dimensions.x-twenyCentX-1,twenyCentY)].isBase=1
 	allSlots[Vector2i(twenyCentX,dimensions.y-twenyCentY-1)].isBase=2
 	allSlots[Vector2i(dimensions.x-twenyCentX-1,dimensions.y-twenyCentY-1)].isBase=2
+	
 	pass
 
 func _input(event: InputEvent) -> void:

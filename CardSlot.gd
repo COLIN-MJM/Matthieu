@@ -12,23 +12,44 @@ var isBase : int :
 	set(value) :
 		match value :
 			0 :
-				modulate =Color.AZURE
+				#modulate =Color.AZURE
 				isBase=value
 			1:
-				modulate =Color.AQUAMARINE
+				#modulate =Color.AQUAMARINE
 				isBase=value
 			2:
-				modulate =Color.PALE_VIOLET_RED
+				#modulate =Color.PALE_VIOLET_RED
 				isBase=value
-
-@export var test : ColorRect
-@export var test2 : ColorRect
+var inT1control:bool= false:
+	set(value) :
+		match value :
+			true :
+				var c :=Color.RED
+				if modulate == Color.WHITE:	modulate=c
+				else :
+					c.a=0.5
+					modulate =modulate.blend(c)
+				inT1control=value
+			false	:
+				modulate =Color.WHITE
+				inT1control=value
+var inT2control:bool= false	:
+	set(value) :
+		match value :
+			true :
+				var c :=Color.BLUE
+				if modulate == Color.WHITE:modulate=c
+				else :
+					c.a=0.5
+					modulate =modulate.blend(c)
+				inT2control=value
+			false	:
+				modulate =Color.WHITE
+				inT2control=value
 func done() -> void:
 	var cam :Camera3D = get_viewport().get_camera_3d()
 	screen_coords.lower_point=cam.unproject_position(global_transform.origin)
 	screen_coords.upper_point=cam.unproject_position(global_transform.origin+Vector3(total_pixelsize.x,total_pixelsize.y,0))
-	test.set_position(screen_coords.lower_point)
-	test2.set_position(screen_coords.upper_point)
 
 
 class screen_coordinate :
