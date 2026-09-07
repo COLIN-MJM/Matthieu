@@ -2,10 +2,8 @@ class_name ChoosingPlaceCard
 extends PlayerState
 
 func OnEnter() -> void:
-	#Fait apparaître un texte d'indication ("Choisissez la carte concernée")
-	#Fait apparaître l'UI de la main
-	#Permet l'interaction à ladite UI
-	#Fait apparaître un bouton Retour
+	indicativeText.add_text("Choose the concerned card")
+	linkedButtons.visible = true
 	return
 
 func OnUpdate() -> void:
@@ -13,6 +11,7 @@ func OnUpdate() -> void:
 	return
 
 func OnExit() -> void:
-	#Fait disparaître le texte, la main et le bouton
-	#Set currentAction à "Place"
+	linkedButtons.visible = false
+	indicativeText.clear()
+	player.currentAction = &"Place"
 	return

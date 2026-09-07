@@ -2,8 +2,9 @@ class_name NotPlaying
 extends PlayerState
 
 func OnEnter() -> void:
-	#Reset nbActionsPlayedThisTurn et PlacePlayedThisTurn
-	#Passe l'autre joueur en state "BeforeSelecting"
+	player.nbActionsPlayedThisTurn = 0
+	player.PlacePlayedThisTurn = false
+	player.otherPlayer.stateMachine.ChangeToState(&"BeforeSelecting")
 	return
 
 func OnUpdate() -> void:

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ceolgbofxkd55" path="res://Players/Player.gd" id="1_ei3sg"]
 [ext_resource type="Script" uid="uid://2jvvv31p2thc" path="res://Players/States/NotPlaying.gd" id="3_tseti"]
 [ext_resource type="Script" uid="uid://cgnv8rhm1vvnq" path="res://Players/States/BeforeSelecting.gd" id="4_m7lsr"]
+[ext_resource type="Script" uid="uid://nb8jroi3glki" path="res://Players/ButtonsScripts/ActionChooser.gd" id="5_m7lsr"]
 [ext_resource type="Script" uid="uid://b11avi7qvalpg" path="res://Players/States/ChoosingPlaceCard.gd" id="5_t2uqj"]
 [ext_resource type="Script" uid="uid://cllsno7ul7ey5" path="res://Players/States/ChoosingMoveCard.gd" id="6_26goc"]
 [ext_resource type="Script" uid="uid://bpk0xocfcdy1c" path="res://Players/States/ChoosingRotateCard.gd" id="7_bjt1c"]
@@ -12,8 +13,10 @@
 [ext_resource type="Script" uid="uid://ebplao03wwms" path="res://Players/States/WaitingForConfirmation.gd" id="11_sb8ii"]
 [ext_resource type="Script" uid="uid://dn4uehuc4ert0" path="res://Players/States/EvaluatingEndTurn.gd" id="12_3u7t7"]
 [ext_resource type="Script" uid="uid://0tpptlvgc8jb" path="res://Players/PlayerStateMachine.gd" id="13_m7lsr"]
+[ext_resource type="Script" uid="uid://dqavaovlbtbwh" path="res://Players/ButtonsScripts/ConfirmationButton.gd" id="13_t2uqj"]
+[ext_resource type="Script" uid="uid://0np8im07nlq7" path="res://Players/ButtonsScripts/EndTurnButton.gd" id="15_26goc"]
 
-[node name="Player" type="Control" unique_id=1894994698 node_paths=PackedStringArray("states")]
+[node name="Player" type="Control" unique_id=1894994698 node_paths=PackedStringArray("states", "stateMachine")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,6 +36,7 @@ states = {
 &"TargetingRotate": NodePath("States/TargetingRotate"),
 &"WaitingForConfirmation": NodePath("States/WaitingForConfirmation")
 }
+stateMachine = NodePath("StateMachine")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1118864320 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
@@ -41,52 +45,385 @@ player = NodePath("..")
 
 [node name="States" type="Node" parent="." unique_id=1566795998]
 
-[node name="NotPlaying" type="Node" parent="States" unique_id=1162358971 node_paths=PackedStringArray("player")]
+[node name="NotPlaying" type="Node" parent="States" unique_id=1162358971 node_paths=PackedStringArray("player", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("3_tseti")
 player = NodePath("../..")
+indicativeText = NodePath("../IndicativeText")
 
-[node name="BeforeSelecting" type="Node" parent="States" unique_id=380520120 node_paths=PackedStringArray("player")]
+[node name="BeforeSelecting" type="Node" parent="States" unique_id=380520120 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("4_m7lsr")
 player = NodePath("../..")
+linkedButtons = NodePath("Buttons")
+indicativeText = NodePath("../IndicativeText")
 
-[node name="ChoosingPlaceCard" type="Node" parent="States" unique_id=419479947 node_paths=PackedStringArray("player")]
+[node name="Buttons" type="Control" parent="States/BeforeSelecting" unique_id=1087897871]
+layout_mode = 3
+anchor_top = 0.76900005
+anchor_right = 1.001
+anchor_bottom = 1.0
+offset_top = -0.31204224
+offset_right = -0.15209961
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rotate" type="Button" parent="States/BeforeSelecting/Buttons" unique_id=2044127609 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 30.0
+offset_right = 1067.0
+offset_bottom = 103.0
+text = "Rotate"
+script = ExtResource("5_m7lsr")
+linkedAction = &"ChoosingRotateCard"
+linkedState = NodePath("../..")
+
+[node name="Move" type="Button" parent="States/BeforeSelecting/Buttons" unique_id=267270387 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 508.0
+offset_top = 30.0
+offset_right = 665.0
+offset_bottom = 103.0
+text = "Move"
+script = ExtResource("5_m7lsr")
+linkedAction = &"ChoosingMoveCard"
+linkedState = NodePath("../..")
+
+[node name="Place" type="Button" parent="States/BeforeSelecting/Buttons" unique_id=2001227862 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 30.0
+offset_right = 262.0
+offset_bottom = 103.0
+text = "Place"
+script = ExtResource("5_m7lsr")
+linkedAction = &"ChoosingPlaceCard"
+linkedState = NodePath("../..")
+
+[node name="ChoosingPlaceCard" type="Node" parent="States" unique_id=419479947 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("5_t2uqj")
 player = NodePath("../..")
+linkedButtons = NodePath("Buttons")
+indicativeText = NodePath("../IndicativeText")
 
-[node name="ChoosingMoveCard" type="Node" parent="States" unique_id=1621494799 node_paths=PackedStringArray("player")]
+[node name="Buttons" type="Control" parent="States/ChoosingPlaceCard" unique_id=2071008714]
+visible = false
+layout_mode = 3
+anchor_top = 0.76900005
+anchor_right = 1.001
+anchor_bottom = 1.0
+offset_top = -149.31204
+offset_right = -0.15209961
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return" type="Button" parent="States/ChoosingPlaceCard/Buttons" unique_id=1053164890 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 30.0
+offset_right = 1067.0
+offset_bottom = 103.0
+text = "Return"
+script = ExtResource("5_m7lsr")
+linkedAction = &"BeforeSelecting"
+linkedState = NodePath("../..")
+
+[node name="Choose" type="Button" parent="States/ChoosingPlaceCard/Buttons" unique_id=526530624 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 30.0
+offset_right = 263.0
+offset_bottom = 104.0
+text = "Choose"
+script = ExtResource("5_m7lsr")
+linkedAction = &"TargetingPlace"
+linkedState = NodePath("../..")
+
+[node name="CardsInHand" type="Control" parent="States/ChoosingPlaceCard/Buttons" unique_id=1340967666]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.98700005
+offset_top = 134.0
+offset_right = -1.0
+offset_bottom = -0.06100464
+
+[node name="TabContainer" type="TabContainer" parent="States/ChoosingPlaceCard/Buttons/CardsInHand" unique_id=1375502]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.001
+anchor_bottom = 0.98800004
+offset_right = -0.15209961
+offset_bottom = -0.020004272
+tab_alignment = 1
+current_tab = 0
+deselect_enabled = true
+
+[node name="Card1" type="Button" parent="States/ChoosingPlaceCard/Buttons/CardsInHand/TabContainer" unique_id=186858680]
+layout_mode = 2
+text = "When Placed, Rotate all nearby Cards by 90° clockwise."
+metadata/_tab_index = 0
+
+[node name="Card2" type="Button" parent="States/ChoosingPlaceCard/Buttons/CardsInHand/TabContainer" unique_id=392801357]
+visible = false
+layout_mode = 2
+text = "Extends its own Zone of Control 1 tile further."
+metadata/_tab_index = 1
+
+[node name="ChoosingMoveCard" type="Node" parent="States" unique_id=1621494799 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("6_26goc")
 player = NodePath("../..")
+linkedButtons = NodePath("Buttons")
+indicativeText = NodePath("../IndicativeText")
 
-[node name="ChoosingRotateCard" type="Node" parent="States" unique_id=1515893106 node_paths=PackedStringArray("player")]
+[node name="Buttons" type="Control" parent="States/ChoosingMoveCard" unique_id=1056408519]
+visible = false
+layout_mode = 3
+anchor_top = 0.76900005
+anchor_right = 1.001
+anchor_bottom = 1.0
+offset_top = -149.31204
+offset_right = -0.15209961
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return" type="Button" parent="States/ChoosingMoveCard/Buttons" unique_id=1341198909 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 30.0
+offset_right = 1067.0
+offset_bottom = 103.0
+text = "Return"
+script = ExtResource("5_m7lsr")
+linkedAction = &"BeforeSelecting"
+linkedState = NodePath("../..")
+
+[node name="ChoosingRotateCard" type="Node" parent="States" unique_id=1515893106 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("7_bjt1c")
 player = NodePath("../..")
+linkedButtons = NodePath("Buttons")
+indicativeText = NodePath("../IndicativeText")
 
-[node name="TargetingPlace" type="Node" parent="States" unique_id=1186725241 node_paths=PackedStringArray("player")]
+[node name="Buttons" type="Control" parent="States/ChoosingRotateCard" unique_id=1999848881]
+visible = false
+layout_mode = 3
+anchor_top = 0.76900005
+anchor_right = 1.001
+anchor_bottom = 1.0
+offset_top = -149.31204
+offset_right = -0.15209961
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return" type="Button" parent="States/ChoosingRotateCard/Buttons" unique_id=1546073990 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 30.0
+offset_right = 1067.0
+offset_bottom = 103.0
+text = "Return"
+script = ExtResource("5_m7lsr")
+linkedAction = &"BeforeSelecting"
+linkedState = NodePath("../..")
+
+[node name="TargetingPlace" type="Node" parent="States" unique_id=1186725241 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("8_llh0m")
 player = NodePath("../..")
+linkedButtons = NodePath("Buttons")
+indicativeText = NodePath("../IndicativeText")
 
-[node name="TargetingMove" type="Node" parent="States" unique_id=561274276 node_paths=PackedStringArray("player")]
+[node name="Buttons" type="Control" parent="States/TargetingPlace" unique_id=1611470475]
+visible = false
+layout_mode = 3
+anchor_top = 0.76900005
+anchor_right = 1.001
+anchor_bottom = 1.0
+offset_top = -149.31204
+offset_right = -0.15209961
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return" type="Button" parent="States/TargetingPlace/Buttons" unique_id=380384958 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 30.0
+offset_right = 1067.0
+offset_bottom = 103.0
+text = "Return"
+script = ExtResource("5_m7lsr")
+linkedAction = &"ChoosingPlaceCard"
+linkedState = NodePath("../..")
+
+[node name="Placeholder" type="Button" parent="States/TargetingPlace/Buttons" unique_id=1453934484 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 41.0
+offset_right = 315.0
+offset_bottom = 102.0
+text = "PlaceholderChoice"
+script = ExtResource("5_m7lsr")
+linkedAction = &"WaitingForConfirmation"
+linkedState = NodePath("../..")
+
+[node name="TargetingMove" type="Node" parent="States" unique_id=561274276 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("9_bx10t")
 player = NodePath("../..")
+linkedButtons = NodePath("Buttons")
+indicativeText = NodePath("../IndicativeText")
 
-[node name="TargetingRotate" type="Node" parent="States" unique_id=1068661726 node_paths=PackedStringArray("player")]
+[node name="Buttons" type="Control" parent="States/TargetingMove" unique_id=1395713525]
+visible = false
+layout_mode = 3
+anchor_top = 0.76900005
+anchor_right = 1.001
+anchor_bottom = 1.0
+offset_top = -149.31204
+offset_right = -0.15209961
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return" type="Button" parent="States/TargetingMove/Buttons" unique_id=57280137 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 30.0
+offset_right = 1067.0
+offset_bottom = 103.0
+text = "Return"
+script = ExtResource("5_m7lsr")
+linkedAction = &"ChoosingMoveCard"
+linkedState = NodePath("../..")
+
+[node name="TargetingRotate" type="Node" parent="States" unique_id=1068661726 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("10_pninn")
 player = NodePath("../..")
+linkedButtons = NodePath("Buttons")
+indicativeText = NodePath("../IndicativeText")
 
-[node name="WaitingForConfirmation" type="Node" parent="States" unique_id=732406961 node_paths=PackedStringArray("player")]
+[node name="Buttons" type="Control" parent="States/TargetingRotate" unique_id=766526652]
+visible = false
+layout_mode = 3
+anchor_top = 0.76900005
+anchor_right = 1.001
+anchor_bottom = 1.0
+offset_top = -149.31204
+offset_right = -0.15209961
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return" type="Button" parent="States/TargetingRotate/Buttons" unique_id=1024300143 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 30.0
+offset_right = 1067.0
+offset_bottom = 103.0
+text = "Return"
+script = ExtResource("5_m7lsr")
+linkedAction = &"ChoosingRotateCard"
+linkedState = NodePath("../..")
+
+[node name="WaitingForConfirmation" type="Node" parent="States" unique_id=732406961 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("11_sb8ii")
 player = NodePath("../..")
+linkedButtons = NodePath("Buttons")
+indicativeText = NodePath("../IndicativeText")
 
-[node name="EvaluatingEndTurn" type="Node" parent="States" unique_id=2004660323 node_paths=PackedStringArray("player")]
+[node name="Buttons" type="Control" parent="States/WaitingForConfirmation" unique_id=20135562]
+visible = false
+layout_mode = 3
+anchor_top = 0.53900003
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.2720337
+offset_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return" type="Button" parent="States/WaitingForConfirmation/Buttons" unique_id=144222472 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 30.0
+offset_right = 1067.0
+offset_bottom = 103.0
+text = "Return"
+script = ExtResource("13_t2uqj")
+linkedState = NodePath("../..")
+
+[node name="Confirm" type="Button" parent="States/WaitingForConfirmation/Buttons" unique_id=645656619 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 30.0
+offset_right = 263.0
+offset_bottom = 104.0
+text = "Confirm"
+script = ExtResource("13_t2uqj")
+isConfirming = true
+linkedState = NodePath("../..")
+
+[node name="EvaluatingEndTurn" type="Node" parent="States" unique_id=2004660323 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("12_3u7t7")
 player = NodePath("../..")
+linkedButtons = NodePath("Buttons")
+indicativeText = NodePath("../IndicativeText")
+
+[node name="Buttons" type="Control" parent="States/EvaluatingEndTurn" unique_id=2128368125]
+visible = false
+layout_mode = 3
+anchor_top = 0.53900003
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.2720337
+offset_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="End Turn" type="Button" parent="States/EvaluatingEndTurn/Buttons" unique_id=988344523 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 30.0
+offset_right = 1067.0
+offset_bottom = 103.0
+text = "End Turn"
+script = ExtResource("15_26goc")
+linkedState = NodePath("../..")
+
+[node name="Continue" type="Button" parent="States/EvaluatingEndTurn/Buttons" unique_id=1329062511 node_paths=PackedStringArray("linkedState")]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 30.0
+offset_right = 263.0
+offset_bottom = 104.0
+text = "Continue"
+script = ExtResource("5_m7lsr")
+linkedAction = &"BeforeSelecting"
+linkedState = NodePath("../..")
+
+[node name="IndicativeText" type="RichTextLabel" parent="States" unique_id=1039426138]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 32.0
+offset_right = -27.0
+offset_bottom = -546.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Coucou"
+horizontal_alignment = 1
+vertical_alignment = 1

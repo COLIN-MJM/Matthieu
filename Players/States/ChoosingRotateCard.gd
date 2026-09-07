@@ -2,9 +2,9 @@ class_name ChoosingRotateCard
 extends PlayerState
 
 func OnEnter() -> void:
-	#Fait apparaître un texte d'indication ("Choisissez la carte concernée")
+	indicativeText.add_text("Choose the concerned card")
+	linkedButtons.visible = true
 	#Permet des feedbacks à l'hover du Playspace
-	#Fait apparaître un bouton Retour
 	return
 
 func OnUpdate() -> void:
@@ -12,7 +12,8 @@ func OnUpdate() -> void:
 	return
 
 func OnExit() -> void:
-	#Fait disparaître le texte et le bouton
+	linkedButtons.visible = false
+	indicativeText.clear()
+	player.currentAction = &"Rotate"
 	#Désactive les feedbacks du Playspace
-	#Set currentAction à "Rotate"
 	return
