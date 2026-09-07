@@ -10,7 +10,9 @@ var TlMidBr : PackedVector2Array
 @onready var cardSlot : PackedScene =$".".get_meta("cardSlot")
 
 var scaler : Vector2 
-var _midpoint : Vector2
+var lowerBound : Vector2
+var upperBound : Vector2
+var pixel_size : Vector2
 
 #var sideEffectHandler : SideEffectHandler = SideEffectHandler.new(self)
 
@@ -22,7 +24,10 @@ func _ready() -> void:
 	positionCam()
 	for cs in allSlots.values():
 		(cs as CardSlot).done()
-	#player_manager.createplayer_sceneS(nbr_of_player)
+	lowerBound =allSlots[Vector2i(0,0)].screen_coords.lower_point
+	upperBound =allSlots[dimensions-Vector2i(1,1)].screen_coords.upper_point
+	pixel_size=allSlots[Vector2i(0,0)].screen_coords.upper_point
+	pixel_size = abs(lowerBound-pixel_size)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left mouse Clic") : test_click_to_slot(event)
@@ -43,17 +48,12 @@ func createGrid()->void:
 			instance.coords = Vector2i(x,y)
 			allSlots[Vector2i(x,y)] = instance
 			board.add_child(instance)
-
-
 func test_click_to_slot(event : InputEventMouseButton)->void :
-	var lowerbound :Vector2=allSlots[Vector2i(0,0)].screen_coords.lower_point
-	var size :Vector2=allSlots[Vector2i(0,0)].screen_coords.upper_point
-	size = abs(lowerbound-size)
-	var upperbound :Vector2=allSlots[dimensions-Vector2i(1,1)].screen_coords.upper_point
-	var b : bool =event.position.x>=lowerbound.x and event.position.x<=upperbound.x and event.position.y<=lowerbound.y and event.position.y>=upperbound.y
+	var b : bool =event.position.x>=lowerBound.x and event.position.x<=upperBound.x and event.position.y<=lowerBound.y and event.position.y>=upperBound.y
 	if !b : return
-	var mousePos :Vector2= event.position-lowerbound
-	var test : Vector2i = Vector2i( floori(mousePos.x /size.x) ,abs(floori(mousePos.y /size.y))-1)
+	var mousePos :Vector2= event.position-lowerBound
+	var test : Vector2i = Vector2i( floori(mousePos.x /pixel_size.x) ,abs(floori(mousePos.y /pixel_size.y))-1)
+	print(test)
 func Resolve_AttacksAndDefend()->void :
 	var slotWithCard = allSlots.values().filter(
 		func(x : CardSlot): return x.haveCarte)
