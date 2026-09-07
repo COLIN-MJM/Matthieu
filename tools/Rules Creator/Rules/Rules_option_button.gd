@@ -47,6 +47,7 @@ func _on_item_selected(index: int) -> void:
 				argument_array.append(newNode)
 				argument_list.add_child(newNode)
 				newNode.indicativ_text.text=statics_arguments[i]
+			
 
 func _on_plus_button_pressed()->void:
 	if statics_arguments[2]==&"filter" :

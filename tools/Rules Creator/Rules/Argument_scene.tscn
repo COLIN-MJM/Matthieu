@@ -12,28 +12,32 @@ offset_right = -843.0
 offset_bottom = -608.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_gij3v")
 indicativ_text = NodePath("MarginContainer/RichTextLabel")
 line_edit = NodePath("LineEdit")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1561199508]
+[node name="MarginContainer" type="PanelContainer" parent="." unique_id=1873415937]
 layout_mode = 2
-
-[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1779539817]
-layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=444520395]
 custom_minimum_size = Vector2(150, 70)
+clip_contents = false
 layout_mode = 2
 text = "SALUT
 "
 fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="VSeparator" type="VSeparator" parent="." unique_id=485536439]
 layout_mode = 2
 
 [node name="LineEdit" type="LineEdit" parent="." unique_id=164850952]
 layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "SALUT MON POTE"
 expand_to_text_length = true
 

@@ -12,11 +12,11 @@ const statics : Array[StringName]= [
 	&"sequence_end", &"array_block"]
 const statics_arguments_dic : Dictionary[StringName,Array] ={
 	&"filtre_dist":[
-		2,"Vérifie que la distance de la carte étudiée i vis-à vis de la position WHO est plus petite ou égale à Dist","Who:Vector2i ","Dist:int"],
+		2,"Vérifie que la distance de la carte étudiée i vis-à vis de la position WHO est plus petite ou égale à Dist","Who:Vector2i(%,%)","Dist:int"],
 	&"filtre_direction":[
-		1,"Vérifie que la direction de la carte étudiée i est égale à DIR ","DIR:Vector2i"],
+		1,"Vérifie que la direction de la carte étudiée i est égale à DIR ","DIR:Vector2i(%,%)"],
 	&"filtre_relative_pos":
-		[3,"Vérifie que la position de la carte étudiée i est n'importe où sur la direction DIR de la carte en position WHO","WHOPOS:Vector2i","WHODIR:Vector2I","RELATIVEDIR:Vector2i"],
+		[3,"Vérifie que la position de la carte étudiée i est n'importe où sur la direction DIR de la carte en position WHO","WHOPOS:Vector2i(%,%)","WHODIR:Vector2i(%,%)","RELATIVEDIR:Vector2i(%,%)"],
 	&"filtre_team" : [
 		2,"Vérifie l'équipe de la carte étudiée i par rapport à l'équipe WHO.\nSi ALLYORENNEMY est vrai, on vérifie qu'elles sont dans la même équipe. Sinon, on vérifie qu'elles sont dans des équipes opposées.","WHO:bool","ALLYORENNEMY:bool"],
 	&"op_not" : [
