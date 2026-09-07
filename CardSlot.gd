@@ -7,6 +7,20 @@ var coords: Vector2i
 var total_pixelsize
 var screen_coords : screen_coordinate =screen_coordinate.new()
 var combat_score : int
+
+var isBase : int :
+	set(value) :
+		match value :
+			0 :
+				modulate =Color.AZURE
+				isBase=value
+			1:
+				modulate =Color.AQUAMARINE
+				isBase=value
+			2:
+				modulate =Color.PALE_VIOLET_RED
+				isBase=value
+
 @export var test : ColorRect
 @export var test2 : ColorRect
 func done() -> void:

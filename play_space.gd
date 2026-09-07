@@ -28,12 +28,24 @@ func _ready() -> void:
 	upperBound =allSlots[dimensions-Vector2i(1,1)].screen_coords.upper_point
 	pixel_size=allSlots[Vector2i(0,0)].screen_coords.upper_point
 	pixel_size = abs(lowerBound-pixel_size)
+	create_base()
+
+
+func create_base()->void:
+	var twenyCentX : int =clampi(floori(dimensions.x * 0.2),3,floori(dimensions.x * 0.2))
+	var twenyCentY : int =clampi(floori(dimensions.y * 0.2),3,floori(dimensions.y * 0.2))
+	
+	allSlots[Vector2i(twenyCentX,twenyCentY)].isBase=1
+	allSlots[Vector2i(dimensions.x-twenyCentX-1,twenyCentY)].isBase=1
+	allSlots[Vector2i(twenyCentX,dimensions.y-twenyCentY-1)].isBase=2
+	allSlots[Vector2i(dimensions.x-twenyCentX-1,dimensions.y-twenyCentY-1)].isBase=2
+	pass
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left mouse Clic") : test_click_to_slot(event)
 
 func positionCam()->void :
-	var height :float = (slotSize.length_squared()*dimensions.length_squared())/2*tan(cam.fov/2)
+	var height :float = (slotSize*Vector2(dimensions)).length_squared()/2*tan(cam.fov/4)
 	cam.position=Vector3(slotSize.x*dimensions.x/2,slotSize.y*dimensions.y/2,-height)
 func createGrid()->void:
 	board=Node3D.new()
