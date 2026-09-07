@@ -4,7 +4,8 @@ extends PlayerState
 func OnEnter() -> void:
 	player.nbActionsPlayedThisTurn = 0
 	player.PlacePlayedThisTurn = false
-	player.otherPlayer.stateMachine.ChangeToState(&"BeforeSelecting")
+	player.activePlayer = !player.activePlayer
+	player.stateMachine.ChangeToState(&"BeforeSelecting")
 	return
 
 func OnUpdate() -> void:
@@ -12,5 +13,6 @@ func OnUpdate() -> void:
 	return
 
 func OnExit() -> void:
-	#Rien
+	if player.activePlayer : player.playerName = &"Player 1"
+	else : player.playerName = &"Player 2"
 	return

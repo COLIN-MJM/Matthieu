@@ -43,11 +43,11 @@ func create_base()->void:
 	
 	pass
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Left mouse Clic") : test_click_to_slot(event)
 
 func positionCam()->void :
-	var height :float = (slotSize*Vector2(dimensions)).length_squared()/2*tan(cam.fov/4)
+	var height :float = (slotSize*Vector2(dimensions)).length_squared()/2*tan(cam.fov/3)
 	cam.position=Vector3(slotSize.x*dimensions.x/2,slotSize.y*dimensions.y/2,-height)
 func createGrid()->void:
 	board=Node3D.new()

@@ -415,6 +415,8 @@ linkedAction = &"BeforeSelecting"
 linkedState = NodePath("../..")
 
 [node name="IndicativeText" type="RichTextLabel" parent="States" unique_id=1039426138]
+modulate = Color(0, 0.23529412, 1, 1)
+self_modulate = Color(0, 0.30980393, 1, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -424,6 +426,5 @@ offset_right = -27.0
 offset_bottom = -546.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Coucou"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -3,12 +3,11 @@
 [ext_resource type="Script" uid="uid://c3n7l0ujysmbd" path="res://play_space.gd" id="1_ddk8d"]
 [ext_resource type="PackedScene" uid="uid://cst0j5nt5ha8a" path="res://CardSlote.tscn" id="2_n6yqr"]
 [ext_resource type="PackedScene" uid="uid://bbvvo3ludckha" path="res://Player.tscn" id="3_u1prq"]
-[ext_resource type="Script" uid="uid://dna6waf1hqwh4" path="res://player_manager.gd" id="4_df1a7"]
+[ext_resource type="Script" path="res://player_manager.gd" id="4_df1a7"]
 
 [node name="Node2D" type="Node2D" unique_id=1755601109 node_paths=PackedStringArray("player_manager")]
 script = ExtResource("1_ddk8d")
 dimensions = Vector2i(5, 5)
-slotSize = Vector2i(100, 100)
 player_manager = NodePath("Player_Manager")
 nbr_of_player = 2
 metadata/CarteSlot = ExtResource("2_n6yqr")
