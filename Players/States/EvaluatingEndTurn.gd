@@ -2,11 +2,11 @@ class_name EvaluatingEndTurn
 extends PlayerState
 
 func OnEnter() -> void:
-	#Si nbActionsPlayedThisTurn == maxNbActions :
-		#Exit immédiatement
-	#Sinon :
-		#Fait apparaître un texte d'indication ("Voulez-vous continuer? (x actions restantes)")
-		#Fait apparaître un bouton Continuer et un bouton Passer
+	if player.nbActionsPlayedThisTurn == player.maxNbActions :
+		player.stateMachine.ChangeToState(&"NotPlaying")
+	else :
+		indicativeText.add_text("Do you want to continue your turn? Max" + str(player.maxNbActions - player.nbActionsPlayedThisTurn) + " action(s) remaining")
+		linkedButtons.visible = true
 	return
 
 func OnUpdate() -> void:
@@ -14,5 +14,6 @@ func OnUpdate() -> void:
 	return
 
 func OnExit() -> void:
-	#Fait disparaître tout ce qu'il a fait apparaître
+	indicativeText.clear()
+	linkedButtons.visible = false
 	return

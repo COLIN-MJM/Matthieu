@@ -2,9 +2,9 @@ class_name TargetingRotate
 extends PlayerState
 
 func OnEnter() -> void:
-	#Fait apparaître un texte d'indication ("Choisissez dans quel sens tourner cette carte")
+	indicativeText.add_text("Choose in which direction you want it to face")
 	#Highlight les 4 cases autour et permet l'interaction avec
-	#Fait apparaitre un bouton Retour
+	linkedButtons.visible = true
 	return
 
 func OnUpdate() -> void:
@@ -13,5 +13,6 @@ func OnUpdate() -> void:
 
 func OnExit() -> void:
 	#Tourne le sprite de la carte dans le sens choisi
-	#Fait disparaître tout le reste de ce qui est apparu ici
+	indicativeText.clear()
+	linkedButtons.visible = false
 	return

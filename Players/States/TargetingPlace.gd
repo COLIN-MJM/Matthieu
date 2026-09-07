@@ -3,9 +3,9 @@ extends PlayerState
 
 func OnEnter() -> void:
 	#Place au centre de la "zone interface" un sprite de la carte choisie
-	#Fait apparaître un texte d'indication ("Choisissez où placer cette carte")
+	indicativeText.add_text("Choose the target tile to place it")
 	#Highlight la zoc du joueur et permet l'interaction avec
-	#Fait apparaitre un bouton Retour
+	linkedButtons.visible = true
 	return
 
 func OnUpdate() -> void:
@@ -14,5 +14,6 @@ func OnUpdate() -> void:
 
 func OnExit() -> void:
 	#Place le sprite de la carte à l'emplacement choisi
-	#Fait disparaître tout le reste de ce qui est apparu ici
+	indicativeText.clear()
+	linkedButtons.visible = false
 	return

@@ -2,9 +2,9 @@ class_name BeforeSelecting
 extends PlayerState
 
 func OnEnter() -> void:
-	#Fait apparaître un texte d'indication ("Player X, faites votre choix")
-	#Set currentAction à "None"
-	#Fait apparaître les trois boutons "Place", "Move" et "Rotate"
+	indicativeText.add_text(player.playerName + ", choose an action to play")
+	player.currentAction = "None"
+	linkedButtons.visible = true
 	#Grise "Place" si "PlacePlayedThisTurn" est true
 	return
 
@@ -13,5 +13,6 @@ func OnUpdate() -> void:
 	return
 
 func OnExit() -> void:
-	#Fait disparaître le texte et les trois boutons
+	indicativeText.clear()
+	linkedButtons.visible = false
 	return
