@@ -1,14 +1,27 @@
 class_name GameStateManager
 extends Node
 
-var playspace : PlaySpace
+@export var playspace : PlaySpace
+const CardScene:PackedScene=preload("uid://cqhllnaq53hyr")
+var allInPlayCard : Array[Card]
 
-static func calculate_control(p:PlaySpace)->void:
-	for cs in p.allSlots.values():
+func InstantiateCard(b:bool,r:Rule,c:Vector2i)->Card:
+	var card:=CardScene.instantiate() as Card
+	card.c_init(r,b,c)
+	playspace.allSlots[c].AddCard(card)
+	allInPlayCard.append(card)
+	return card
+
+func RemoveCard(c:Card)->void:
+	allInPlayCard.erase(c)
+	playspace.allSlots[c.c_position].RemoveCard()
+
+func calculate_control()->void:
+	for cs in playspace.allSlots.values():
 		(cs as CardSlot).inT1control=false
 		(cs as CardSlot).inT2control=false
 	print("started bullshit")
-	for cs in p.allSlots.values():
+	for cs in playspace.allSlots.values():
 		var stdr:int
 		var b : bool
 		if (cs as CardSlot).haveCard :
@@ -31,21 +44,21 @@ static func calculate_control(p:PlaySpace)->void:
 			for y in range(0,stdr+1):
 				coo.append_array([
 					Vector2i(
-					clamp((cs as CardSlot).coords.x+x,0,p.dimensions.x-1),
-					clamp((cs as CardSlot).coords.y+y,0,p.dimensions.y-1)),
+					clamp((cs as CardSlot).coords.x+x,0,playspace.dimensions.x-1),
+					clamp((cs as CardSlot).coords.y+y,0,playspace.dimensions.y-1)),
 					Vector2i(
-					clamp((cs as CardSlot).coords.x-x,0,p.dimensions.x-1),
-					clamp((cs as CardSlot).coords.y+y,0,p.dimensions.y-1)),
+					clamp((cs as CardSlot).coords.x-x,0,playspace.dimensions.x-1),
+					clamp((cs as CardSlot).coords.y+y,0,playspace.dimensions.y-1)),
 					Vector2i(
-					clamp((cs as CardSlot).coords.x+x,0,p.dimensions.x-1),
-					clamp((cs as CardSlot).coords.y-y,0,p.dimensions.y-1)),
+					clamp((cs as CardSlot).coords.x+x,0,playspace.dimensions.x-1),
+					clamp((cs as CardSlot).coords.y-y,0,playspace.dimensions.y-1)),
 					Vector2i(
-					clamp((cs as CardSlot).coords.x-x,0,p.dimensions.x-1),
-					clamp((cs as CardSlot).coords.y-y,0,p.dimensions.y-1)),
+					clamp((cs as CardSlot).coords.x-x,0,playspace.dimensions.x-1),
+					clamp((cs as CardSlot).coords.y-y,0,playspace.dimensions.y-1)),
 				])
 		if b:
 			for vc in coo:
-				p.allSlots[vc].inT1control=true
+				playspace.allSlots[vc].inT1control=true
 		else :
 			for vc in coo:
-				p.allSlots[vc].inT2control=true
+				playspace.allSlots[vc].inT2control=true

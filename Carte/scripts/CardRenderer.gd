@@ -1,10 +1,10 @@
 class_name CardRenderer
-extends Node2D
+extends Node3D
 
-@export var arrow : Node2D
-@export var spriteMain : Sprite2D
-@export var playerColor : Polygon2D
-@export var teamColor : Polygon2D
+@export var arrow : Sprite3D
+@export var spriteMain : Sprite3D
+@export var playerColor : Sprite3D
+@export var teamColor : Sprite3D
 
 @export var CardEffect:Card :
 	get :
@@ -31,4 +31,4 @@ func process_card_rotate() -> void :
 			dirToRot=180
 		Vector2i.LEFT:
 			dirToRot=270
-	arrow.global_rotation_degrees=dirToRot
+	arrow.rotation.z=dirToRot

@@ -1,5 +1,5 @@
 class_name Card
-extends Resource
+extends Node3D
 
 var c_name : StringName
 var c_position : Vector2i
@@ -15,9 +15,12 @@ var parameters : Dictionary[StringName, int] = {
 
 var alreadyActivatedThisTurn : bool = false
 
-#@onready var cardRenderer: CardRenderer = %CardRenderer
+@onready var cardRenderer: CardRenderer = %CardRenderer
 
 func _ready() -> void:
+	if rule!=null :
+		cardRenderer.spriteMain.texture=rule.CardSprite
+		return
 	c_name = "MyCard"
 	c_position = Vector2i(7, 2)
 	c_rotation = Vector2i.UP
@@ -31,11 +34,11 @@ func _ready() -> void:
 	When(GlobalCardEnum.ActivationTypes.OnMove)
 	When(GlobalCardEnum.ActivationTypes.OnPlacement)
 
-func _init(s : StringName = &"MyCard", pos : Vector2i = Vector2i(-1, -1), rot : Vector2i = Vector2i.UP, ow : bool = true) -> void:
-	c_name=s
+func c_init(r:Rule,ow : bool = true, pos : Vector2i = Vector2i(-1, -1), rot : Vector2i = Vector2i.UP) -> void:
 	c_position=pos
 	c_rotation=rot
 	c_owner=ow
+	rule=r
 	
 func When(source : GlobalCardEnum.ActivationTypes)->SecondaryEffect:
 	if (source == null || alreadyActivatedThisTurn) : return null

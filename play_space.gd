@@ -29,7 +29,7 @@ func _ready() -> void:
 	pixel_size=allSlots[Vector2i(0,0)].screen_coords.upper_point
 	pixel_size = abs(lowerBound-pixel_size)
 	create_base()
-	GameStateManager.calculate_control(self)
+	%GameStateManager.calculate_control(self)
 
 
 func create_base()->void:

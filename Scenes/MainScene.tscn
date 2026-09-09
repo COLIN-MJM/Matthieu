@@ -2,13 +2,21 @@
 
 [ext_resource type="Script" uid="uid://c3n7l0ujysmbd" path="res://play_space.gd" id="1_tr2i4"]
 [ext_resource type="PackedScene" uid="uid://cst0j5nt5ha8a" path="res://CardSlote.tscn" id="2_tr2i4"]
+[ext_resource type="Script" uid="uid://dlmsi8y7503oa" path="res://manager/GameStateManager.gd" id="3_7rqgy"]
 [ext_resource type="PackedScene" uid="uid://ccnt7quqw48ss" path="res://Players/Player.tscn" id="3_nhkr4"]
 
 [node name="MainScene" type="Node3D" unique_id=1938600875 node_paths=PackedStringArray("cam")]
 script = ExtResource("1_tr2i4")
 dimensions = Vector2i(13, 13)
 cam = NodePath("Camera3D")
+nbr_of_player = null
 metadata/cardSlot = ExtResource("2_tr2i4")
+
+[node name="GameStateManager" type="Node" parent="." unique_id=739740092 node_paths=PackedStringArray("playspace")]
+unique_name_in_owner = true
+script = ExtResource("3_7rqgy")
+playspace = NodePath("..")
+metadata/_custom_type_script = "uid://dlmsi8y7503oa"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2087583222]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6073952, 0.34375983, 4.7282777)

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cqhllnaq53hyr"]
+
+[ext_resource type="Script" uid="uid://58ojlxda4eo0" path="res://NewCards/Card.gd" id="1_rj7vy"]
+[ext_resource type="Script" uid="uid://c4ws3hf8em16v" path="res://Carte/scripts/CardRenderer.gd" id="2_27f46"]
+[ext_resource type="Texture2D" uid="uid://djqq6bxlxabw8" path="res://Carte/Carte_Dir_For_Instance/Carte_Inté_3svg.svg" id="3_4x1a8"]
+[ext_resource type="Texture2D" uid="uid://w1hfa7fprxqj" path="res://NewCards/Contour_Placeholder.svg" id="4_dhkur"]
+[ext_resource type="Texture2D" uid="uid://descfjkavw3v1" path="res://NewCards/Carte_Couleursvg.svg" id="5_7imco"]
+
+[node name="CarteInstance" type="Node3D" unique_id=1218106115]
+script = ExtResource("1_rj7vy")
+
+[node name="CardRenderer" type="Node3D" parent="." unique_id=1099700384]
+unique_name_in_owner = true
+script = ExtResource("2_27f46")
+
+[node name="Polygon2D" type="Sprite3D" parent="CardRenderer" unique_id=819853281]
+centered = false
+pixel_size = 0.001
+texture = ExtResource("3_4x1a8")
+
+[node name="DirectionIndactor" type="Sprite3D" parent="CardRenderer/Polygon2D" unique_id=379540241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05122818, 0.050996304, 0)
+pixel_size = 0.001
+texture = ExtResource("4_dhkur")
+
+[node name="Polygon2D2" type="Sprite3D" parent="CardRenderer/Polygon2D" unique_id=1779524011]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.005)
+centered = false
+flip_h = true
+flip_v = true
+pixel_size = 0.001
+texture = ExtResource("5_7imco")
+
+[node name="Polygon2D4" type="Sprite3D" parent="CardRenderer/Polygon2D" unique_id=1811747677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.005)
+centered = false
+pixel_size = 0.001
+texture = ExtResource("5_7imco")

@@ -4,6 +4,9 @@ extends Resource
 var bindedCard : Card
 
 @export var rule_name : StringName
+@export_group("Visual")
+@export var CardSprite:DPITexture
+@export_group("Logic")
 @export var whenToActivate : Array[GlobalCardEnum.ActivationTypes]
 
 @export_custom(PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_READ_ONLY) 
