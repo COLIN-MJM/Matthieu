@@ -52,7 +52,7 @@ func done() -> void:
 	screen_coords.upper_point=cam.unproject_position(global_transform.origin+Vector3(total_pixelsize.x,total_pixelsize.y,0))
 
 func RemoveCard()->void:
-	cardData.free()
+	remove_child(cardData)
 	cardData=null
 func AddCard(c:Card)->void:
 	add_child(c)

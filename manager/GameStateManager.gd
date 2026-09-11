@@ -12,9 +12,14 @@ func InstantiateCard(b:bool,r:Rule,c:Vector2i)->Card:
 	allInPlayCard.append(card)
 	return card
 
+func MoveCard(c:Card , target :Vector2i)->void :
+	playspace.allSlots[c.c_position].RemoveCard()
+	playspace.allSlots[target].AddCard(c)
+	
 func RemoveCard(c:Card)->void:
 	allInPlayCard.erase(c)
 	playspace.allSlots[c.c_position].RemoveCard()
+	c.free()
 
 func calculate_control()->void:
 	for cs in playspace.allSlots.values():
