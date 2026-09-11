@@ -33,13 +33,6 @@ const array_block_needed : Array[StringName] = [&"op_nand", &"op_xor", &"op_or"]
 const self_blocs : Array[StringName] = [&"self_position", &"self_rotation", &"self_owner"]
 #endregion
 
-static func get_test_array()->Array[Card]:
-	var test : Array
-	var toreturn : Array[Card] = [Card.new("1",Vector2i(7,1),Vector2i.RIGHT,true),Card.new("2",Vector2i(6,1),Vector2i.RIGHT,false),Card.new("3",Vector2i(8,2),Vector2i.DOWN,true)]
-	for y in toreturn:
-		test.append(y.name)
-	print(test)
-	return toreturn
 
 #region FILTRES & OPERATEURS
 
@@ -49,7 +42,7 @@ static func get_test_array()->Array[Card]:
 #region FILTRES
 ## Vérifie que la distance de la carte étudiée i vis-à vis de la position "who" est plus petite ou égale à "dist"
 static func filtre_dist(i:Card, who:Vector2i, dist:int)->bool :
-	return i.position.distance_squared_to(who)<=dist
+	return i.c_position.distance_squared_to(who)<=dist
 	
 ## Vérifie que la direction de la carte étudiée i est égale à "dir"
 static func filtre_direction(i:Card, dir:Vector2i)->bool : 

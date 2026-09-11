@@ -12,19 +12,19 @@ var isBase : int :
 	set(value) :
 		match value :
 			0 :
-				#modulate =Color.AZURE
+				modulate =Color.WHITE
 				isBase=value
 			1:
-				#modulate =Color.AQUAMARINE
+				modulate =Color.RED
 				isBase=value
 			2:
-				#modulate =Color.PALE_VIOLET_RED
+				modulate =Color.BLUE
 				isBase=value
 var inT1control:bool= false:
 	set(value) :
 		match value :
 			true :
-				var c :=Color.RED
+				var c :=Color.INDIAN_RED
 				if modulate == Color.WHITE:	modulate=c
 				else :
 					c.a=0.5
@@ -37,7 +37,7 @@ var inT2control:bool= false	:
 	set(value) :
 		match value :
 			true :
-				var c :=Color.BLUE
+				var c :=Color.SKY_BLUE
 				if modulate == Color.WHITE:modulate=c
 				else :
 					c.a=0.5

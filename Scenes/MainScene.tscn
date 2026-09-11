@@ -9,7 +9,6 @@
 script = ExtResource("1_tr2i4")
 dimensions = Vector2i(13, 13)
 cam = NodePath("Camera3D")
-nbr_of_player = null
 metadata/cardSlot = ExtResource("2_tr2i4")
 
 [node name="GameStateManager" type="Node" parent="." unique_id=739740092 node_paths=PackedStringArray("playspace")]

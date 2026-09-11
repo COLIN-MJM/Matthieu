@@ -18,10 +18,6 @@ func RemoveCard(c:Card)->void:
 
 func calculate_control()->void:
 	for cs in playspace.allSlots.values():
-		(cs as CardSlot).inT1control=false
-		(cs as CardSlot).inT2control=false
-	print("started bullshit")
-	for cs in playspace.allSlots.values():
 		var stdr:int
 		var b : bool
 		if (cs as CardSlot).haveCard :
@@ -33,10 +29,10 @@ func calculate_control()->void:
 			match (cs as CardSlot).isBase:
 				1:
 					b=true
-					(cs as CardSlot).inT1control=true
+					
 				2:
 					b=false
-					(cs as CardSlot).inT2control=true
+					
 			stdr=2
 		else:continue
 		var coo:Array[Vector2i]=[]
@@ -56,6 +52,7 @@ func calculate_control()->void:
 					clamp((cs as CardSlot).coords.x-x,0,playspace.dimensions.x-1),
 					clamp((cs as CardSlot).coords.y-y,0,playspace.dimensions.y-1)),
 				])
+		coo =coo.filter(func(x:Vector2i) : return x!=(cs as CardSlot).coords )
 		if b:
 			for vc in coo:
 				playspace.allSlots[vc].inT1control=true

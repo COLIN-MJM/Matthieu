@@ -3,7 +3,6 @@ extends Node3D
 @export var dimensions : Vector2i
 @export var cam :Camera3D
 var slotSize : Vector2
-@export var player_manager : Player_Manager
 @export_custom(PROPERTY_HINT_RANGE,"0,4,1") var nbr_of_player : int
 var board : Node3D
 var TlMidBr : PackedVector2Array
@@ -29,7 +28,7 @@ func _ready() -> void:
 	pixel_size=allSlots[Vector2i(0,0)].screen_coords.upper_point
 	pixel_size = abs(lowerBound-pixel_size)
 	create_base()
-	%GameStateManager.calculate_control(self)
+	%GameStateManager.calculate_control()
 
 
 func create_base()->void:
@@ -82,14 +81,3 @@ func Resolve_Passive()->void :
 		func(x:Vector2i) :
 			return (allSlots[x].haveCarte and allSlots[x].carteData.ActivationType== GlobalCardEnum.ActivationTypes.Passive)
 	)
-	
-	#for y in filtered :
-		#sideEffectHandler.queu_secondaryEffect(allSlots[y].ActivateCard())
-	#sideEffectHandler.ResolveSecondaryEffects()
-
-func debugCreateCard(at :Vector2i =Vector2i(0,0))->void :
-	var ressource : PackedScene = preload("res://CarteInstance.tscn")
-	var instance : CardRenderer =ressource.instantiate()
-	instance.CardEffect.direction=Vector2i.RIGHT
-	allSlots[at].AssignCard(instance)
-	
