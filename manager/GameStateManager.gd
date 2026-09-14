@@ -1,6 +1,7 @@
 class_name GameStateManager
 extends Node
 
+@export var baseStrenghValue : int = 1
 @export var playspace : PlaySpace
 const CardScene:PackedScene=preload("uid://cqhllnaq53hyr")
 var allInPlayCard : Array[Card]
@@ -21,8 +22,26 @@ func RemoveCard(c:Card)->void:
 	playspace.allSlots[c.c_position].RemoveCard()
 	c.free()
 
+func calculate_combat_score()->void:
+	for cs in playspace.allSlots.values() :
+		cs = cs as CardSlot
+		match cs.isBase :
+			0 : cs.combat_score= 0
+			1 : cs.combat_score= baseStrenghValue
+			2 : cs.combat_score=-baseStrenghValue
+	for carte in allInPlayCard :
+		carte = carte as Card
+		var i : int
+		match carte.c_owner :
+			true : i=carte.parameters[&"CombatValue"]
+			false: i=-carte.parameters[&"CombatValue"]
+		playspace.allSlots[carte.c_position+carte.c_rotation].combat_score+=i
+		playspace.allSlots[carte.c_position].combat_score+=clampi(i,-1,1)
+
 func calculate_control()->void:
 	for cs in playspace.allSlots.values():
+		(cs as CardSlot).inT1control=false;
+		(cs as CardSlot).inT2control=false;
 		var stdr:int
 		var b : bool
 		if (cs as CardSlot).haveCard :

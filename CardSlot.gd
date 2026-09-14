@@ -57,6 +57,7 @@ func RemoveCard()->void:
 func AddCard(c:Card)->void:
 	add_child(c)
 	cardData=c
+	c.c_position=coords
 
 class screen_coordinate :
 	func is_within(input:Vector2)->bool:
