@@ -83,3 +83,6 @@ func calculate_control()->void:
 		else :
 			for vc in coo:
 				playspace.allSlots[vc].inT2control=true
+func ActivatePassive()->void:
+	for carte in allInPlayCard :
+		carte.When(GlobalCardEnum.ActivationTypes.Passive)
