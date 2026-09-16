@@ -326,17 +326,6 @@ script = ExtResource("5_m7lsr")
 linkedAction = &"ChoosingPlaceCard"
 linkedState = NodePath("../..")
 
-[node name="Placeholder" type="Button" parent="States/TargetingPlace/Buttons" unique_id=1453934484 node_paths=PackedStringArray("linkedState")]
-layout_mode = 0
-offset_left = 164.0
-offset_top = 41.0
-offset_right = 315.0
-offset_bottom = 102.0
-text = "PlaceholderChoice"
-script = ExtResource("5_m7lsr")
-linkedAction = &"WaitingForConfirmation"
-linkedState = NodePath("../..")
-
 [node name="TargetingMove" type="Node" parent="States" unique_id=561274276 node_paths=PackedStringArray("player", "linkedButtons", "indicativeText")]
 unique_name_in_owner = true
 script = ExtResource("9_bx10t")

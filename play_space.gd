@@ -18,7 +18,8 @@ var pixel_size : Vector2
 
 #var sideEffectHandler : SideEffectHandler = SideEffectHandler.new(self)
 
-var allSlots :Dictionary[Vector2i,CardSlot]
+var allSlots : Dictionary[Vector2i,CardSlot]
+var highlightableSlots : Array[CardSlot]
 var currentHighlightedSlot : CardSlot
 
 func _ready() -> void:
@@ -84,8 +85,9 @@ func MouseTracker(event : InputEventMouseMotion)->void:
 		return
 	var mousePos :Vector2= event.position-lowerBound
 	var test : Vector2i = Vector2i( floori(mousePos.x /pixel_size.x) ,abs(floori(mousePos.y /pixel_size.y))-1)
-	currentHighlightedSlot = allSlots[test]
-	currentHighlightedSlot.Highlighted(true)
+	if highlightableSlots.has(allSlots[test]) :
+		currentHighlightedSlot = allSlots[test]
+		currentHighlightedSlot.Highlighted(true)
 
 func Resolve_AttacksAndDefend()->void :
 	var slotWithCard = allSlots.values().filter(

@@ -5,8 +5,9 @@ func OnEnter() -> void:
 	player.currentAction = &"Move"
 	indicativeText.add_text("Choose the concerned card")
 	linkedButtons.visible = true
-	player.main_scene.interactionMode = true
-	player.main_scene.currentHighlightedSlot = null
+	player.main_scene.highlightableSlots.clear()
+	SelectOwnedCardSlot(player.activePlayer)
+	ToggleInteraction(true)
 	return
 
 func OnUpdate() -> void:
@@ -19,8 +20,7 @@ func OnUpdate() -> void:
 func OnExit() -> void:
 	linkedButtons.visible = false
 	indicativeText.clear()
-	player.main_scene.currentHighlightedSlot = null
-	player.main_scene.interactionMode = false
+	ToggleInteraction(false)
 	return
 
 func _input(event: InputEvent) -> void :

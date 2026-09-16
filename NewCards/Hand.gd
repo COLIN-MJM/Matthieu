@@ -23,7 +23,7 @@ func RunThroughDeckToUpdate(deck:Array[Card]) -> void:
 		else :
 			card.visible = true
 			card.linkedCard = deck[offset + i]
-			card.text = card.linkedCard.c_name
+			card.text = card.linkedCard.rule.rule_name
 		if i == 4 and deck.size() <= offset + i + 1 : nextButton.visible = false
 		else : nextButton.visible = true
 	return

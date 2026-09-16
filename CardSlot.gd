@@ -12,6 +12,7 @@ var combat_score : int
 @export var highlightTexture : Texture
 
 var isBase : int :
+	get : return isBase
 	set(value) :
 		match value :
 			0 :
@@ -24,6 +25,7 @@ var isBase : int :
 				modulate =Color.BLUE
 				isBase=value
 var inT1control:bool= false:
+	get : return inT1control
 	set(value) :
 		match value :
 			true :
@@ -37,6 +39,7 @@ var inT1control:bool= false:
 				modulate =Color.WHITE
 				inT1control=value
 var inT2control:bool= false	:
+	get : return inT2control
 	set(value) :
 		match value :
 			true :

@@ -9,18 +9,23 @@
 [node name="CarteInstance" type="Node3D" unique_id=1218106115]
 script = ExtResource("1_rj7vy")
 
-[node name="CardRenderer" type="Node3D" parent="." unique_id=1099700384]
+[node name="CardRenderer" type="Node3D" parent="." unique_id=1099700384 node_paths=PackedStringArray("arrow", "spriteMain", "playerColor", "teamColor")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02734375)
 script = ExtResource("2_27f46")
+arrow = NodePath("Polygon2D/DirectionIndactor")
+spriteMain = NodePath("Polygon2D")
+playerColor = NodePath("Polygon2D/Polygon2D2")
+teamColor = NodePath("Polygon2D/Polygon2D4")
 
 [node name="Polygon2D" type="Sprite3D" parent="CardRenderer" unique_id=819853281]
 centered = false
-pixel_size = 0.001
+pixel_size = 0.005
 texture = ExtResource("3_4x1a8")
 
 [node name="DirectionIndactor" type="Sprite3D" parent="CardRenderer/Polygon2D" unique_id=379540241]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05122818, 0.050996304, 0)
-pixel_size = 0.001
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2564304, 0.256146, 0)
+pixel_size = 0.005
 texture = ExtResource("4_dhkur")
 
 [node name="Polygon2D2" type="Sprite3D" parent="CardRenderer/Polygon2D" unique_id=1779524011]
@@ -28,11 +33,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.005)
 centered = false
 flip_h = true
 flip_v = true
-pixel_size = 0.001
+pixel_size = 0.005
 texture = ExtResource("5_7imco")
 
 [node name="Polygon2D4" type="Sprite3D" parent="CardRenderer/Polygon2D" unique_id=1811747677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.005)
 centered = false
-pixel_size = 0.001
+pixel_size = 0.005
 texture = ExtResource("5_7imco")

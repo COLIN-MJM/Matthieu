@@ -5,6 +5,7 @@ const CardScene:PackedScene=preload("uid://cqhllnaq53hyr")
 var allInPlayCard : Array[Card]
 
 func PlaceCard(card:Card,c:Vector2i)->void:
+	card.get_parent().remove_child(card)
 	playspace.allSlots[c].AddCard(card)
 	allInPlayCard.append(card)
 

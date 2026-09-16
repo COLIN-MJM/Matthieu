@@ -8,21 +8,21 @@ func onButtonPressed() -> void:
 	match player.currentAction :
 		&"Move" : 
 			if isConfirming :
-				#Active l'appel de mouvement
+				OnMove()
 				linkedState.player.stateMachine.ChangeToState(&"EvaluatingEndTurn")
 				linkedState.player.nbActionsPlayedThisTurn += 1
 			else :
 				linkedState.player.stateMachine.ChangeToState(&"TargetingMove")
 		&"Rotate" :
 			if isConfirming :
-				#Active l'appel de rotation
+				OnRotate()
 				linkedState.player.stateMachine.ChangeToState(&"EvaluatingEndTurn")
 				linkedState.player.nbActionsPlayedThisTurn += 1
 			else :
 				linkedState.player.stateMachine.ChangeToState(&"TargetingRotate")
 		&"Place" : 
 			if isConfirming :
-				#Active l'appel de placement
+				OnPlace()
 				player.stateMachine.ChangeToState(&"EvaluatingEndTurn")
 				player.PlacePlayedThisTurn = true
 				player.nbActionsPlayedThisTurn += 1
@@ -40,3 +40,16 @@ func DeckAfterRemovedCard(card:Card, deck:Array[Card]) -> Array[Card] :
 	for c in deck :
 		if c != card : newDeck.append(c)
 	return newDeck
+
+func OnMove() -> void:
+	var player = linkedState.player
+	GameStateManager.MoveCard(player.chosenCard, player.chosenSlot.coords)
+	return
+	
+func OnRotate() -> void:
+	return
+	
+func OnPlace() -> void:
+	var player = linkedState.player
+	GameStateManager.PlaceCard(player.chosenCardToPlace, player.chosenSlot.coords)
+	return

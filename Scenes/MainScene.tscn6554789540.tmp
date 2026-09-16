@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bjceeqf5tstca"]
+
+[ext_resource type="Script" uid="uid://c3n7l0ujysmbd" path="res://play_space.gd" id="1_tr2i4"]
+[ext_resource type="PackedScene" uid="uid://cst0j5nt5ha8a" path="res://CardSlote.tscn" id="2_tr2i4"]
+[ext_resource type="PackedScene" uid="uid://ccnt7quqw48ss" path="res://Players/Player.tscn" id="3_nhkr4"]
+[ext_resource type="Script" uid="uid://cb2l02qw3kin2" path="res://NewCards/DecksCreator.gd" id="3_y4jh7"]
+
+[node name="MainScene" type="Node3D" unique_id=1938600875 node_paths=PackedStringArray("cam")]
+script = ExtResource("1_tr2i4")
+dimensions = Vector2i(13, 13)
+cam = NodePath("Camera3D")
+metadata/cardSlot = ExtResource("2_tr2i4")
+
+[node name="Decks" type="Node" parent="." unique_id=808892560 node_paths=PackedStringArray("playerManager")]
+script = ExtResource("3_y4jh7")
+playerManager = NodePath("../PlayerUIManager")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2087583222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6073952, 0.34375983, 4.7282777)
+
+[node name="PlayerUIManager" parent="." unique_id=1894994698 node_paths=PackedStringArray("states") instance=ExtResource("3_nhkr4")]
+states = {
+&"BeforeSelecting": NodePath("States/BeforeSelecting"),
+&"ChoosingMoveCard": NodePath("States/ChoosingMoveCard"),
+&"ChoosingPlaceCard": NodePath("States/ChoosingPlaceCard"),
+&"ChoosingRotateCard": NodePath("States/ChoosingRotateCard"),
+&"EvaluatingEndTurn": NodePath("States/EvaluatingEndTurn"),
+&"NotPlaying": NodePath("States/NotPlaying"),
+&"TargetingMove": NodePath("States/TargetingMove"),
+&"TargetingPlace": NodePath("States/TargetingPlace"),
+&"TargetingRotate": NodePath("States/TargetingRotate"),
+&"WaitingForConfirmation": NodePath("States/WaitingForConfirmation")
+}

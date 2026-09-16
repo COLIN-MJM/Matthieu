@@ -19,5 +19,5 @@ func CreateCard(rule:Rule, team:bool)->Card:
 	var newCard := cardScene.instantiate() as Card
 	newCard.c_init(rule, team)
 	newCard.rule.bindedCard = newCard
-	get_parent().add_child.call_deferred(newCard)
+	add_child.call_deferred(newCard)
 	return newCard
