@@ -2,9 +2,12 @@
 
 [ext_resource type="Script" uid="uid://b3trvewnpeu2u" path="res://CardSlot.gd" id="1_3cehr"]
 [ext_resource type="Texture2D" uid="uid://ceron8lvv0idp" path="res://CardSlot_Placeholder.png" id="1_ddm2n"]
+[ext_resource type="Texture2D" uid="uid://b8w4os7ekkg8m" path="res://CardSlot_Placeholder_Highlighted.png" id="3_wbas2"]
 
 [node name="Node2D" type="Sprite3D" unique_id=976340261]
 centered = false
 pixel_size = 0.001
 texture = ExtResource("1_ddm2n")
 script = ExtResource("1_3cehr")
+normalTexture = ExtResource("1_ddm2n")
+highlightTexture = ExtResource("3_wbas2")

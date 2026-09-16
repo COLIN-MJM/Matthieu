@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cst0j5nt5ha8a" path="res://CardSlote.tscn" id="2_tr2i4"]
 [ext_resource type="Script" uid="uid://dlmsi8y7503oa" path="res://manager/GameStateManager.gd" id="3_7rqgy"]
 [ext_resource type="PackedScene" uid="uid://ccnt7quqw48ss" path="res://Players/Player.tscn" id="3_nhkr4"]
-[ext_resource type="Script" uid="uid://cb2l02qw3kin2" path="res://NewCards/DecksCreator.gd" id="3_y4jh7"]
+[ext_resource type="Script" uid="uid://cb2l02qw3kin2" path="res://CardTester.gd" id="3_y4jh7"]
 
 [node name="MainScene" type="Node3D" unique_id=1938600875 node_paths=PackedStringArray("cam")]
 script = ExtResource("1_tr2i4")

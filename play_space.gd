@@ -7,6 +7,7 @@ var slotSize : Vector2
 var board : Node3D
 var TlMidBr : PackedVector2Array
 @onready var cardSlot : PackedScene =$".".get_meta("cardSlot")
+var interactionMode : bool = false
 
 var scaler : Vector2 
 var lowerBound : Vector2
@@ -16,6 +17,7 @@ var pixel_size : Vector2
 #var sideEffectHandler : SideEffectHandler = SideEffectHandler.new(self)
 
 var allSlots :Dictionary[Vector2i,CardSlot]
+var currentHighlightedSlot : CardSlot
 
 func _ready() -> void:
 	scaler= Vector2(slotSize)/100
@@ -23,9 +25,9 @@ func _ready() -> void:
 	positionCam()
 	for cs in allSlots.values():
 		(cs as CardSlot).done()
-	lowerBound =allSlots[Vector2i(0,0)].screen_coords.lower_point
-	upperBound =allSlots[dimensions-Vector2i(1,1)].screen_coords.upper_point
-	pixel_size=allSlots[Vector2i(0,0)].screen_coords.upper_point
+	lowerBound = allSlots[Vector2i(0,0)].screen_coords.lower_point
+	upperBound = allSlots[dimensions-Vector2i(1,1)].screen_coords.upper_point
+	pixel_size = allSlots[Vector2i(0,0)].screen_coords.upper_point
 	pixel_size = abs(lowerBound-pixel_size)
 	create_base()
 	%GameStateManager.calculate_control()
@@ -41,9 +43,6 @@ func create_base()->void:
 	allSlots[Vector2i(dimensions.x-twenyCentX-1,dimensions.y-twenyCentY-1)].isBase=2
 	
 	pass
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Left mouse Clic") : test_click_to_slot(event)
 
 func positionCam()->void :
 	var height :float = (slotSize*Vector2(dimensions)).length_squared()/2*tan(cam.fov/3)
@@ -61,12 +60,31 @@ func createGrid()->void:
 			instance.coords = Vector2i(x,y)
 			allSlots[Vector2i(x,y)] = instance
 			board.add_child(instance)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Left mouse Clic") : test_click_to_slot(event)
+	if event is InputEventMouseMotion and interactionMode : MouseTracker(event)
+
 func test_click_to_slot(event : InputEventMouseButton)->void :
 	var b : bool =event.position.x>=lowerBound.x and event.position.x<=upperBound.x and event.position.y<=lowerBound.y and event.position.y>=upperBound.y
 	if !b : return
 	var mousePos :Vector2= event.position-lowerBound
 	var test : Vector2i = Vector2i( floori(mousePos.x /pixel_size.x) ,abs(floori(mousePos.y /pixel_size.y))-1)
 	print(test)
+
+func MouseTracker(event : InputEventMouseMotion)->void:
+	if currentHighlightedSlot != null : 
+		currentHighlightedSlot.Highlighted(false)
+	var b : bool =event.position.x>=lowerBound.x and event.position.x<=upperBound.x and event.position.y<=lowerBound.y and event.position.y>=upperBound.y
+	if !b : 
+		currentHighlightedSlot = null
+		return
+	var mousePos :Vector2= event.position-lowerBound
+	var test : Vector2i = Vector2i( floori(mousePos.x /pixel_size.x) ,abs(floori(mousePos.y /pixel_size.y))-1)
+	currentHighlightedSlot = allSlots[test]
+	print(currentHighlightedSlot)
+	currentHighlightedSlot.Highlighted(true)
+
 func Resolve_AttacksAndDefend()->void :
 	var slotWithCard = allSlots.values().filter(
 		func(x : CardSlot): return x.haveCarte)
@@ -74,8 +92,7 @@ func Resolve_AttacksAndDefend()->void :
 		var tryPos : Vector2i =slot.coords+slot.carteData.direction
 		if tryPos.x <dimensions.x and tryPos.x >0 and tryPos.y <dimensions.y and tryPos.y >0  :
 			allSlots[tryPos].combat_score+=slot.carteData.strenght
-		
-	
+
 func Resolve_Passive()->void :
 	var filtered =allSlots.keys().filter(
 		func(x:Vector2i) :

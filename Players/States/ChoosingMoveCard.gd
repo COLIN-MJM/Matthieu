@@ -4,16 +4,21 @@ extends PlayerState
 func OnEnter() -> void:
 	indicativeText.add_text("Choose the concerned card")
 	linkedButtons.visible = true
-	#Permet des feedbacks à l'hover du Playspace
+	player.main_scene.interactionMode = true
+	player.main_scene.currentHighlightedSlot = null
 	return
 
 func OnUpdate() -> void:
-	#Rien
+	var slot := player.main_scene.currentHighlightedSlot
+	if slot == null : return
+	if (slot.cardData == null) : return
+	print(slot.cardData)
 	return
 
 func OnExit() -> void:
 	linkedButtons.visible = false
 	indicativeText.clear()
 	player.currentAction = &"Move"
-	#Désactive les feedbacks du Playspace
+	player.main_scene.currentHighlightedSlot = null
+	player.main_scene.interactionMode = false
 	return

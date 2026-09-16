@@ -4,7 +4,8 @@ extends PlayerButton
 @export var isConfirming : bool
 
 func onButtonPressed() -> void:
-	match linkedState.player.currentAction :
+	var player = linkedState.player
+	match player.currentAction :
 		&"Move" : 
 			if isConfirming :
 				#Active l'appel de mouvement
@@ -22,10 +23,20 @@ func onButtonPressed() -> void:
 		&"Place" : 
 			if isConfirming :
 				#Active l'appel de placement
-				linkedState.player.stateMachine.ChangeToState(&"EvaluatingEndTurn")
-				linkedState.player.PlacePlayedThisTurn = true
-				linkedState.player.nbActionsPlayedThisTurn += 1
+				player.stateMachine.ChangeToState(&"EvaluatingEndTurn")
+				player.PlacePlayedThisTurn = true
+				player.nbActionsPlayedThisTurn += 1
+				if player.activePlayer : 
+					player.remainingDeckP1 = DeckAfterRemovedCard(player.chosenCardToPlace, player.remainingDeckP1)
+				else :
+					player.remainingDeckP2 = DeckAfterRemovedCard(player.chosenCardToPlace, player.remainingDeckP2)
 			else :
-				linkedState.player.stateMachine.ChangeToState(&"TargetingPlace")
+				player.stateMachine.ChangeToState(&"TargetingPlace")
 		_ : return
 	return
+
+func DeckAfterRemovedCard(card:Card, deck:Array[Card]) -> Array[Card] :
+	var newDeck : Array[Card]
+	for c in deck :
+		if c != card : newDeck.append(c)
+	return newDeck
