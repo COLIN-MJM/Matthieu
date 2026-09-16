@@ -1,4 +1,4 @@
-extends Object
+extends Node
 
 #region ConstArrays
 

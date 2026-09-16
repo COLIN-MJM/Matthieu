@@ -1,4 +1,4 @@
-extends Object
+extends Node
 
 static var map : Dictionary[StringName,filter_struct]
 static var non_finite_while_limits = 25

@@ -1,4 +1,4 @@
-extends Object
+extends Node
 
 var playspace : PlaySpace
 const CardScene:PackedScene=preload("uid://cqhllnaq53hyr")

@@ -13,6 +13,9 @@ var bindedCard : Card
 @export_custom(PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_READ_ONLY) 
 var rawFilters : Array
 @export var rawAction : ActionsBank.ActionWord 
+@export_custom(PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_READ_ONLY) 
+var expected : String
+@export var actions_params :Array
 
 var updatedFilters : Array
 @export_custom(PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_READ_ONLY) 
