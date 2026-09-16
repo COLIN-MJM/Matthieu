@@ -1,8 +1,6 @@
-class_name GameStateManager
-extends Node
+extends Object
 
-@export var baseStrenghValue : int = 1
-@export var playspace : PlaySpace
+var playspace : PlaySpace
 const CardScene:PackedScene=preload("uid://cqhllnaq53hyr")
 var allInPlayCard : Array[Card]
 
@@ -27,8 +25,8 @@ func calculate_combat_score()->void:
 		cs = cs as CardSlot
 		match cs.isBase :
 			0 : cs.combat_score= 0
-			1 : cs.combat_score= baseStrenghValue
-			2 : cs.combat_score=-baseStrenghValue
+			1 : cs.combat_score= playspace.baseStrenghValue
+			2 : cs.combat_score=-playspace.baseStrenghValue
 	for carte in allInPlayCard :
 		carte = carte as Card
 		var i : int

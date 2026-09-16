@@ -9,6 +9,8 @@ var TlMidBr : PackedVector2Array
 @onready var cardSlot : PackedScene =$".".get_meta("cardSlot")
 var interactionMode : bool = false
 
+@export var baseStrenghValue : int = 1
+
 var scaler : Vector2 
 var lowerBound : Vector2
 var upperBound : Vector2
@@ -30,7 +32,7 @@ func _ready() -> void:
 	pixel_size = allSlots[Vector2i(0,0)].screen_coords.upper_point
 	pixel_size = abs(lowerBound-pixel_size)
 	create_base()
-	%GameStateManager.calculate_control()
+	GameStateManager.calculate_control()
 
 
 func create_base()->void:

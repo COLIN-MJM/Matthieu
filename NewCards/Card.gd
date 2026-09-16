@@ -40,7 +40,7 @@ func When(source : GlobalCardEnum.ActivationTypes)->SecondaryEffect:
 func Activate()->SecondaryEffect:
 	alreadyActivatedThisTurn = true
 	rule.updatedFilters = UpdateFilters(rule.rawFilters)
-	var cards = %GameStateManager.allInPlayCard
+	var cards = GameStateManager.allInPlayCard
 	rule.Reparse(rule.updatedFilters,cards)
 	var concernedCards : Array = rule.callableFilters.call()
 	print(concernedCards)
