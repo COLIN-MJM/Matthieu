@@ -8,6 +8,9 @@ var total_pixelsize
 var screen_coords : screen_coordinate =screen_coordinate.new()
 var combat_score : int
 
+@export var normalTexture : Texture
+@export var highlightTexture : Texture
+
 var isBase : int :
 	set(value) :
 		match value :
@@ -50,6 +53,10 @@ func done() -> void:
 	var cam :Camera3D = get_viewport().get_camera_3d()
 	screen_coords.lower_point=cam.unproject_position(global_transform.origin)
 	screen_coords.upper_point=cam.unproject_position(global_transform.origin+Vector3(total_pixelsize.x,total_pixelsize.y,0))
+	
+func Highlighted(on:bool) -> void:
+	if on : texture = highlightTexture
+	else : texture = normalTexture
 
 func RemoveCard()->void:
 	remove_child(cardData)

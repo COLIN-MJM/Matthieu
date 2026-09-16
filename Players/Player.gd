@@ -7,6 +7,8 @@ var playerName : StringName
 var remainingDeckP1 : Array[Card]
 var remainingDeckP2 : Array[Card]
 var chosenCardToPlace : Card
+var chosenCard : Card
+var chosenSlot : CardSlot
 
 var nbActionsPlayedThisTurn : int = 0
 var maxNbActions : int = 3

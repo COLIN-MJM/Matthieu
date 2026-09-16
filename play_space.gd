@@ -22,6 +22,7 @@ var allSlots :Dictionary[Vector2i,CardSlot]
 var currentHighlightedSlot : CardSlot
 
 func _ready() -> void:
+	GameStateManager.playspace = self
 	scaler= Vector2(slotSize)/100
 	createGrid()
 	positionCam()
@@ -84,7 +85,6 @@ func MouseTracker(event : InputEventMouseMotion)->void:
 	var mousePos :Vector2= event.position-lowerBound
 	var test : Vector2i = Vector2i( floori(mousePos.x /pixel_size.x) ,abs(floori(mousePos.y /pixel_size.y))-1)
 	currentHighlightedSlot = allSlots[test]
-	print(currentHighlightedSlot)
 	currentHighlightedSlot.Highlighted(true)
 
 func Resolve_AttacksAndDefend()->void :

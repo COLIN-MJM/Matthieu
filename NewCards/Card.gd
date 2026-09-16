@@ -18,6 +18,7 @@ var alreadyActivatedThisTurn : bool = false
 @onready var cardRenderer: CardRenderer = %CardRenderer
 
 func _ready() -> void:
+	return
 	if rule!=null :
 		cardRenderer.spriteMain.texture=rule.CardSprite
 		rule.CreateActionCallable()

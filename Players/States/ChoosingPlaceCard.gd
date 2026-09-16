@@ -5,6 +5,7 @@ extends PlayerState
 @export var hand : Hand
 
 func OnEnter() -> void:
+	player.currentAction = &"Place"
 	indicativeText.add_text("Choose the concerned card")
 	linkedButtons.visible = true
 	chooseButton.visible = false
@@ -19,5 +20,4 @@ func OnUpdate() -> void:
 func OnExit() -> void:
 	linkedButtons.visible = false
 	indicativeText.clear()
-	player.currentAction = &"Place"
 	return

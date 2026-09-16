@@ -2,6 +2,7 @@ class_name ChoosingMoveCard
 extends PlayerState
 
 func OnEnter() -> void:
+	player.currentAction = &"Move"
 	indicativeText.add_text("Choose the concerned card")
 	linkedButtons.visible = true
 	player.main_scene.interactionMode = true
@@ -18,7 +19,10 @@ func OnUpdate() -> void:
 func OnExit() -> void:
 	linkedButtons.visible = false
 	indicativeText.clear()
-	player.currentAction = &"Move"
 	player.main_scene.currentHighlightedSlot = null
 	player.main_scene.interactionMode = false
 	return
+
+func _input(event: InputEvent) -> void :
+	if player.currentState != self : return
+	SelectCard(event)
