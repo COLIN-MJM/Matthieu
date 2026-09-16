@@ -4,12 +4,9 @@ var playspace : PlaySpace
 const CardScene:PackedScene=preload("uid://cqhllnaq53hyr")
 var allInPlayCard : Array[Card]
 
-func InstantiateCard(b:bool,r:Rule,c:Vector2i)->Card:
-	var card:=CardScene.instantiate() as Card
-	card.c_init(r,b,c)
+func PlaceCard(card:Card,c:Vector2i)->void:
 	playspace.allSlots[c].AddCard(card)
 	allInPlayCard.append(card)
-	return card
 
 func MoveCard(c:Card , target :Vector2i)->void :
 	playspace.allSlots[c.c_position].RemoveCard()
