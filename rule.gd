@@ -6,6 +6,7 @@ var bindedCard : Card
 @export var rule_name : StringName
 @export_group("Visual")
 @export var CardSprite:DPITexture
+@export var description : String
 @export_group("Logic")
 @export var whenToActivate : Array[GlobalCardEnum.ActivationTypes]
 
