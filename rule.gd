@@ -25,8 +25,8 @@ func _init(wta:Array[GlobalCardEnum.ActivationTypes] = [GlobalCardEnum.Activatio
 	rawFilters = filters
 	rawAction = action
 
-func CreateActionCallable(Ab:ActionsBank)->void:
-	callableActions=Callable.create(Ab,updatedAction)
+func CreateActionCallable()->void:
+	callableActions=Callable.create(ActionsBank,updatedAction)
 
 func Reparse(f:Array,c :Array[Card]) -> void:
 	callableFilters = Parser.Parse(f,c)
