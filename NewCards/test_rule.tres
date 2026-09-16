@@ -5,4 +5,8 @@
 [resource]
 script = ExtResource("1_0mv2i")
 whenToActivate = Array[int]([0])
+rawAction = 1
+expected = "Dir:Vector2i,
+NbTiles:int"
+actions_params = [Vector2i(0, 0)]
 metadata/_custom_type_script = "uid://dcieys7jktyni"

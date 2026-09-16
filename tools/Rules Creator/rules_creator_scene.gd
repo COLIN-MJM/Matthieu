@@ -60,3 +60,5 @@ func _on_editor_inspector_property_edited(property: String) -> void:
 	if property ==&"rawAction":
 		var i :=(inspector.get_edited_object()as Rule)
 		i.updatedAction=ActionsBank.ActionWord.find_key(i.rawAction)
+		i.expected=ActionsBank.ActionExpected[i.rawAction]
+		return

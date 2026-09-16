@@ -4,7 +4,13 @@ extends Node
 enum ActionWord{
 	RotateAll,MoveAll,AttractOrPushAway,RotateTowardsOrAway,BuffAll,Null}
 	
-
+const ActionExpected : Dictionary[ActionWord,String]={
+	ActionWord.RotateAll:"Angle : Float",
+	ActionWord.MoveAll:"Dir:Vector2i,\nNbTiles:int",
+	ActionWord.AttractOrPushAway :"whoPos :Vector2i,\nnbTiles :int,\nattractOrPushAway:bool",
+	ActionWord.RotateTowardsOrAway:"whoPos :Vector2i,\nnbTiles :int,\ntowardsOrAway:bool",
+	ActionWord.BuffAll:"parameter:StringName, \naddedValue:int"
+}
 
 #region Actions Fondamentales
 

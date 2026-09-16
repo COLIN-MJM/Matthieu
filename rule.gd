@@ -31,6 +31,7 @@ func _init(wta:Array[GlobalCardEnum.ActivationTypes] = [GlobalCardEnum.Activatio
 
 func CreateActionCallable()->void:
 	callableActions=Callable.create(ActionsBank,updatedAction)
+	callableActions=callableActions.bindv(actions_params)
 
 func Reparse(f:Array,c :Array[Card]) -> void:
 	callableFilters = Parser.Parse(f,c)
