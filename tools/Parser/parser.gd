@@ -1,12 +1,8 @@
-#@tool
-class_name Parser
-#extends EditorScript
 extends Object
 
 static var map : Dictionary[StringName,filter_struct]
 static var non_finite_while_limits = 25
 
-static var fBank : FilterBank = FilterBank.new()
 
 #alors plusieur point sur le formatage :
 ## ouais c'est des string et pas de des enum donc douleur
@@ -39,9 +35,9 @@ const inputs : Array = [
 
 static func Parse(inputsToInterpret:Array,cards:Array[Card]) -> Callable:
 	non_finite_while_limits = inputsToInterpret.size()
-	for i in fBank.statics:
+	for i in FilterBank.statics:
 		if i  == &"sequence_end" or i  ==&"array_block" : continue
-		map.get_or_add(i,filter_struct.new(fBank,null,i))
+		map.get_or_add(i,filter_struct.new(null,i))
 	var result = interpreter(inputsToInterpret , cards)
 	map.clear()
 	return result
@@ -60,7 +56,7 @@ static func interpreter(inputsToInterpret:Array ,cards:Array[Card])->Callable:
 			i=x.next_i
 			i+=1
 			continue
-		if fBank.statics.has(inputsToInterpret[i]) :
+		if FilterBank.statics.has(inputsToInterpret[i]) :
 			if inputsToInterpret[i] =="sequence_end" or inputsToInterpret[i] =="array_block":
 				print("sequence_end or array_block  encounter,skipping iteration")
 				i+=1
@@ -94,7 +90,7 @@ static func bind_to_callable(inputsToInterpret:Array, x:filter_struct, i:int, it
 	print("i is : ",i," and thus is : ",inputsToInterpret[i])
 	for panic in range(inputsToInterpret.size()):
 		var item = inputsToInterpret[y]
-		if item is StringName and fBank.statics.has(item) :
+		if item is StringName and FilterBank.statics.has(item) :
 			if item==&"sequence_end" :break
 			if item==&"array_block" :
 				print("entred array_outpout mode for current block")

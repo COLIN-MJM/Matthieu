@@ -1,8 +1,5 @@
-@tool
-class_name ActionsBank
-extends EditorScript
+extends Object
 
-var playspace
 
 enum ActionWord{
 	RotateAll,MoveAll,AttractOrPushAway,RotateTowardsOrAway,BuffAll,Null}

@@ -19,6 +19,12 @@ run/main_scene="uid://cgbx7ayc6kuuy"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Parser="*uid://csvyc324be00"
+ActionsBank="*uid://dtjtvjn0tufig"
+FilterBank="*uid://dnvtfawafokl8"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gdscript_refactoring/plugin.cfg")

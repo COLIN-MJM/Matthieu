@@ -1,6 +1,3 @@
-#@tool
-class_name FilterBank
-#extends EditorScript
 extends Object
 
 #region ConstArrays
