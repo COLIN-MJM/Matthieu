@@ -12,10 +12,10 @@ func MoveCard(c:Card , target :Vector2i)->void :
 	playspace.allSlots[c.c_position].RemoveCard()
 	playspace.allSlots[target].AddCard(c)
 	
-func RemoveCard(c:Card)->void:
+func RemoveCard(c:Card)->Card:
 	allInPlayCard.erase(c)
 	playspace.allSlots[c.c_position].RemoveCard()
-	c.free()
+	return c
 
 func calculate_combat_score()->void:
 	for cs in playspace.allSlots.values() :
