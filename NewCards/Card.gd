@@ -20,19 +20,8 @@ var alreadyActivatedThisTurn : bool = false
 func _ready() -> void:
 	if rule!=null :
 		cardRenderer.spriteMain.texture=rule.CardSprite
+		rule.CreateActionCallable()
 		return
-	c_name = "MyCard"
-	c_position = Vector2i(7, 2)
-	c_rotation = Vector2i.UP
-	c_owner = true
-	
-	rule = Rule.new(
-	[GlobalCardEnum.ActivationTypes.OnPlacement], 
-	[&"filtre_dist", 1, &"self_position", &"sequence_end"],
-	ActionsBank.ActionWord.RotateAll)
-	
-	When(GlobalCardEnum.ActivationTypes.OnMove)
-	When(GlobalCardEnum.ActivationTypes.OnPlacement)
 
 func c_init(r:Rule,ow : bool = true, pos : Vector2i = Vector2i(-1, -1), rot : Vector2i = Vector2i.UP) -> void:
 	c_position=pos
@@ -55,7 +44,7 @@ func Activate()->SecondaryEffect:
 	rule.Reparse(rule.updatedFilters,cards)
 	var concernedCards : Array = rule.callableFilters.call()
 	print(concernedCards)
-	return null
+	return rule.callableActions.call(concernedCards)
 
 func UpdateFilters(filters:Array)->Array:
 	var tempFilters : Array = filters
