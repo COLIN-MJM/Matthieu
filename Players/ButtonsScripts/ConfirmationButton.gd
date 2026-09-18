@@ -41,6 +41,7 @@ func DeckAfterRemovedCard(card:Card, deck:Array[Card]) -> Array[Card] :
 		if c != card : newDeck.append(c)
 	return newDeck
 
+
 func OnMove() -> void:
 	var player = linkedState.player
 	GameStateManager.MoveCard(player.chosenCard, player.chosenSlot.coords)
@@ -52,4 +53,12 @@ func OnRotate() -> void:
 func OnPlace() -> void:
 	var player = linkedState.player
 	GameStateManager.PlaceCard(player.chosenCardToPlace, player.chosenSlot.coords)
+	return
+
+func OnKill(initialPLacement : bool)->void:
+	var player = linkedState.player
+	var killed :=GameStateManager.RemoveAndReplace(player.chosenCardToPlace, player.chosenSlot.coords,initialPLacement)
+	match killed.c_owner:
+		true : player.remainingDeckP1.append(killed)
+		false: player.remainingDeckP2.append(killed)
 	return
