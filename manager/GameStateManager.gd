@@ -4,6 +4,28 @@ var playspace : PlaySpace
 const CardScene:PackedScene=preload("uid://cqhllnaq53hyr")
 var allInPlayCard : Array[Card]
 
+func StartTurnRoutine()->void:
+	ActivatePassive()
+	calculate_control()
+	calculate_combat_score()
+	VerifiyVictoryCondition()
+
+func VerifiyVictoryCondition()->void:
+	var base:= playspace.allSlots.values().filter(func(x:CardSlot):return x.isBase!=0 and x.haveCard)
+	if base.filter(func(x:CardSlot): return x.isBase==1).size()==2:
+		print("player 1 won")
+	elif base.filter(func(x:CardSlot): return x.isBase==2).size()==2:
+		print("player 2 won")
+
+#Remove une carte et la remaplce par une autre  , returne la carte removed pour gestion(tuer)
+func RemoveAndReplace(card : Card , slot : Vector2i,isInitialPlacement:bool)->Card :
+	var re :=RemoveCard(playspace.allSlots[slot].cardData)
+	card.get_parent().remove_child(card)
+	playspace.allSlots[slot].AddCard(card)
+	if isInitialPlacement:
+		allInPlayCard.append(card)
+	return re
+
 func PlaceCard(card:Card,c:Vector2i)->void:
 	card.get_parent().remove_child(card)
 	playspace.allSlots[c].AddCard(card)
@@ -45,7 +67,7 @@ func calculate_control()->void:
 			if b:(cs as CardSlot).inT1control=true
 			else :(cs as CardSlot).inT2control=true
 			stdr =(cs as CardSlot).cardData.parameters[&"Zoc"]
-		elif (cs as CardSlot).isBase!=0 and (cs as CardSlot).isBase!=null :
+		elif  (cs as CardSlot).isBase!=null and (cs as CardSlot).isBase!=0 :
 			match (cs as CardSlot).isBase:
 				1:
 					b=true

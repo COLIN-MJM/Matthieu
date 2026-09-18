@@ -24,6 +24,9 @@ var isBase : int :
 			2:
 				modulate =Color.BLUE
 				isBase=value
+			_:
+				print("base value of slot "+error_string(5))
+				isBase=value
 var inT1control:bool= false:
 	get : return inT1control
 	set(value) :
