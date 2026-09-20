@@ -60,6 +60,7 @@ func calculate_control()->void:
 	for cs in playspace.allSlots.values():
 		(cs as CardSlot).inT1control=false;
 		(cs as CardSlot).inT2control=false;
+	for cs in playspace.allSlots.values():
 		var stdr:int
 		var b : bool
 		if (cs as CardSlot).haveCard :
@@ -67,7 +68,7 @@ func calculate_control()->void:
 			if b:(cs as CardSlot).inT1control=true
 			else :(cs as CardSlot).inT2control=true
 			stdr =(cs as CardSlot).cardData.parameters[&"Zoc"]
-		elif  (cs as CardSlot).isBase!=null and (cs as CardSlot).isBase!=0 :
+		elif (cs as CardSlot).isBase!=0 and (cs as CardSlot).isBase!=null :
 			match (cs as CardSlot).isBase:
 				1:
 					b=true

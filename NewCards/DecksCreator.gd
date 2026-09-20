@@ -17,6 +17,7 @@ func _ready() -> void:
 
 func CreateCard(rule:Rule, team:bool)->Card:
 	var newCard := cardScene.instantiate() as Card
+	newCard.position=Vector3(50,50,50)
 	newCard.c_init(rule, team)
 	newCard.rule.bindedCard = newCard
 	add_child.call_deferred(newCard)
