@@ -33,7 +33,7 @@ const inputs : Array = [
 	&"sequence_end"]
 
 
-static func Parse(inputsToInterpret:Array,cards:Array[Card]) -> Callable:
+func Parse(inputsToInterpret:Array,cards:Array[Card]) -> Callable:
 	non_finite_while_limits = inputsToInterpret.size()
 	for i in FilterBank.statics:
 		if i  == &"sequence_end" or i  ==&"array_block" : continue

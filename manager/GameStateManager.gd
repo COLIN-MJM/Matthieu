@@ -30,6 +30,7 @@ func PlaceCard(card:Card,c:Vector2i)->void:
 	card.get_parent().remove_child(card)
 	playspace.allSlots[c].AddCard(card)
 	allInPlayCard.append(card)
+	card.visible=true
 
 func MoveCard(c:Card , target :Vector2i)->void :
 	playspace.allSlots[c.c_position].RemoveCard()
@@ -38,6 +39,7 @@ func MoveCard(c:Card , target :Vector2i)->void :
 func RemoveCard(c:Card)->Card:
 	allInPlayCard.erase(c)
 	playspace.allSlots[c.c_position].RemoveCard()
+	c.visible=false
 	return c
 
 func calculate_combat_score()->void:

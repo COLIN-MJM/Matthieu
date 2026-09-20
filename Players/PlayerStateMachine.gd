@@ -3,7 +3,7 @@ extends Node
 
 @export var player : NewPlayer
 
-func _process(float) -> void :
+func _process(f:float) -> void :
 	player.currentState.OnUpdate()
 
 func ChangeToState(state:StringName) -> void :

@@ -66,9 +66,11 @@ func Highlighted(on:bool) -> void:
 
 func RemoveCard()->void:
 	remove_child(cardData)
+	haveCard=false
 	cardData=null
 func AddCard(c:Card)->void:
 	add_child(c)
+	haveCard=true
 	cardData=c
 	c.c_position=coords
 

@@ -7,7 +7,7 @@ extends Node
 @export var nextButton : Button
 var offset : int = 0
 
-func UpdateCardsInHand(owner:bool) -> void:
+func UpdateCardsInHand(c_owner:bool) -> void:
 	if offset == 0 : previousButton.visible = false
 	else : previousButton.visible = true
 	

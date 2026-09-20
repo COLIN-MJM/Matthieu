@@ -5,6 +5,7 @@ func OnEnter() -> void:
 	player.nbActionsPlayedThisTurn = 0
 	player.PlacePlayedThisTurn = false
 	player.activePlayer = !player.activePlayer
+	GameStateManager.StartTurnRoutine()
 	player.stateMachine.ChangeToState(&"BeforeSelecting")
 	return
 

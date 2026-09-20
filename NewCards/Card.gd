@@ -35,7 +35,7 @@ func When(source : GlobalCardEnum.ActivationTypes)->SecondaryEffect:
 	if rule.whenToActivate.has(source) : 
 		print("Corresponding condition! Let's Continue!")
 		return Activate()
-	print("Nope...")
+	print("Card Activation failed due to incompatle activationtype :",source)
 	return null
 
 func Activate()->SecondaryEffect:
