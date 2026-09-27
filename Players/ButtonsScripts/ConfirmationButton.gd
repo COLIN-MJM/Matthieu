@@ -48,11 +48,34 @@ func OnMove() -> void:
 	return
 	
 func OnRotate() -> void:
+	var player = linkedState.player
+	var vect : Vector2i = Vector2i(player.chosenSlot.coords.x - player.chosenCard.c_position.x, player.chosenCard.c_position.y - player.chosenSlot.coords.y) 
+	player.chosenCard.c_rotation = vect
+	match vect :
+		Vector2i.UP: player.chosenCard.pivot.rotation = Vector3(0, 0, 0)
+		Vector2i.RIGHT: player.chosenCard.pivot.rotation = Vector3(0, 0, deg_to_rad(270))
+		Vector2i.DOWN: player.chosenCard.pivot.rotation = Vector3(0, 0, deg_to_rad(180))
+		Vector2i.LEFT: player.chosenCard.pivot.rotation = Vector3(0, 0, deg_to_rad(90))
 	return
 	
 func OnPlace() -> void:
 	var player = linkedState.player
 	GameStateManager.PlaceCard(player.chosenCardToPlace, player.chosenSlot.coords)
+	var card : Card = player.main_scene.allSlots[player.chosenSlot.coords].cardData
+	match player.currentRotation :
+		0: 
+			card.c_rotation = Vector2i.UP
+			card.pivot.rotation = Vector3(0, 0, 0)
+		1: 
+			card.c_rotation = Vector2i.RIGHT
+			card.pivot.rotation = Vector3(0, 0, deg_to_rad(270))
+		2: 
+			card.c_rotation = Vector2i.DOWN
+			card.pivot.rotation = Vector3(0, 0, deg_to_rad(180))
+		3: 
+			card.c_rotation = Vector2i.LEFT
+			card.pivot.rotation = Vector3(0, 0, deg_to_rad(90))
+		_: card.c_rotation = Vector2i.ZERO
 	return
 
 func OnKill(initialPLacement : bool)->void:

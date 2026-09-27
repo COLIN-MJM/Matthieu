@@ -11,7 +11,7 @@ func OnEnter() -> void:
 	return
 
 func OnUpdate() -> void:
-	#Rien
+	OrientateNearbySlotHighlight()
 	return
 
 func OnExit() -> void:

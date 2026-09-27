@@ -12,7 +12,9 @@ func OnEnter() -> void:
 	return
 
 func OnUpdate() -> void:
-	#Rien
+	var slot = player.main_scene.currentHighlightedSlot
+	if !slot : return
+	slot.pivot.rotation = Vector3(0, 0, deg_to_rad(-90 * player.currentRotation))
 	return
 
 func OnExit() -> void:
@@ -25,3 +27,5 @@ func OnExit() -> void:
 func _input(event: InputEvent) -> void:
 	if player.currentState != self : return
 	SelectSlot(event)
+	RotateInfo(event)
+	return

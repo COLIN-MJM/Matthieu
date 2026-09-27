@@ -19,6 +19,8 @@ var PlacePlayedThisTurn : bool = false
 var currentState : PlayerState 
 var currentAction : StringName
 
+var currentRotation : int = 0
+
 @onready var main_scene: PlaySpace = $".."
 
 func _ready() -> void:

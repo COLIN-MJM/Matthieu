@@ -16,6 +16,7 @@ var parameters : Dictionary[StringName, int] = {
 var alreadyActivatedThisTurn : bool = false
 
 @onready var cardRenderer: CardRenderer = %CardRenderer
+@onready var pivot: Node3D = %Pivot
 
 func _ready() -> void:
 	return

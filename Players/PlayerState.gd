@@ -17,6 +17,27 @@ func SelectSlot(event: InputEvent) -> void :
 		player.stateMachine.ChangeToState(&"WaitingForConfirmation")
 		return
 
+func RotateInfo(event: InputEvent) -> void:
+	var selectedSlot := player.main_scene.currentHighlightedSlot
+	if event.is_pressed() and selectedSlot != null:
+		if event.button_index != MOUSE_BUTTON_WHEEL_UP and event.button_index != MOUSE_BUTTON_WHEEL_DOWN : return
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			player.currentRotation += 1
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			player.currentRotation -= 1
+		player.currentRotation % 4
+	return
+
+func OrientateNearbySlotHighlight() -> void :
+	var slot = player.main_scene.currentHighlightedSlot
+	if !slot : return
+	var vect : Vector2i = Vector2i(slot.coords.x - player.chosenCard.c_position.x, player.chosenCard.c_position.y - slot.coords.y) 
+	match vect :
+		Vector2i.UP: slot.pivot.rotation = Vector3(0, 0, 0)
+		Vector2i.RIGHT: slot.pivot.rotation = Vector3(0, 0, deg_to_rad(270))
+		Vector2i.DOWN: slot.pivot.rotation = Vector3(0, 0, deg_to_rad(180))
+		Vector2i.LEFT: slot.pivot.rotation = Vector3(0, 0, deg_to_rad(90))
+
 func SelectCard(event: InputEvent) -> void :
 	var selectedSlot := player.main_scene.currentHighlightedSlot
 	if selectedSlot == null or selectedSlot.cardData == null : return

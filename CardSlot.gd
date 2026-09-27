@@ -11,18 +11,21 @@ var combat_score : int
 @export var normalTexture : Texture
 @export var highlightTexture : Texture
 
+@onready var pivot: Node3D = %Pivot
+@onready var slot_renderer: Sprite3D = %SlotRenderer
+
 var isBase : int :
 	get : return isBase
 	set(value) :
 		match value :
 			0 :
-				modulate =Color.WHITE
+				slot_renderer.modulate =Color.WHITE
 				isBase=value
 			1:
-				modulate =Color.RED
+				slot_renderer.modulate =Color.RED
 				isBase=value
 			2:
-				modulate =Color.BLUE
+				slot_renderer.modulate =Color.BLUE
 				isBase=value
 			_:
 				print("base value of slot "+error_string(5))
@@ -33,13 +36,13 @@ var inT1control:bool= false:
 		match value :
 			true :
 				var c :=Color.INDIAN_RED
-				if modulate == Color.WHITE:	modulate=c
+				if slot_renderer.modulate == Color.WHITE:	slot_renderer.modulate=c
 				else :
 					c.a=0.5
-					modulate =modulate.blend(c)
+					slot_renderer.modulate = slot_renderer.modulate.blend(c)
 				inT1control=value
 			false	:
-				modulate =Color.WHITE
+				slot_renderer.modulate =Color.WHITE
 				inT1control=value
 var inT2control:bool= false	:
 	get : return inT2control
@@ -47,13 +50,13 @@ var inT2control:bool= false	:
 		match value :
 			true :
 				var c :=Color.SKY_BLUE
-				if modulate == Color.WHITE:modulate=c
+				if slot_renderer.modulate == Color.WHITE: slot_renderer.modulate=c
 				else :
 					c.a=0.5
-					modulate =modulate.blend(c)
+					slot_renderer.modulate = slot_renderer.modulate.blend(c)
 				inT2control=value
 			false	:
-				modulate =Color.WHITE
+				slot_renderer.modulate =Color.WHITE
 				inT2control=value
 func done() -> void:
 	var cam :Camera3D = get_viewport().get_camera_3d()
@@ -61,8 +64,10 @@ func done() -> void:
 	screen_coords.upper_point=cam.unproject_position(global_transform.origin+Vector3(total_pixelsize.x,total_pixelsize.y,0))
 	
 func Highlighted(on:bool) -> void:
-	if on : texture = highlightTexture
-	else : texture = normalTexture
+	if on : slot_renderer.texture = highlightTexture
+	else : 
+		slot_renderer.texture = normalTexture
+		pivot.rotation = Vector3(0, 0, 0)
 
 func RemoveCard()->void:
 	remove_child(cardData)

@@ -5,9 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://b8w4os7ekkg8m" path="res://CardSlot_Placeholder_Highlighted.png" id="3_wbas2"]
 
 [node name="Node2D" type="Sprite3D" unique_id=976340261]
+transparency = 1.0
 centered = false
 pixel_size = 0.001
 texture = ExtResource("1_ddm2n")
 script = ExtResource("1_3cehr")
 normalTexture = ExtResource("1_ddm2n")
 highlightTexture = ExtResource("3_wbas2")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=489823746]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275, 0.275, 0)
+
+[node name="SlotRenderer" type="Sprite3D" parent="Pivot" unique_id=867809977]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.013460215)
+pixel_size = 0.001
+texture = ExtResource("1_ddm2n")
